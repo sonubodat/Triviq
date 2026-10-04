@@ -1,25 +1,20 @@
-import { CapabilityCarousel } from "@/components/sections/carousel";
-import { ContactUs } from "@/components/sections/contact-us";
-import { HelpSection } from "@/components/sections/help";
+import { ProjectCta } from "@/components/sections/cta";
 import { Hero } from "@/components/sections/hero";
 import { ProcessSection } from "@/components/sections/process";
-import { ProjectsSection } from "@/components/sections/projects";
-import { SiteFooter } from "@/components/sections/site-footer";
-import { SiteHeader } from "@/components/sections/site-header";
+import { ServicesSection } from "@/components/sections/services";
+import { ProductsSection, WorkSection } from "@/components/sections/showcase";
+import { WhySection } from "@/components/sections/why";
 
 export default function Home() {
   return (
     <>
-      <SiteHeader />
-      <main>
-        <Hero />
-        <HelpSection />
-        <CapabilityCarousel />
-        <ProjectsSection />
-        <ProcessSection />
-        <ContactUs />
-      </main>
-      <SiteFooter />
+      <Hero />
+      <ServicesSection />
+      <WorkSection />
+      <ProductsSection />
+      <ProcessSection />
+      <WhySection />
+      <ProjectCta />
     </>
   );
 }

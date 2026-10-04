@@ -1,32 +1,30 @@
+import Image from "next/image";
 import Link from "next/link";
 
-import { siteConfig } from "@/lib/site";
+import { nav, siteConfig } from "@/lib/site";
 
-const navItems = [
-  { label: "Services", href: "#services" },
-  { label: "Clients", href: "#clients" },
-  { label: "Work", href: "#work" },
-  { label: "Process", href: "#process" },
-  { label: "Contact", href: "#contact" },
-];
+import { MobileMenu } from "./mobile-menu";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-30 h-11 bg-black text-white">
-      <div className="mx-auto flex h-full w-full max-w-[1068px] items-center justify-between px-6">
-        <Link href="/" className="text-[15px] font-semibold tracking-tight" aria-label={siteConfig.name}>
-          {siteConfig.name}
+    <header className="on-black sticky top-0 z-30 bg-black text-white">
+      <div className="mx-auto flex h-11 w-full max-w-[1068px] items-center justify-between px-6">
+        <Link href="/" aria-label={`${siteConfig.name} home`}>
+          <Image src={siteConfig.logo} alt={siteConfig.name} width={377} height={136} className="h-6 w-auto" priority />
         </Link>
-        <nav className="hidden items-center gap-8 text-xs tracking-[-0.12px] text-white/85 md:flex" aria-label="Primary">
-          {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="transition-colors hover:text-white">
+        <nav className="hidden items-center gap-7 text-xs tracking-[-0.12px] text-white/85 min-[834px]:flex" aria-label="Primary">
+          {nav.map((item) => (
+            <Link key={item.href} href={item.href} className="transition-colors hover:text-white">
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
-        <a href="#contact" className="rounded-lg bg-white px-3 py-1 text-xs font-semibold text-ink active:scale-95">
-          Start a project
-        </a>
+        <div className="flex items-center gap-3">
+          <Link href="/contact" className="rounded-lg bg-white px-3 py-1 text-xs font-semibold text-ink active:scale-95">
+            Start a project
+          </Link>
+          <MobileMenu />
+        </div>
       </div>
     </header>
   );

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+import { SiteFooter } from "@/components/sections/site-footer";
+import { SiteHeader } from "@/components/sections/site-header";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -41,9 +43,8 @@ export const metadata: Metadata = {
     images: [siteConfig.ogImage],
   },
   icons: {
-    icon: "/assets/icon.svg",
-    shortcut: "/assets/icon.svg",
-    apple: "/assets/apple-touch-icon.svg",
+    icon: siteConfig.icon,
+    apple: siteConfig.icon,
   },
   category: "technology",
 };
@@ -52,7 +53,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full bg-background text-foreground">
-        {children}
+        <SiteHeader />
+        <main>{children}</main>
+        <SiteFooter />
       </body>
     </html>
   );
