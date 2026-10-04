@@ -1,40 +1,30 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { siteConfig } from "@/lib/site";
 
 const navItems = [
   { label: "Services", href: "#services" },
-  { label: "Work", href: "#projects" },
+  { label: "Clients", href: "#clients" },
+  { label: "Work", href: "#work" },
   { label: "Process", href: "#process" },
   { label: "Contact", href: "#contact" },
 ];
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur">
-      <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-6 sm:px-10">
-        <Link
-          className="flex items-center gap-3"
-          href="/"
-          aria-label={siteConfig.companyName}
-        >
-          <Image src={siteConfig.logo} alt="" width={40} height={40} priority />
-          <span className="text-lg font-semibold">{siteConfig.name}</span>
+    <header className="sticky top-0 z-30 h-11 bg-black text-white">
+      <div className="mx-auto flex h-full w-full max-w-[1068px] items-center justify-between px-6">
+        <Link href="/" className="text-[15px] font-semibold tracking-tight" aria-label={siteConfig.name}>
+          {siteConfig.name}
         </Link>
-
-        <nav className="hidden items-center gap-8 text-sm font-medium text-muted md:flex">
+        <nav className="hidden items-center gap-8 text-xs tracking-[-0.12px] text-white/85 md:flex" aria-label="Primary">
           {navItems.map((item) => (
-            <a key={item.href} className="transition hover:text-foreground" href={item.href}>
+            <a key={item.href} href={item.href} className="transition-colors hover:text-white">
               {item.label}
             </a>
           ))}
         </nav>
-
-        <a
-          className="inline-flex h-10 items-center justify-center rounded-md bg-foreground px-4 text-sm font-semibold text-background transition hover:opacity-90"
-          href="#contact"
-        >
+        <a href="#contact" className="rounded-lg bg-white px-3 py-1 text-xs font-semibold text-ink active:scale-95">
           Start a project
         </a>
       </div>
