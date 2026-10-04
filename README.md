@@ -37,3 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Contact form
 `/api/contact` validates inquiries. Set `RESEND_API_KEY` and `CONTACT_TO_EMAIL` (see `.env.example`) to email them; in dev they are also saved to `data/inquiries.jsonl`.
+# Triviq
