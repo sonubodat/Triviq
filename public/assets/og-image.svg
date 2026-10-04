@@ -1,0 +1,8 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#101010"/>
+  <rect x="80" y="80" width="1040" height="470" rx="28" fill="#18181B" stroke="#27272A" stroke-width="2"/>
+  <path d="M160 164H300V200H248V314H212V200H160V164Z" fill="white"/>
+  <path d="M170 314H290" stroke="#16A34A" stroke-width="22" stroke-linecap="round"/>
+  <text x="360" y="235" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="700">Triviq</text>
+  <text x="360" y="315" fill="#A1A1AA" font-family="Arial, Helvetica, sans-serif" font-size="34">Apps, websites, automation, and digital project delivery.</text>
+</svg>

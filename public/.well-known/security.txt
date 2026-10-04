@@ -1,0 +1,3 @@
+Contact: mailto:security@triviq.com
+Preferred-Languages: en
+Canonical: https://triviq.com/.well-known/security.txt

@@ -1,0 +1,3 @@
+# Triviq
+
+Triviq Solutions builds websites, apps, internal tools, automation, APIs, and digital systems for businesses.

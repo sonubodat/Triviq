@@ -1,0 +1,1 @@
+# Add authorized digital sellers here when ads are configured.

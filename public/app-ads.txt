@@ -1,0 +1,1 @@
+# Add authorized app digital sellers here when app ads are configured.
