@@ -31,6 +31,7 @@ export type Project = {
   built: string;
   system: string;
   status?: string;
+  proofPoints: string[];
   media:
     | { type: "phones"; images: { src: string; width: number; height: number; alt: string }[] }
     | { type: "diagram"; id: "qr-flow" };
@@ -45,6 +46,7 @@ export const work: Project[] = [
     descriptor: "Street-food discovery and dine-in offers platform.",
     built: "Mobile apps · Vendor tools · Admin platform · Backend · Website",
     system: "React Native · Node.js · MongoDB · Next.js",
+    proofPoints: ["Mobile UI", "Vendor tools", "Admin + API"],
     media: {
       type: "phones",
       images: [
@@ -68,6 +70,7 @@ export const work: Project[] = [
     descriptor: "Vendor referral tracking for an energy business.",
     built: "Vendor portal · Sales portal · Admin console · Public enquiry flow · Backend",
     system: "React · Node.js · Prisma · Postgres",
+    proofPoints: ["QR flow", "Attribution", "Role access"],
     media: { type: "diagram", id: "qr-flow" },
     details: {
       problem:
@@ -89,6 +92,7 @@ export const products: Project[] = [
     built: "Mobile app · Backend · Billing · Auth",
     system: "Flutter · FastAPI · Supabase · RevenueCat",
     status: "In development",
+    proofPoints: ["Private UX", "Auth optional", "In build"],
     media: {
       type: "phones",
       images: [

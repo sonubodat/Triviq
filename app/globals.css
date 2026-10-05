@@ -106,6 +106,21 @@
   .accent { color: var(--triviq-blue); }
   :is(.tile-dark, .tile-black) .accent { color: var(--triviq-sky); }
   .accent-cyan { color: var(--triviq-cyan); }
+  .skip-link {
+    position: fixed;
+    left: 16px;
+    top: 12px;
+    z-index: 200;
+    transform: translateY(-140%);
+    border-radius: 9999px;
+    background: var(--triviq-white);
+    color: var(--triviq-text);
+    padding: 10px 16px;
+    font-weight: 600;
+    box-shadow: var(--product-shadow);
+    transition: transform 0.18s ease-out;
+  }
+  .skip-link:focus-visible { transform: translateY(0); }
 
   /* First splash: rough paper sketch of the Triviq T. Fast, looping while visible. */
   .splash-intro {
@@ -308,10 +323,38 @@
 
   /* Case studies: product work stays the focus, so media sits on a quiet blue-white */
   .cs { display: flex; flex-direction: column; overflow: hidden; background: var(--triviq-white); border: 1px solid var(--triviq-border); border-radius: 18px; }
-  .cs-media { display: flex; justify-content: center; align-items: flex-start; gap: 12px; height: 380px; overflow: hidden; padding: 36px 16px 0; background: var(--triviq-surface-strong); }
-  .phone { position: relative; flex: 0 1 188px; min-width: 0; border: 6px solid var(--triviq-text); border-bottom: 0; border-radius: 30px 30px 0 0; overflow: hidden; background: #fff; box-shadow: var(--product-shadow); }
-  .phone img { width: 100%; height: auto; }
+  .cs-media { display: flex; justify-content: center; align-items: flex-start; gap: 18px; height: 460px; overflow: hidden; padding: 28px 18px 0; background: var(--triviq-surface-strong); }
+  .phone {
+    position: relative;
+    flex: 0 1 214px;
+    min-width: 0;
+    border: 7px solid var(--triviq-text);
+    border-bottom: 0;
+    border-radius: 34px 34px 0 0;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: var(--product-shadow);
+    transform: translateY(var(--phone-shift, 0));
+  }
+  .phone img { width: 100%; height: auto; display: block; }
+  .phone:nth-child(2) img { transform: translateY(-34px); }
   .cs-body { display: flex; flex-direction: column; gap: 12px; padding: 24px; }
+  .proof-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 2px 0 0; padding: 0; list-style: none; }
+  .proof-chips li {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 5px 11px;
+    border-radius: 9999px;
+    background: var(--triviq-surface);
+    border: 1px solid var(--triviq-border);
+    color: var(--triviq-text-soft);
+    font-family: var(--font-mono-stack);
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
   .cs-facts { display: grid; gap: 10px; margin: 4px 0 0; }
   .cs-facts dt, .cs-detail dt { color: var(--triviq-text-muted); }
   .cs-facts dd, .cs-detail dd { margin: 2px 0 0; }
@@ -322,6 +365,7 @@
   .cs-detail { display: grid; gap: 14px; margin: 4px 0 0; padding-top: 16px; border-top: 1px solid var(--triviq-border); }
   .cs-dark { background: var(--triviq-dark-card); border-color: var(--triviq-border-dark); }
   .cs-dark .cs-media { background: var(--triviq-black); }
+  .cs-dark .proof-chips li { background: var(--triviq-dark); border-color: var(--triviq-border-dark); color: var(--triviq-text-dark-muted); }
   .cs-dark .cs-facts dt, .cs-dark .cs-detail dt { color: var(--triviq-text-dark-muted); }
   .cs-dark .cs-more summary { color: var(--triviq-sky); }
   .cs-dark .cs-detail { border-color: var(--triviq-border-dark); }

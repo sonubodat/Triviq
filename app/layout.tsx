@@ -68,8 +68,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
         <SplashIntro />
+        <a href="#main" className="skip-link">Skip to Content</a>
         <SiteHeader />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <SiteFooter />
       </body>
     </html>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 
 import type { Project } from "@/lib/content";
 
@@ -10,8 +11,8 @@ export function CaseStudyCard({ project, dark = false }: { project: Project; dar
     <article className={`cs ${dark ? "cs-dark" : ""}`}>
       <div className="cs-media">
         {media.type === "phones" ? (
-          media.images.map((img) => (
-            <div key={img.src} className="phone">
+          media.images.map((img, index) => (
+            <div key={img.src} className="phone" style={{ "--phone-shift": `${index * 28}px` } as CSSProperties}>
               <Image src={img.src} alt={img.alt} width={img.width} height={img.height} sizes="188px" />
             </div>
           ))
@@ -28,6 +29,11 @@ export function CaseStudyCard({ project, dark = false }: { project: Project; dar
         </p>
         <h3 className="t-title">{project.name}</h3>
         <p className="muted">{project.descriptor}</p>
+        <ul className="proof-chips" aria-label={`${project.name} proof points`}>
+          {project.proofPoints.map((point) => (
+            <li key={point}>{point}</li>
+          ))}
+        </ul>
         <dl className="cs-facts">
           <div><dt className="mono">Built</dt><dd>{project.built}</dd></div>
           <div><dt className="mono">System</dt><dd>{project.system}</dd></div>

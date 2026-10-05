@@ -7,7 +7,7 @@ import { StepRail } from "@/components/motion/step-rail";
 import { canRunWebGLHero, detectHeroEnv } from "@/lib/capability";
 import { gsap, registerGsap, useGSAP } from "@/lib/gsap";
 
-import { HeroDiagram } from "./hero-diagram";
+// import { HeroDiagram } from "./hero-diagram";
 import { NODES } from "./system-graph";
 
 const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false });
@@ -20,7 +20,7 @@ registerGsap();
 export function HeroVisual() {
   const [mode, setMode] = useState<"svg" | "webgl">("svg");
   const [ready, setReady] = useState(false);
-  const [visible, setVisible] = useState(true);
+  // const [visible, setVisible] = useState(true);
   const [hover, setHover] = useState<number | null>(null);
   const box = useRef<HTMLDivElement>(null);
   const collapse = useRef(0);
@@ -43,18 +43,20 @@ export function HeroVisual() {
     };
   }, []);
 
-  useEffect(() => {
-    const el = box.current;
-    if (!el || mode !== "webgl") return;
-    const io = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
-    io.observe(el);
-    return () => io.disconnect();
-  }, [mode]);
+  // Keep the WebGL hero running continuously. Do not pause it when it leaves the viewport.
+  // useEffect(() => {
+  //   const el = box.current;
+  //   if (!el || mode !== "webgl") return;
+  //   const io = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
+  //   io.observe(el);
+  //   return () => io.disconnect();
+  // }, [mode]);
 
   const fallback = () => {
-    collapse.current = 0;
-    setMode("svg");
-    setReady(false);
+    // Keep this fallback disabled per request: never switch back to the old static SVG.
+    // collapse.current = 0;
+    // setMode("svg");
+    // setReady(false);
   };
   const node = hover === null ? null : NODES[hover];
 
@@ -111,12 +113,13 @@ export function HeroVisual() {
 
   return (
     <div ref={box} className="relative aspect-[620/520] w-full">
-      <div className={`absolute inset-0 transition-opacity duration-700 ${ready ? "opacity-0" : "opacity-100"}`}>
+      {/* Old static fallback commented out: keep only the WebGL hero visible. */}
+      {/* <div className={`absolute inset-0 transition-opacity duration-700 ${ready ? "opacity-0" : "opacity-100"}`}>
         <HeroDiagram />
-      </div>
+      </div> */}
       {mode === "webgl" && (
         <div className="absolute inset-0" aria-hidden="true">
-          <HeroScene active={visible} guard collapse={collapse} onHover={setHover} onSlow={fallback} onFirstFrame={() => setReady(true)} />
+          <HeroScene active guard={false} collapse={collapse} onHover={setHover} onSlow={fallback} onFirstFrame={() => setReady(true)} />
         </div>
       )}
       {mode === "webgl" && ready && (
