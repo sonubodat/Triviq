@@ -1,0 +1,5 @@
+[
+ {"id":"gradient-gloss","score":0.82,"notes":"Same lit rig as the surface pass; specular streaks on the ring, saturated gradients."},
+ {"id":"t-silhouette","score":0.9,"notes":"unchanged"},
+ {"id":"orbit-ring","score":0.82,"notes":"Rim light (#6fd8ff from behind) outlines the ring edge on a dark background."}
+]

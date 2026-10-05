@@ -1,7 +1,8 @@
 import { appendFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 
-import { budgets, services, siteConfig } from "@/lib/site";
+import { services } from "@/lib/content";
+import { budgets, siteConfig } from "@/lib/site";
 
 const services_ = new Set<string>([...services.map((s) => s.title), "Something else"]);
 const budgets_ = new Set<string>(budgets);
@@ -61,10 +62,10 @@ export async function POST(req: Request) {
         text: Object.entries(record).map(([k, v]) => `${k}: ${v}`).join("\n"),
       }),
     });
-    if (!res.ok) return bad("We could not send your inquiry. Please email us directly.", 502);
+    if (!res.ok) return bad("We could not send your inquiry right now.", 502);
   } else if (process.env.NODE_ENV === "production") {
     console.error("Contact delivery not configured: set RESEND_API_KEY and CONTACT_TO_EMAIL", record);
-    return bad("We could not send your inquiry. Please email us directly.", 503);
+    return bad("We could not send your inquiry right now.", 503);
   }
 
   return Response.json({ ok: true });

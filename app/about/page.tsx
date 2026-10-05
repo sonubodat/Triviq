@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 import { ProjectCta } from "@/components/sections/cta";
 import { PageHero } from "@/components/sections/page-hero";
-import { services } from "@/lib/site";
+import { services } from "@/lib/content";
 
-export const metadata: Metadata = { title: "About", description: "Triviq is an independent technology studio building software for businesses and products of its own." };
+export const metadata: Metadata = { alternates: { canonical: "/about" }, title: "About", description: "Triviq is an independent technology studio building software for businesses and products of its own." };
 
 const principles = [
   ["Ship real things", "We measure ourselves by working software in users' hands, not slide decks."],
@@ -36,7 +36,7 @@ export default function About() {
           </ul>
         </div>
       </section>
-      <section className="tile tile-parchment">
+      <section className="tile tile-surface">
         <div className="wrap">
           <h2 className="t-display text-center">How we think.</h2>
           <div className="mt-12 grid gap-5 md:grid-cols-3">

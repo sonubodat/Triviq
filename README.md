@@ -1,40 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Triviq website
 
-## Getting Started
-
-First, run the development server:
+Next.js 16 (App Router) + Tailwind v4. Design system: Apple-inspired structure (`DESIGN.md`) with Triviq's logo blue as the accent.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm lint && pnpm exec tsc --noEmit && pnpm build
+node --test components/hero/hero.test.mjs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where things live
+- `lib/site.ts`: name, URL, contact emails, nav, footer, budgets, legal entity/jurisdiction.
+- `lib/content.ts`: services, work, products, process, engagement copy. Edit here; sections render from it.
+- `components/sections/`: home-page sections. `components/hero/`: hero visual (static SVG first; WebGL scene lazy-loaded on capable tablet/desktop browsers).
+- `components/three/createTriviqCore.ts` + `design/triviq-core/`: procedural T-core (img2threejs spec, notes in `PATCHES.md`).
+- `app/globals.css`: tokens (`:root`) and component classes (`@layer components`, so Tailwind utilities override them).
+- `public/work/`: case-study screenshots (WebP, ~540px wide).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Content rules
+- No metrics, ROI or client names without permission. The anonymised project in `work` stays unnamed until written permission exists.
+- No content element may rely on `opacity: 0` / `visibility: hidden` to be readable (full-page screenshots and crawlers do not scroll).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contact form (launch-blocking setup)
+`POST /api/contact` validates (honeypot, rate limit, field checks), then:
+- **dev:** appends to `data/inquiries.jsonl` (git-ignored).
+- **production:** emails via Resend. Set `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` (verified domain), see `.env.example`. If they are missing the route returns 503 and logs the inquiry to stdout so it is not silently lost.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Contact form
-`/api/contact` validates inquiries. Set `RESEND_API_KEY` and `CONTACT_TO_EMAIL` (see `.env.example`) to email them; in dev they are also saved to `data/inquiries.jsonl`.
-# Triviq
+## Before launch
+Replace `hello@` / `support@triviq.com`, set the production domain in `siteConfig.url`, fill `legal.entity` and `legal.jurisdiction`, have the privacy policy and terms reviewed, and confirm Untold's real status before labelling it beyond "In development".

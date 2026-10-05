@@ -1,0 +1,5 @@
+[
+ {"id":"gradient-gloss","score":0.82,"notes":"Lit render (studio rig, no tone mapping): azure-to-cyan crossbar ramp, azure-to-deep-blue stem ramp, glossy ring with clearcoat streaks, emissive cyan chips. Max per-part dE 18.26 (<20)."},
+ {"id":"t-silhouette","score":0.9,"notes":"unchanged"},
+ {"id":"orbit-ring","score":0.82,"notes":"Specular rim reads as the reference's bright inner edge; the white outline gap of the 2D logo is approximated by clearcoat highlights only."}
+]

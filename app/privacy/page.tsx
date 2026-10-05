@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { LegalPage } from "@/components/sections/legal-page";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Privacy Policy", description: "How Triviq collects, uses and protects information submitted through this website." };
+export const metadata: Metadata = { alternates: { canonical: "/privacy" }, title: "Privacy Policy", description: "How Triviq collects, uses and protects information submitted through this website." };
 
 export default function Privacy() {
   const { entity } = siteConfig.legal;

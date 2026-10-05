@@ -1,19 +1,20 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { ContactForm } from "@/components/sections/contact-form";
 import { PageHero } from "@/components/sections/page-hero";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Contact", description: "Tell Triviq about your project. We reply within one business day." };
+export const metadata: Metadata = { alternates: { canonical: "/contact" }, title: "Contact", description: "Tell Triviq about your project. We reply within one business day." };
 
 export default function Contact() {
   return (
     <>
       <PageHero title="Tell us what you want to build." lead="We reply within one business day, wherever you are." />
-      <section className="tile tile-parchment pt-0">
+      <section className="tile tile-surface pt-0">
         <div className="wrap grid gap-8 lg:grid-cols-[1.4fr_1fr]">
-          <ContactForm />
+          <Suspense fallback={null}><ContactForm /></Suspense>
           <aside className="grid content-start gap-5">
             <div className="card">
               <h2 className="t-tagline">Email</h2>

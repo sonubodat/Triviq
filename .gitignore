@@ -43,3 +43,6 @@ next-env.d.ts
 # local inquiries
 /data/
 !.env.example
+
+# img2threejs working state
+.img2threejs/

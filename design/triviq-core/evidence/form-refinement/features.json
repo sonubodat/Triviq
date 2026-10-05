@@ -1,0 +1,5 @@
+[
+ {"id":"t-silhouette","score":0.9,"notes":"Stepped crossbar and stem keep the mask match; rounded chamfers (0.02-0.028) now catch the key light along the top and side edges."},
+ {"id":"orbit-ring","score":0.83,"notes":"Tapered ribbon with true points at both tips; the ring spine was fitted offline against the reference mask (IoU 0.854 analytic)."},
+ {"id":"chip-cluster","score":0.85,"notes":"Three cubes in the right order and sizes."}
+]

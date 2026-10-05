@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { LegalPage } from "@/components/sections/legal-page";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Terms & Conditions", description: "Terms for using the Triviq website and how project engagements are governed." };
+export const metadata: Metadata = { alternates: { canonical: "/terms" }, title: "Terms & Conditions", description: "Terms for using the Triviq website and how project engagements are governed." };
 
 export default function Terms() {
   const { entity, jurisdiction } = siteConfig.legal;

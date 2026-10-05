@@ -7,7 +7,7 @@ import { MobileMenu } from "./mobile-menu";
 
 export function SiteHeader() {
   return (
-    <header className="on-black sticky top-0 z-30 bg-black text-white">
+    <header className="on-black sticky top-0 z-30 bg-[var(--triviq-black)] text-white">
       <div className="mx-auto flex h-11 w-full max-w-[1068px] items-center justify-between px-6">
         <Link href="/" aria-label={`${siteConfig.name} home`}>
           <Image src={siteConfig.logo} alt={siteConfig.name} width={377} height={136} className="h-6 w-auto" priority />

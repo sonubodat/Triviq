@@ -1,0 +1,5 @@
+[
+ {"id":"orbit-ring","score":0.85,"notes":"Ring pivot sits at the ring centre; rotating it 90 deg about the plane normal (-0.174, 0.897, 0.407) orbits the stem without drifting (spin0 vs spin90 captures)."},
+ {"id":"t-silhouette","score":0.9,"notes":"unchanged"},
+ {"id":"gradient-gloss","score":0.82,"notes":"unchanged"}
+]

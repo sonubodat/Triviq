@@ -1,3 +1,17 @@
 # Triviq
 
-Triviq Solutions builds websites, apps, internal tools, automation, APIs, and digital systems for businesses.
+Triviq is an independent product and engineering studio building websites, apps, SaaS platforms and digital experiences for businesses worldwide. Based in India, working worldwide.
+
+## Services
+- Web & Platforms
+- Mobile Apps
+- SaaS Products
+- AI & Automation
+- Business Software
+- Games & Interactive
+
+## Pages
+- Home: https://triviq.com/
+- About: https://triviq.com/about
+- Contact: https://triviq.com/contact
+- Help & Support: https://triviq.com/support

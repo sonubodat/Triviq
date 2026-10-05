@@ -1,0 +1,5 @@
+[
+ {"id":"t-silhouette","score":0.9,"notes":"T proportions, stepped +X crossbar end and stem match the reference mask almost cell for cell."},
+ {"id":"orbit-ring","score":0.78,"notes":"Ring tilt, extent and tapered tips match; the band reads slightly thinner than the reference ribbon and the cyan far arc hides behind the crossbar."},
+ {"id":"chip-cluster","score":0.85,"notes":"Three cubes in the right diagonal order and sizes."}
+]

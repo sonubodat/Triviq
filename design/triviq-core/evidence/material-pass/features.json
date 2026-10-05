@@ -1,0 +1,5 @@
+[
+ {"id":"gradient-gloss","score":0.78,"notes":"Flat-albedo render (ambient only, no tone mapping): crossbar #0381f1 to #03c1f5 vs reference #037bfc to cyan, stem #038ced to #024bbe vs #007bfc to #012bb8, chips #03d4ff vs #03d6fe; max per-part dE 12.45 (<20). Gloss/clearcoat verified in the reference-lit render."},
+ {"id":"t-silhouette","score":0.9,"notes":"unchanged"},
+ {"id":"orbit-ring","score":0.8,"notes":"Ring ramps deep blue to azure; the reference's right half is slightly more cyan."}
+]

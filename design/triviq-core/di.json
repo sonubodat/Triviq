@@ -1,0 +1,191 @@
+{
+ "sourceImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+ "zonesDir": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones",
+ "detailInventory": {
+  "scanMethod": "grid-3x3",
+  "targetMinDetails": 6,
+  "details": [
+   {
+    "id": "zone-r0c0",
+    "kind": "bevel",
+    "description": "Crossbar left end and top edge: crisp bright top edge and square left end, reading as a hard chamfer under light (stylised; bevel depth invented).",
+    "region": {
+     "x": 0.0,
+     "y": 0.0,
+     "width": 0.3333,
+     "height": 0.3333,
+     "units": "normalized"
+    },
+    "scale": "meso",
+    "affects": "crossbar silhouette edge highlight",
+    "mapsTo": {
+     "type": "component.localFeatures",
+     "ref": "bevel-crossbar"
+    },
+    "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r0c0.png",
+    "confidence": 0.6
+   },
+   {
+    "id": "zone-r0c1",
+    "kind": "gloss",
+    "description": "Crossbar top: horizontal value gradient from azure (#037bfc) at -X to cyan (#02b6ff to #03d6fe) toward +X, glossy.",
+    "region": {
+     "x": 0.3333,
+     "y": 0.0,
+     "width": 0.3333,
+     "height": 0.3333,
+     "units": "normalized"
+    },
+    "scale": "meso",
+    "affects": "crossbar albedo gradient and gloss",
+    "mapsTo": {
+     "type": "material.localOverrides",
+     "ref": "crossbar-gradient"
+    },
+    "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r0c1.png",
+    "confidence": 0.8
+   },
+   {
+    "id": "zone-r0c2",
+    "kind": "emissive",
+    "description": "Three detached cyan squares stepping up and +X from the crossbar end: large, medium, small; saturated near-emissive cyan (#03d6fe).",
+    "region": {
+     "x": 0.6667,
+     "y": 0.0,
+     "width": 0.3333,
+     "height": 0.3333,
+     "units": "normalized"
+    },
+    "scale": "micro",
+    "affects": "chip cluster colour and glow",
+    "mapsTo": {
+     "type": "material.localOverrides",
+     "ref": "chip-emissive"
+    },
+    "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r0c2.png",
+    "confidence": 0.85
+   },
+   {
+    "id": "zone-r1c0",
+    "kind": "contour",
+    "description": "Orbit ring left tip: tapers to a sharp point at the -X end; thickest part of the near arc sweeps below it.",
+    "region": {
+     "x": 0.0,
+     "y": 0.3333,
+     "width": 0.3333,
+     "height": 0.3333,
+     "units": "normalized"
+    },
+    "scale": "meso",
+    "affects": "ring silhouette taper at -X tip",
+    "mapsTo": {
+     "type": "component.localFeatures",
+     "ref": "ring-taper-front"
+    },
+    "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r1c0.png",
+    "confidence": 0.7
+   },
+   {
+    "id": "zone-r1c1",
+    "kind": "gloss",
+    "description": "Stem upper section split into two vertical bands (lighter +X band) and white rim line separating ring from stem; ring near arc crosses in front of the stem.",
+    "region": {
+     "x": 0.3333,
+     "y": 0.3333,
+     "width": 0.3333,
+     "height": 0.3333,
+     "units": "normalized"
+    },
+    "scale": "micro",
+    "affects": "stem two-tone and ring rim highlight",
+    "mapsTo": {
+     "type": "material.localOverrides",
+     "ref": "ring-rim-gloss"
+    },
+    "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r1c1.png",
+    "confidence": 0.65
+   },
+   {
+    "id": "zone-r1c2",
+    "kind": "chip",
+    "description": "Crossbar +X end is stepped/notched (top-right corner cut) where the chips begin; far ring arc tapers to a point beneath it.",
+    "region": {
+     "x": 0.6667,
+     "y": 0.3333,
+     "width": 0.3333,
+     "height": 0.3333,
+     "units": "normalized"
+    },
+    "scale": "meso",
+    "affects": "crossbar silhouette notch",
+    "mapsTo": {
+     "type": "component.localFeatures",
+     "ref": "step-notch"
+    },
+    "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r1c2.png",
+    "confidence": 0.7
+   },
+   {
+    "id": "zone-r2c0",
+    "kind": "contour",
+    "description": "Near ring arc lower-left: widest part of the ring, deep blue (#0148e6 to #0541c5), tapering smoothly toward the front-centre.",
+    "region": {
+     "x": 0.0,
+     "y": 0.6667,
+     "width": 0.3333,
+     "height": 0.3333,
+     "units": "normalized"
+    },
+    "scale": "meso",
+    "affects": "ring thickness profile",
+    "mapsTo": {
+     "type": "component.localFeatures",
+     "ref": "ring-taper-front"
+    },
+    "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r2c0.png",
+    "confidence": 0.75
+   },
+   {
+    "id": "zone-r2c1",
+    "kind": "gloss",
+    "description": "Lower stem: value darkens toward the bottom (#012bb8 to #024cd0); stem below the ring reads as a separate lower section.",
+    "region": {
+     "x": 0.3333,
+     "y": 0.6667,
+     "width": 0.3333,
+     "height": 0.3333,
+     "units": "normalized"
+    },
+    "scale": "meso",
+    "affects": "stem vertical gradient",
+    "mapsTo": {
+     "type": "material.localOverrides",
+     "ref": "stem-gradient"
+    },
+    "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r2c1.png",
+    "confidence": 0.75
+   },
+   {
+    "id": "zone-r2c2",
+    "kind": "contour",
+    "description": "Near ring arc right tip: thin sliver outlined in white tapering to a point right of the stem; far arc ends in a second point above it.",
+    "region": {
+     "x": 0.6667,
+     "y": 0.6667,
+     "width": 0.3333,
+     "height": 0.3333,
+     "units": "normalized"
+    },
+    "scale": "meso",
+    "affects": "ring right tip taper and far arc",
+    "mapsTo": {
+     "type": "component.localFeatures",
+     "ref": "ring-taper-back"
+    },
+    "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r2c2.png",
+    "confidence": 0.6
+   }
+  ]
+ },
+ "authoringInstruction": "Open each zone crop under zonesDir and replace every detail stub's kind, description, scale, affects, mapsTo, and confidence with what is actually observed. Add more detail entries per zone if a single zone contains multiple distinct marks; do not leave stubs unfilled or unlinked (mapsTo must reference a real component.localFeatures or material.localOverrides entry)."
+}

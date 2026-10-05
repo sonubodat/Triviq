@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/page-hero";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Help & Support", description: "Answers to common questions about working with Triviq, and how to get support." };
+export const metadata: Metadata = { alternates: { canonical: "/support" }, title: "Help & Support", description: "Answers to common questions about working with Triviq, and how to get support." };
 
 const faqs = [
   ["How does a project start?", "Send an inquiry with your goals and budget range. We reply within one business day, usually with questions or a short call, and then send a written proposal."],
@@ -29,7 +29,7 @@ export default function Support() {
           ))}
         </div>
       </section>
-      <section className="tile tile-parchment">
+      <section className="tile tile-surface">
         <div className="wrap grid gap-5 md:grid-cols-2">
           <div className="card"><h2 className="t-tagline">Support</h2><p className="mt-2 muted">Existing clients and users: <a className="link" href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a></p></div>
           <div className="card"><h2 className="t-tagline">New project</h2><p className="mt-2 muted">Use the <Link className="link" href="/contact">contact form</Link> to start a conversation.</p></div>

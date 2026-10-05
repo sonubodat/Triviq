@@ -1,0 +1,49 @@
+{
+ "model": "triviq-t-core",
+ "parts": [
+  {
+   "name": "t-stem",
+   "kind": "part",
+   "module": "t-stem",
+   "triangles": 60
+  },
+  {
+   "name": "t-crossbar",
+   "kind": "part",
+   "module": "t-crossbar",
+   "triangles": 92
+  },
+  {
+   "name": "orbit-ring",
+   "kind": "part",
+   "module": "orbit-ring",
+   "triangles": 700
+  },
+  {
+   "name": "ring-back-arc",
+   "kind": "part",
+   "module": "ring-back-arc",
+   "triangles": 180
+  },
+  {
+   "name": "pixel-chip-large",
+   "kind": "part",
+   "module": "pixel-chip-large",
+   "triangles": 192
+  },
+  {
+   "name": "pixel-chip-medium",
+   "kind": "part",
+   "module": "pixel-chip-medium",
+   "triangles": 192
+  },
+  {
+   "name": "pixel-chip-small",
+   "kind": "part",
+   "module": "pixel-chip-small",
+   "triangles": 192
+  }
+ ],
+ "unnamedMeshes": 0,
+ "integralMeshes": 0
+}

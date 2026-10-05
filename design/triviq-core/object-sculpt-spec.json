@@ -1,0 +1,4931 @@
+{
+  "targetName": "Triviq T-core",
+  "targetId": "triviq-t-core",
+  "schemaVersion": "2.1",
+  "terminologyProfile": {
+    "domain": "real-time procedural Three.js asset",
+    "geometryTerms": [
+      "silhouette",
+      "topology",
+      "primitive",
+      "bevel",
+      "chamfer",
+      "taper",
+      "bend",
+      "boolean cut",
+      "edge loop",
+      "surface normal",
+      "displacement"
+    ],
+    "materialTerms": [
+      "albedo",
+      "baseColor",
+      "roughness",
+      "metalness",
+      "normal map",
+      "bump map",
+      "ambient occlusion",
+      "cavity dirt",
+      "edge wear",
+      "clearcoat"
+    ],
+    "lightingTerms": [
+      "key light",
+      "fill light",
+      "rim light",
+      "HDRI/environment reflection",
+      "contact shadow"
+    ],
+    "descriptionRule": "Use measurable 3D graphics terms. Avoid vague words unless they are paired with concrete geometry/material/shader parameters."
+  },
+  "sourceImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+  "referenceCamera": {
+    "solved": true,
+    "fovDegrees": 25.0,
+    "aspect": 1.287,
+    "orientation": {
+      "yaw": 0.0,
+      "pitch": 0.0,
+      "roll": 0.0
+    },
+    "positionHint": [
+      0.0,
+      0.12,
+      5.95
+    ],
+    "note": "Set manually (a flat logo has no perspective to solve): frontal camera framing the mark at about 74% of image height; solve_camera_pose is not applicable."
+  },
+  "suitability": "conditional",
+  "scores": {
+    "object_isolation": 3,
+    "silhouette_readability": 3,
+    "depth_inference": 1,
+    "primitive_decomposition": 3,
+    "material_procedurality": 2,
+    "occlusion_risk": 2,
+    "interaction_fit": 2
+  },
+  "preSpecAssessment": {
+    "objectClass": {
+      "primaryType": "stylised T monogram emblem with tilted orbit ring and detached chip cluster",
+      "primaryDomain": "object",
+      "formLanguage": [
+        "hard-surface",
+        "sculptural"
+      ],
+      "structureKind": [
+        "compound object",
+        "repeated modules"
+      ],
+      "motionPotential": [
+        "static prop",
+        "whole-object transform",
+        "articulated"
+      ],
+      "materialFamilies": [
+        "plastic",
+        "metal"
+      ],
+      "notes": "Flat 2D brand mark reconstructed as a STYLISED interpretation. Depth, bevel, ring cross-section and back faces are invented; the wordmark is out of scope."
+    },
+    "complexity": {
+      "tier": "moderate",
+      "scores": {
+        "silhouetteComplexity": 1,
+        "componentCount": 2,
+        "hierarchyDepth": 1,
+        "repetitionDensity": 1,
+        "materialLayerCount": 1,
+        "localDetailDensity": 1,
+        "occlusionRisk": 2,
+        "actionReadinessNeed": 1
+      },
+      "estimatedCounts": {
+        "macroComponents": 3,
+        "mesoComponents": 7,
+        "microFeatureGroups": 3,
+        "materialLayers": 3,
+        "repetitionSystems": 1
+      },
+      "reasoning": [
+        "Three macro parts (T body, orbit ring, chip cluster); T body = crossbar + stem; ring has front/back arcs; chips are a small repeated system.",
+        "Few materials (glossy blue gradient, white rim, emissive cyan) so not complex; occlusion risk from the back ring arc and unseen depth."
+      ]
+    },
+    "specDepthDecision": {
+      "requiredDepth": "moderate",
+      "minimumComponentLevels": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "needsRepetitionSystems": true,
+      "needsMaterialLocalOverrides": true,
+      "needsMultipleReviewViews": true,
+      "needsActionReadyHierarchy": true,
+      "rationale": "Moderate: hierarchy T body > crossbar/stem, ring > arcs, chips > 3 instances; ring spin and chip anchors require pivots/sockets."
+    },
+    "unknownsToResolveBeforeImplementation": [],
+    "detailInventory": {
+      "scanMethod": "grid-3x3",
+      "targetMinDetails": 6,
+      "details": [
+        {
+          "id": "zone-r0c0",
+          "kind": "bevel",
+          "description": "Crossbar left end and top edge: crisp bright top edge and square left end, reading as a hard chamfer under light (stylised; bevel depth invented).",
+          "region": {
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.3333,
+            "height": 0.3333,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "crossbar silhouette edge highlight",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "bevel-crossbar"
+          },
+          "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r0c0.png",
+          "confidence": 0.6
+        },
+        {
+          "id": "zone-r0c1",
+          "kind": "gloss",
+          "description": "Crossbar top: horizontal value gradient from azure (#037bfc) at -X to cyan (#02b6ff to #03d6fe) toward +X, glossy.",
+          "region": {
+            "x": 0.3333,
+            "y": 0.0,
+            "width": 0.3333,
+            "height": 0.3333,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "crossbar albedo gradient and gloss",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "crossbar-gradient"
+          },
+          "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r0c1.png",
+          "confidence": 0.8
+        },
+        {
+          "id": "zone-r0c2",
+          "kind": "emissive",
+          "description": "Three detached cyan squares stepping up and +X from the crossbar end: large, medium, small; saturated near-emissive cyan (#03d6fe).",
+          "region": {
+            "x": 0.6667,
+            "y": 0.0,
+            "width": 0.3333,
+            "height": 0.3333,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "chip cluster colour and glow",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "chip-emissive"
+          },
+          "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r0c2.png",
+          "confidence": 0.85
+        },
+        {
+          "id": "zone-r1c0",
+          "kind": "contour",
+          "description": "Orbit ring left tip: tapers to a sharp point at the -X end; thickest part of the near arc sweeps below it.",
+          "region": {
+            "x": 0.0,
+            "y": 0.3333,
+            "width": 0.3333,
+            "height": 0.3333,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "ring silhouette taper at -X tip",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "ring-taper-front"
+          },
+          "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r1c0.png",
+          "confidence": 0.7
+        },
+        {
+          "id": "zone-r1c1",
+          "kind": "gloss",
+          "description": "Stem upper section split into two vertical bands (lighter +X band) and white rim line separating ring from stem; ring near arc crosses in front of the stem.",
+          "region": {
+            "x": 0.3333,
+            "y": 0.3333,
+            "width": 0.3333,
+            "height": 0.3333,
+            "units": "normalized"
+          },
+          "scale": "micro",
+          "affects": "stem two-tone and ring rim highlight",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "ring-rim-gloss"
+          },
+          "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r1c1.png",
+          "confidence": 0.65
+        },
+        {
+          "id": "zone-r1c2",
+          "kind": "chip",
+          "description": "Crossbar +X end is stepped/notched (top-right corner cut) where the chips begin; far ring arc tapers to a point beneath it.",
+          "region": {
+            "x": 0.6667,
+            "y": 0.3333,
+            "width": 0.3333,
+            "height": 0.3333,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "crossbar silhouette notch",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "step-notch"
+          },
+          "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r1c2.png",
+          "confidence": 0.7
+        },
+        {
+          "id": "zone-r2c0",
+          "kind": "contour",
+          "description": "Near ring arc lower-left: widest part of the ring, deep blue (#0148e6 to #0541c5), tapering smoothly toward the front-centre.",
+          "region": {
+            "x": 0.0,
+            "y": 0.6667,
+            "width": 0.3333,
+            "height": 0.3333,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "ring thickness profile",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "ring-taper-front"
+          },
+          "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r2c0.png",
+          "confidence": 0.75
+        },
+        {
+          "id": "zone-r2c1",
+          "kind": "gloss",
+          "description": "Lower stem: value darkens toward the bottom (#012bb8 to #024cd0); stem below the ring reads as a separate lower section.",
+          "region": {
+            "x": 0.3333,
+            "y": 0.6667,
+            "width": 0.3333,
+            "height": 0.3333,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "stem vertical gradient",
+          "mapsTo": {
+            "type": "material.localOverrides",
+            "ref": "stem-gradient"
+          },
+          "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r2c1.png",
+          "confidence": 0.75
+        },
+        {
+          "id": "zone-r2c2",
+          "kind": "contour",
+          "description": "Near ring arc right tip: thin sliver outlined in white tapering to a point right of the stem; far arc ends in a second point above it.",
+          "region": {
+            "x": 0.6667,
+            "y": 0.6667,
+            "width": 0.3333,
+            "height": 0.3333,
+            "units": "normalized"
+          },
+          "scale": "meso",
+          "affects": "ring right tip taper and far arc",
+          "mapsTo": {
+            "type": "component.localFeatures",
+            "ref": "ring-taper-back"
+          },
+          "evidenceRef": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/detail-zones/zone-r2c2.png",
+          "confidence": 0.6
+        }
+      ]
+    },
+    "anatomy": {
+      "applies": false,
+      "styleHeads": 0.0,
+      "proportions": {
+        "headUnit": 0.0,
+        "torso": 0.0,
+        "legs": 0.0,
+        "shoulderWidth": 0.0,
+        "hipWidth": 0.0
+      },
+      "pose": {
+        "type": "unassessed",
+        "jointAngles": {}
+      },
+      "faceLandmarks": {
+        "eyeLine": 0.0,
+        "eyeSpacing": 0.0,
+        "noseBase": 0.0,
+        "mouthLine": 0.0,
+        "hairline": 0.0
+      },
+      "features": [],
+      "confidence": 0.0,
+      "note": "Only meaningful when objectClass.primaryDomain is character or hybrid. Set applies=true and fill from forge/stage1_intake/extract_landmarks.py. See grimoire/character/reconstruction.md and grimoire/character/likeness_maximization.md."
+    },
+    "sourceImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png"
+  },
+  "qualityContract": {
+    "qualityBar": "moderate",
+    "definitionOfDone": [
+      "The rendered model matches the reference silhouette, primary proportions, visible component hierarchy, material response, and most recognizable local features for the selected fidelity tier."
+    ],
+    "minimumSpecDepth": {
+      "macroComponents": 2,
+      "mesoComponents": 3,
+      "microFeatureGroups": 2,
+      "materialLayers": 2,
+      "repetitionSystems": 0,
+      "reviewViewpoints": 3
+    },
+    "featureGroups": [
+      {
+        "id": "overall-silhouette",
+        "name": "Overall silhouette and proportions",
+        "required": true,
+        "qualityCriteria": [
+          "Bounding shape, dominant curves, negative spaces, and scale relationships are explicitly described."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "model reads as a generic placeholder instead of the reference object",
+          "major proportions are guessed without evidence"
+        ]
+      },
+      {
+        "id": "primary-structure",
+        "name": "Primary structure and hierarchy",
+        "required": true,
+        "qualityCriteria": [
+          "Major parts, joints, seams, contact points, and parent-child relationships are named before code generation."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "large visible parts are merged into one mesh",
+          "component hierarchy is too shallow for the observed complexity"
+        ]
+      },
+      {
+        "id": "attachment-joint-correctness",
+        "name": "Attachment and joint correctness",
+        "required": true,
+        "qualityCriteria": [
+          "Every visible child appendage, branch, limb, handle, connector, tube, cable, horn, wing, leg, or hinged part has an attachment contract with parent socket, localStart/localEnd, contact type, embed/overlap, and gap tolerance."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "child part root floats away from the parent",
+          "branch/limb/tube is centered in space instead of pivoting from its root",
+          "parent-child transform mixes world and local coordinates"
+        ]
+      },
+      {
+        "id": "surface-material-response",
+        "name": "Surface material response",
+        "required": true,
+        "qualityCriteria": [
+          "Albedo zones, roughness, normal/bump/displacement intent, cavity dirt, edge wear, and local overrides are specified where visible.",
+          "Important materials define independent albedo, roughness, height/normal, and AO responses instead of reusing one texture for unrelated PBR channels.",
+          "Surface response is decomposed into macro, meso, and micro frequency bands with scale and amplitude tied to object scale."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "surface looks like flat plastic",
+          "local material variation is missing or not tied to image evidence"
+        ]
+      },
+      {
+        "id": "reference-lookdev",
+        "name": "Reference color, material, and lighting response",
+        "required": true,
+        "qualityCriteria": [
+          "Material-pass names the reference-derived albedo palette, roughness variation, tactile normal/bump/displacement response, and local masks.",
+          "When a source image is available, run reference PBR extraction and require confidence >= 0.7 before treating maps as implementation-ready.",
+          "Lighting-pass names key/fill/rim or environment light, exposure, tone mapping, background, and contact shadow behavior.",
+          "Neutral, grazing-angle, and reference-matched renders prove that surface relief survives relighting and is not painted into albedo."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "model has acceptable shape but reads as flat shaded or plastic",
+          "colors are a generic average instead of reference-observed local color zones",
+          "lighting is evenly ambient and cannot reproduce the source value range"
+        ]
+      }
+    ],
+    "visualDeltaChecks": [
+      "silhouette and negative-space delta",
+      "component hierarchy depth delta",
+      "repetition density and distribution delta",
+      "material albedo/roughness/normal response delta",
+      "local feature placement and scale delta"
+    ],
+    "antiShallowSpecRules": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ],
+    "mustNotDo": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md).",
+      "Adjacent components must overlap by at least 0.02 world units at shared seams (source: grimoire/build/geometry_patterns.md).",
+      "Raised or recessed relief and fasteners must be geometry, instanced micro-parts, or displacement; a map alone is an approximation (source: grimoire/build/geometry_patterns.md)."
+    ]
+  },
+  "qualityTargets": {
+    "targetFidelity": 0.7,
+    "mustMatch": [
+      "macro silhouette and proportions",
+      "primary material albedo/roughness response",
+      "reference-derived PBR material response at or above 0.7 confidence when source pixels are usable",
+      "most recognizable local features"
+    ],
+    "niceToHave": [
+      "micro scratches, stains, chips, and dirt masks",
+      "secondary lighting match"
+    ],
+    "fpsTarget": 60,
+    "reviewViewpoints": [
+      "front",
+      "three-quarter",
+      "side",
+      "thickness-axis",
+      "long-axis"
+    ]
+  },
+  "selfCorrectLoop": {
+    "enabled": true,
+    "visualAcceptance": {
+      "reviewer": "ai-vision",
+      "threshold": 0.7,
+      "comparisonArtifactRequired": true,
+      "layerScoresRequired": true,
+      "codePixelDiffIsAcceptanceAuthority": false,
+      "scoringRule": "AI vision must inspect a side-by-side reference/render sheet and score the current pass from 0 to 1. Pixel-diff code may assist diagnostics but cannot approve a pass.",
+      "requiredLayerScores": [
+        "silhouetteProportion",
+        "componentStructure",
+        "formDetail",
+        "materialSurface",
+        "lightingCamera"
+      ],
+      "featureReviewPolicy": {
+        "enabled": true,
+        "reviewUnit": "semantic-subsystem",
+        "maxCriticalFeaturesPerPass": 5,
+        "maxImportantFeaturesPerPass": 3,
+        "criticalDefaultThreshold": 0.8,
+        "importantAverageThreshold": 0.65,
+        "adaptiveEscalation": true,
+        "singleImagePairOnly": true,
+        "selectionRule": "Choose only the most visually salient, identity-defining, user-prioritized, or high-risk semantic systems. Group repeated parts instead of reviewing every mesh. AI vision scores every selected feature from the same full reference/render pair."
+      }
+    },
+    "reviewAfterPasses": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "allowedActions": [
+      "continue",
+      "refine-spec",
+      "refine-code",
+      "request-input",
+      "stop"
+    ],
+    "specRefineTriggers": [
+      "missing component",
+      "wrong primitive family",
+      "wrong proportions",
+      "material layer under-specified",
+      "local feature not traceable to viewEvidence",
+      "reference ambiguity discovered during implementation"
+    ],
+    "codeRefineTriggers": [
+      "spec is adequate but generated geometry/material does not match",
+      "browser render differs from reference",
+      "performance budget exceeded",
+      "lighting hides geometry or material response"
+    ],
+    "stopCriteria": [
+      "target fidelity reached or user accepts current approximation",
+      "remaining gaps require new reference images or manual art"
+    ],
+    "screenshotPolicy": {
+      "requiredForPasses": [
+        "blockout",
+        "structural-pass",
+        "form-refinement",
+        "material-pass",
+        "surface-pass",
+        "lighting-pass",
+        "interaction-pass"
+      ],
+      "preferredCapture": "in-app-browser-screenshot",
+      "fallbackCapture": "user-supplied-screenshot-path",
+      "minimumEvidence": "Each visual pass needs a reference image, rendered screenshot, side-by-side comparison sheet, AI vision score, layer scores, and critique before choosing continue.",
+      "reviewPairRule": "Compare the same camera/viewpoint whenever possible; do not judge a front reference against a random render angle.",
+      "acceptanceAuthority": "AI vision review of the comparison sheet. Code-generated pixel similarity is not sufficient evidence."
+    }
+  },
+  "featureReviewTargets": [
+    {
+      "id": "t-silhouette",
+      "name": "T monogram proportions and stepped crossbar",
+      "tier": "critical",
+      "passIds": [
+        "blockout",
+        "structural-pass"
+      ],
+      "minimumScore": 0.8,
+      "mustPass": true,
+      "componentRefs": [
+        "t-stem",
+        "t-crossbar"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "orbit-ring",
+      "name": "Tilted tapered orbit ring crossing in front of the stem",
+      "tier": "critical",
+      "passIds": [
+        "blockout",
+        "structural-pass",
+        "form-refinement"
+      ],
+      "minimumScore": 0.75,
+      "mustPass": true,
+      "componentRefs": [
+        "orbit-ring",
+        "ring-back-arc"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "chip-cluster",
+      "name": "Three cyan chips stepping off the crossbar end",
+      "tier": "important",
+      "passIds": [
+        "structural-pass",
+        "form-refinement"
+      ],
+      "minimumScore": 0.7,
+      "mustPass": false,
+      "componentRefs": [
+        "pixel-chip-large",
+        "pixel-chip-medium",
+        "pixel-chip-small"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    },
+    {
+      "id": "gradient-gloss",
+      "name": "Blue gradient glossy finish with cyan emissive chips",
+      "tier": "critical",
+      "passIds": [
+        "material-pass",
+        "surface-pass"
+      ],
+      "minimumScore": 0.7,
+      "mustPass": true,
+      "componentRefs": [
+        "t-stem",
+        "t-crossbar",
+        "orbit-ring",
+        "ring-back-arc",
+        "pixel-chip-large",
+        "pixel-chip-medium",
+        "pixel-chip-small"
+      ],
+      "evidenceRefs": [
+        "full-object"
+      ]
+    }
+  ],
+  "sculptPipeline": {
+    "passGateMode": "locked-sequential",
+    "passOrder": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "currentPass": "complete",
+    "completedPasses": [
+      "blockout",
+      "structural-pass",
+      "form-refinement",
+      "material-pass",
+      "surface-pass",
+      "lighting-pass",
+      "interaction-pass",
+      "optimization-pass"
+    ],
+    "lastCompletedPass": "optimization-pass",
+    "blockedReason": "all build passes completed",
+    "nextRequiredEvidence": []
+  },
+  "lookDevTargets": {
+    "qualityPriority": "reference-fidelity",
+    "materialPass": {
+      "albedoPaletteRequired": true,
+      "roughnessVariationRequired": true,
+      "normalOrBumpRequired": true,
+      "localOverridesRequired": true,
+      "minimumTextureResolution": 1024,
+      "preferredTextureResolution": 2048,
+      "independentMapChannels": [
+        "albedo",
+        "roughness",
+        "height",
+        "normal",
+        "ambient-occlusion"
+      ],
+      "requiredSurfaceFrequencyBands": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "geometryReliefRequiredWhenSilhouetteAffected": true,
+      "referencePbrExtraction": {
+        "requiredWhenSourceImagePresent": true,
+        "targetThreshold": 0.7,
+        "stopOnLowConfidence": true,
+        "script": "forge/stage1_intake/extract_pbr_evidence.py",
+        "acceptedLimitation": "single-image extraction is reference-derived inference, not exact photogrammetry"
+      },
+      "mustAvoid": [
+        "single flat albedo per material",
+        "uniform roughness",
+        "albedo texture reused as roughness/height/normal/AO",
+        "single-frequency random noise",
+        "plastic-looking smooth bark, stone, cloth, foliage, or aged material",
+        "local color/detail described only in prose without material masks",
+        "claiming exact PBR recovery when confidence is below the target threshold"
+      ]
+    },
+    "lightingPass": {
+      "requiredTerms": [
+        "key light",
+        "fill light",
+        "rim or environment light",
+        "exposure",
+        "tone mapping",
+        "background",
+        "contact shadow"
+      ],
+      "mustAvoid": [
+        "ambient-only lighting",
+        "flat value range",
+        "missing contact shadow",
+        "reference lighting copied without separating material readability"
+      ]
+    },
+    "screenshotReview": [
+      "Compare albedo palette and local color zones.",
+      "Compare roughness/normal/bump response under light.",
+      "Compare cavity dirt, edge wear, stains, moss, scratches, or other local masks.",
+      "Compare key/fill/rim structure, exposure, tone mapping, background, and contact shadows.",
+      "Capture a neutral-light render to verify material readability without reference lighting.",
+      "Capture a grazing-light close-up to expose flat normals, uniform roughness, tiling, and plastic highlights.",
+      "Capture a reference-matched render from the same camera framing as the source."
+    ]
+  },
+  "actionReadiness": {
+    "contract": "Every macro/meso component should be generated as a stable named Object3D pivot node with a mesh child, action metadata, optional sockets, collider proxy, and destruction metadata.",
+    "defaultRigType": "action-ready-static-rig",
+    "rootMotionNode": "root",
+    "requiredComponentFields": [
+      "id",
+      "parent",
+      "transform",
+      "attachment for child appendages, connectors, limbs, tubes, handles, legs, horns, wings, branches, or cables",
+      "actionProfile.animationRole",
+      "actionProfile.pivot",
+      "actionProfile.collider",
+      "actionProfile.destruction"
+    ],
+    "transformChannels": [
+      "translate",
+      "rotate",
+      "scale",
+      "bend",
+      "twist",
+      "detach",
+      "visibility",
+      "material-state"
+    ],
+    "authoringRules": [
+      "Do not collapse independently movable parts into one mesh.",
+      "Put transforms on component pivot groups, not only on raw meshes.",
+      "For attached child parts, put the pivot at the semantic root/socket and build visible geometry from localStart to localEnd.",
+      "Represent hinge, socket, detachable, and breakable intent even when no animation is implemented yet.",
+      "Use simplified collider proxies for runtime physics instead of visual mesh colliders by default."
+    ],
+    "destructionPolicy": {
+      "defaultBreakable": false,
+      "fractureGroupNaming": "Use stable semantic names such as body-shell, left-hinge, glass-panel, branch-segment.",
+      "debrisStrategy": "Prefer detachable component groups and a small number of procedural fragments over random mesh explosion."
+    }
+  },
+  "assumptions": [
+    "Stylised interpretation: thickness (depth), bevel, ring cross-section and back faces are invented; the owner accepted this (conditional suitability).",
+    "Wordmark out of scope: T mark only.",
+    "Ring plane assumed pitched 24 deg and rolled 11 deg from the visible ellipse; far arc assumed not to touch the crossbar.",
+    "Colours are sampled from the reference and passed to the generator as rootTipGradient ramps with a white material colour."
+  ],
+  "coordinateFrame": {
+    "front": "+Z toward the viewer (reference view)",
+    "up": "+Y",
+    "scaleReference": "T height = 2.0 units; origin at the centre of the T bounding box in X/Y; the T body occupies z 0..0.46, so the model centre plane is z = 0.23 (wrap with a -0.23 z offset to centre)"
+  },
+  "silhouette": {
+    "boundingShape": "T monogram (stepped crossbar on a stem) wrapped by a tilted, broken orbit ring, with three floating cubes off the crossbar's +X end",
+    "aspectRatios": [
+      "bbox 2.5 wide x 2.24 tall (1.12:1)",
+      "T alone 1.78 wide x 2.0 tall"
+    ],
+    "symmetry": "T body bilateral about the stem except the stepped +X end; ring and chips asymmetric",
+    "dominantCurves": [
+      "orbit ring: circle R=1.25 pitched 24 deg, rolled 11 deg (right end up)",
+      "ring thickest at the near arc, -X side"
+    ],
+    "negativeSpaces": [
+      "hole inside the ring around the stem",
+      "gap between the crossbar notch and the chips"
+    ],
+    "landmarks": [
+      "crossbar +X notch",
+      "ring -X tip",
+      "ring +X near tip",
+      "far-arc +X tip",
+      "chip cluster"
+    ]
+  },
+  "viewEvidence": [
+    {
+      "id": "full-object",
+      "view": "primary",
+      "imageRegion": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0,
+        "units": "normalized"
+      },
+      "observations": [
+        "T 1.78w x 2.0h, stem 0.61w, crossbar 0.52h",
+        "ring spans about 2.46 across, tilted 11 deg",
+        "three chips 0.27/0.24/0.15"
+      ],
+      "confidence": 0.5
+    }
+  ],
+  "componentTree": [
+    {
+      "id": "t-stem",
+      "name": "T stem",
+      "level": "macro",
+      "role": "body",
+      "importance": 1.0,
+      "confidence": 0.7,
+      "primitive": "extrude",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Rigid prismatic stem with hard flat faces: an extruded rectangle profile (not a box primitive so the profile can be edited), bevel handled in refine-code.",
+      "geometryDescriptor": {
+        "topologyIntent": "extruded T stem, bevel-ready edges",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.035,
+          "segments": 2
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry",
+        "profile2D": {
+          "points": [
+            [
+              -0.325,
+              -1.0
+            ],
+            [
+              0.285,
+              -1.0
+            ],
+            [
+              0.285,
+              0.52
+            ],
+            [
+              -0.325,
+              0.52
+            ]
+          ],
+          "depth": 0.46,
+          "bevel": {
+            "size": 0.02,
+            "thickness": 0.025,
+            "segments": 3
+          }
+        }
+      },
+      "parent": null,
+      "attachment": null,
+      "dimensions": {
+        "width": 0.61,
+        "height": 1.52,
+        "depth": 0.46,
+        "units": "relative",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "root",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.5
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [
+          {
+            "id": "ring-socket",
+            "position": [
+              0,
+              0,
+              0.23
+            ],
+            "note": "orbit ring pivot"
+          },
+          {
+            "id": "chip-socket",
+            "position": [
+              0.775,
+              1.086,
+              0.23
+            ],
+            "note": "chip cluster anchor"
+          }
+        ],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0.23
+          ],
+          "scale": [
+            2.5,
+            2.3,
+            1.2
+          ],
+          "isTrigger": false,
+          "notes": "Whole-mark proxy; the ring and chips extend the silhouette."
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "m-t-gloss",
+      "materialLayers": [
+        "m-t-gloss"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "bevel-stem",
+          "type": "bevel highlight",
+          "placement": "all outer edges of the stem",
+          "size": "0.035 object units",
+          "orientation": "around the stem profile",
+          "materialEffect": "bright specular rim under the key light",
+          "geometryEffect": "rounded chamfer, 3 segments, profile2D.bevel (applied by postprocess because the generator extrudes with bevelEnabled false)",
+          "confidence": 0.55
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "rootTipGradient": {
+        "rootColor": "#0230b8",
+        "tipColor": "#049bff",
+        "axis": "y"
+      },
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(3,123,252,1)",
+        "secondaryAlbedo": "rgba(1,43,184,1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.55,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0.0,
+              "color": "rgba(2,48,184,1)"
+            },
+            {
+              "position": 1.0,
+              "color": "rgba(4,155,255,1)"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "t-crossbar",
+      "name": "T crossbar",
+      "level": "meso",
+      "role": "body",
+      "importance": 0.9,
+      "confidence": 0.7,
+      "primitive": "extrude",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "Rigid prismatic bar with a stepped +X end: extruded polygon profile.",
+      "geometryDescriptor": {
+        "topologyIntent": "stepped crossbar profile",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.035,
+          "segments": 3
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry",
+        "profile2D": {
+          "points": [
+            [
+              -0.89,
+              1.0
+            ],
+            [
+              0.55,
+              1.0
+            ],
+            [
+              0.55,
+              0.84
+            ],
+            [
+              0.865,
+              0.84
+            ],
+            [
+              0.865,
+              0.48
+            ],
+            [
+              -0.89,
+              0.48
+            ]
+          ],
+          "depth": 0.5,
+          "bevel": {
+            "size": 0.022,
+            "thickness": 0.028,
+            "segments": 3
+          }
+        }
+      },
+      "parent": "t-stem",
+      "attachment": null,
+      "dimensions": {
+        "width": 1.755,
+        "height": 0.52,
+        "depth": 0.5,
+        "units": "relative",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          -0.02
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.5
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "Replace with sphere/capsule/compound proxy when the object shape demands it."
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "m-t-gloss",
+      "materialLayers": [
+        "m-t-gloss"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "bevel-crossbar",
+          "type": "bevel highlight",
+          "placement": "outer edges of the crossbar, strongest on the top edge",
+          "size": "0.04 object units",
+          "orientation": "around the crossbar profile",
+          "materialEffect": "crisp bright top edge",
+          "geometryEffect": "rounded chamfer, 3 segments, profile2D.bevel (postprocess)",
+          "confidence": 0.6
+        },
+        {
+          "id": "step-notch",
+          "type": "notch",
+          "placement": "top-right corner of the crossbar, x from 0.55 to 0.89",
+          "size": "0.34 x 0.16 object units",
+          "orientation": "cut from the +X top corner",
+          "materialEffect": "none",
+          "geometryEffect": "profile step in the extruded polygon",
+          "confidence": 0.7
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "rootTipGradient": {
+        "rootColor": "#0377f9",
+        "tipColor": "#03d0ff",
+        "axis": "x"
+      },
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(3,123,252,1)",
+        "secondaryAlbedo": "rgba(3,214,254,1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.55,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0.0,
+              "color": "rgba(3,119,249,1)"
+            },
+            {
+              "position": 1.0,
+              "color": "rgba(3,208,255,1)"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "orbit-ring",
+      "name": "Orbit ring (near arc)",
+      "level": "macro",
+      "role": "orbit",
+      "importance": 0.9,
+      "confidence": 0.6,
+      "primitive": "tapered-sweep",
+      "topologyClass": "continuous-sculpt",
+      "topologyRationale": "One smooth swept band that narrows to true points at both tips: a tapered sweep along a tilted elliptical spine (a constant-radius tube cannot taper).",
+      "geometryDescriptor": {
+        "topologyIntent": "tapered swoosh arc",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0.0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry",
+        "taperedSweep": {
+          "stations": [
+            {
+              "position": [
+                -0.5493,
+                0.2041,
+                -1.0505
+              ],
+              "rx": 0.0,
+              "rz": 0.0,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.6941,
+                0.129,
+                -0.9739
+              ],
+              "rx": 0.0588,
+              "rz": 0.0437,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.8233,
+                0.0511,
+                -0.8755
+              ],
+              "rx": 0.0709,
+              "rz": 0.0548,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.9341,
+                -0.0281,
+                -0.7574
+              ],
+              "rx": 0.0802,
+              "rz": 0.0622,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -1.0238,
+                -0.1066,
+                -0.6223
+              ],
+              "rx": 0.0883,
+              "rz": 0.0679,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -1.0907,
+                -0.1827,
+                -0.4733
+              ],
+              "rx": 0.0957,
+              "rz": 0.0723,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -1.133,
+                -0.2547,
+                -0.3136
+              ],
+              "rx": 0.1026,
+              "rz": 0.0758,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -1.1499,
+                -0.321,
+                -0.1469
+              ],
+              "rx": 0.109,
+              "rz": 0.0785,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -1.141,
+                -0.3801,
+                0.023
+              ],
+              "rx": 0.1151,
+              "rz": 0.0807,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -1.1065,
+                -0.4306,
+                0.1925
+              ],
+              "rx": 0.1208,
+              "rz": 0.0823,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -1.0472,
+                -0.4715,
+                0.3577
+              ],
+              "rx": 0.1262,
+              "rz": 0.0834,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.9644,
+                -0.5019,
+                0.5148
+              ],
+              "rx": 0.1312,
+              "rz": 0.0841,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.8599,
+                -0.5209,
+                0.6604
+              ],
+              "rx": 0.1358,
+              "rz": 0.0843,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.7362,
+                -0.5283,
+                0.7911
+              ],
+              "rx": 0.1401,
+              "rz": 0.0841,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.5959,
+                -0.5238,
+                0.9042
+              ],
+              "rx": 0.1439,
+              "rz": 0.0835,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.4422,
+                -0.5076,
+                0.9969
+              ],
+              "rx": 0.1473,
+              "rz": 0.0824,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.2787,
+                -0.4799,
+                1.0672
+              ],
+              "rx": 0.1501,
+              "rz": 0.081,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.1088,
+                -0.4415,
+                1.1136
+              ],
+              "rx": 0.1523,
+              "rz": 0.0791,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.0634,
+                -0.3932,
+                1.135
+              ],
+              "rx": 0.1539,
+              "rz": 0.0768,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.2343,
+                -0.3361,
+                1.131
+              ],
+              "rx": 0.1547,
+              "rz": 0.074,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.3999,
+                -0.2714,
+                1.1015
+              ],
+              "rx": 0.1545,
+              "rz": 0.0707,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.5565,
+                -0.2006,
+                1.0474
+              ],
+              "rx": 0.1532,
+              "rz": 0.0667,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.7006,
+                -0.1254,
+                0.9697
+              ],
+              "rx": 0.1503,
+              "rz": 0.062,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.829,
+                -0.0473,
+                0.8703
+              ],
+              "rx": 0.1453,
+              "rz": 0.0563,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.9388,
+                0.0318,
+                0.7513
+              ],
+              "rx": 0.1368,
+              "rz": 0.0491,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                1.0276,
+                0.1103,
+                0.6155
+              ],
+              "rx": 0.1211,
+              "rz": 0.0387,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                1.0932,
+                0.1862,
+                0.4659
+              ],
+              "rx": 0.0,
+              "rz": 0.0,
+              "twist": 0.0
+            }
+          ],
+          "radialSegments": 14,
+          "capEnds": true
+        }
+      },
+      "parent": "t-stem",
+      "attachment": null,
+      "dimensions": {
+        "width": 2.46,
+        "height": 0.95,
+        "depth": 1.1,
+        "units": "relative",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          -0.01199341861480479,
+          0.14753491663333282,
+          0.23
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "orbit",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            -0.1743,
+            0.8968,
+            0.4067
+          ],
+          "confidence": 0.5
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [
+          {
+            "id": "ring-spin-axis",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "note": "spin about the ring plane normal"
+          }
+        ],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            2.5,
+            1.0,
+            1.1
+          ],
+          "isTrigger": false,
+          "notes": "Proxy for the near arc"
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "m-ring-gloss",
+      "materialLayers": [
+        "m-ring-gloss"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "ring-taper-front",
+          "type": "taper",
+          "placement": "both tips of the near arc, thick at the -X side",
+          "size": "half-height 0.21 to 0 over the arc",
+          "orientation": "along the arc",
+          "materialEffect": "white specular rim along the inner edge",
+          "geometryEffect": "tapered sweep stations narrow to a true point",
+          "confidence": 0.7
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "rootTipGradient": {
+        "rootColor": "#0540c8",
+        "tipColor": "#2a9bff",
+        "axis": "x"
+      },
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(5,65,197,1)",
+        "secondaryAlbedo": "rgba(42,155,255,1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.55,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0.0,
+              "color": "rgba(1,72,230,1)"
+            },
+            {
+              "position": 1.0,
+              "color": "rgba(42,155,255,1)"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ring-back-arc",
+      "name": "Orbit ring (far arc)",
+      "level": "meso",
+      "role": "orbit",
+      "importance": 0.6,
+      "confidence": 0.55,
+      "primitive": "tapered-sweep",
+      "topologyClass": "continuous-sculpt",
+      "topologyRationale": "Thinner far arc of the same orbit, tapering to a point at its visible +X end.",
+      "geometryDescriptor": {
+        "topologyIntent": "thin tapered far arc",
+        "edgeTreatment": {
+          "type": "none",
+          "bevelRadius": 0.0,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry",
+        "taperedSweep": {
+          "stations": [
+            {
+              "position": [
+                0.8669,
+                0.5201,
+                -0.6519
+              ],
+              "rx": 0.0,
+              "rz": 0.0,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.7666,
+                0.5276,
+                -0.7622
+              ],
+              "rx": 0.0247,
+              "rz": 0.0247,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.6544,
+                0.527,
+                -0.8607
+              ],
+              "rx": 0.0363,
+              "rz": 0.0363,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.5322,
+                0.5183,
+                -0.946
+              ],
+              "rx": 0.044,
+              "rz": 0.044,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.4018,
+                0.5016,
+                -1.0168
+              ],
+              "rx": 0.0485,
+              "rz": 0.0485,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.2652,
+                0.4772,
+                -1.0718
+              ],
+              "rx": 0.05,
+              "rz": 0.05,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                0.1245,
+                0.4455,
+                -1.1104
+              ],
+              "rx": 0.0485,
+              "rz": 0.0485,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.0181,
+                0.4068,
+                -1.1319
+              ],
+              "rx": 0.044,
+              "rz": 0.044,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.1604,
+                0.3619,
+                -1.1359
+              ],
+              "rx": 0.0363,
+              "rz": 0.0363,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.3003,
+                0.3115,
+                -1.1224
+              ],
+              "rx": 0.0247,
+              "rz": 0.0247,
+              "twist": 0.0
+            },
+            {
+              "position": [
+                -0.4355,
+                0.2562,
+                -1.0916
+              ],
+              "rx": 0.0,
+              "rz": 0.0,
+              "twist": 0.0
+            }
+          ],
+          "radialSegments": 10,
+          "capEnds": true
+        }
+      },
+      "parent": "orbit-ring",
+      "attachment": null,
+      "dimensions": {
+        "width": 2.0,
+        "height": 0.6,
+        "depth": 1.0,
+        "units": "relative",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "orbit",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            -0.1743,
+            0.8968,
+            0.4067
+          ],
+          "confidence": 0.5
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "Replace with sphere/capsule/compound proxy when the object shape demands it."
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "m-ring-gloss",
+      "materialLayers": [
+        "m-ring-gloss"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [
+        {
+          "id": "ring-taper-back",
+          "type": "taper",
+          "placement": "visible +X end of the far arc, above the near-arc tip",
+          "size": "half-height 0.10 to 0",
+          "orientation": "along the arc",
+          "materialEffect": "cyan end",
+          "geometryEffect": "tapered sweep stations narrow to a true point",
+          "confidence": 0.6
+        }
+      ],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "rootTipGradient": {
+        "rootColor": "#0a6fe0",
+        "tipColor": "#03c9ff",
+        "axis": "x"
+      },
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(2,182,255,1)",
+        "secondaryAlbedo": "rgba(10,111,224,1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.55,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0.0,
+              "color": "rgba(10,111,224,1)"
+            },
+            {
+              "position": 1.0,
+              "color": "rgba(3,201,255,1)"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "pixel-chip-large",
+      "name": "Pixel chip (large)",
+      "level": "macro",
+      "role": "accent",
+      "importance": 0.5,
+      "confidence": 0.7,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "A discrete hard-faced cube, genuinely box-shaped.",
+      "geometryDescriptor": {
+        "topologyIntent": "floating pixel cube",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.02,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "t-stem",
+      "attachment": null,
+      "dimensions": {
+        "width": 0.27,
+        "height": 0.27,
+        "depth": 0.27,
+        "units": "relative",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          0.775,
+          1.086,
+          0.23
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.5
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [
+          {
+            "id": "pixel-chip-large-anchor",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "note": "data pulse anchor"
+          }
+        ],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "Replace with sphere/capsule/compound proxy when the object shape demands it."
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "m-chip-emissive",
+      "materialLayers": [
+        "m-chip-emissive"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(3,214,254,1)",
+        "secondaryAlbedo": "rgba(92,224,255,1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.55,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0.0,
+              "color": "rgba(3,214,254,1)"
+            },
+            {
+              "position": 1.0,
+              "color": "rgba(92,224,255,1)"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "pixel-chip-medium",
+      "name": "Pixel chip (medium)",
+      "level": "meso",
+      "role": "accent",
+      "importance": 0.4,
+      "confidence": 0.7,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "A discrete hard-faced cube, genuinely box-shaped.",
+      "geometryDescriptor": {
+        "topologyIntent": "floating pixel cube",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.02,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "pixel-chip-large",
+      "attachment": null,
+      "dimensions": {
+        "width": 0.24,
+        "height": 0.24,
+        "depth": 0.24,
+        "units": "relative",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          0.345,
+          0.149,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.5
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [
+          {
+            "id": "pixel-chip-medium-anchor",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "note": "data pulse anchor"
+          }
+        ],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "Replace with sphere/capsule/compound proxy when the object shape demands it."
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "m-chip-emissive",
+      "materialLayers": [
+        "m-chip-emissive"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(3,214,254,1)",
+        "secondaryAlbedo": "rgba(92,224,255,1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.55,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0.0,
+              "color": "rgba(3,214,254,1)"
+            },
+            {
+              "position": 1.0,
+              "color": "rgba(92,224,255,1)"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "pixel-chip-small",
+      "name": "Pixel chip (small)",
+      "level": "meso",
+      "role": "accent",
+      "importance": 0.3,
+      "confidence": 0.7,
+      "primitive": "box",
+      "topologyClass": "assembled-solid",
+      "topologyRationale": "A discrete hard-faced cube, genuinely box-shaped.",
+      "geometryDescriptor": {
+        "topologyIntent": "floating pixel cube",
+        "edgeTreatment": {
+          "type": "chamfer",
+          "bevelRadius": 0.02,
+          "segments": 1
+        },
+        "deformationStack": [],
+        "uvStrategy": "generated procedural coordinates",
+        "normalStrategy": "vertex normals from generated geometry"
+      },
+      "parent": "pixel-chip-large",
+      "attachment": null,
+      "dimensions": {
+        "width": 0.15,
+        "height": 0.15,
+        "depth": 0.15,
+        "units": "relative",
+        "confidence": 0.6
+      },
+      "transform": {
+        "position": [
+          0.285,
+          -0.202,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "actionProfile": {
+        "animationRole": "static-part",
+        "pivot": {
+          "mode": "center",
+          "localPosition": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "confidence": 0.5
+        },
+        "transformChannels": {
+          "translate": true,
+          "rotate": true,
+          "scale": true,
+          "bend": false,
+          "twist": false,
+          "detach": false,
+          "visibility": true,
+          "materialState": true
+        },
+        "sockets": [
+          {
+            "id": "pixel-chip-small-anchor",
+            "position": [
+              0,
+              0,
+              0
+            ],
+            "note": "data pulse anchor"
+          }
+        ],
+        "collider": {
+          "type": "box",
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "isTrigger": false,
+          "notes": "Replace with sphere/capsule/compound proxy when the object shape demands it."
+        },
+        "constraints": [],
+        "destruction": {
+          "breakable": false,
+          "fractureGroup": "root",
+          "seamRefs": [],
+          "detachableFragments": [],
+          "breakImpulse": 0.0,
+          "debrisMaterial": "base"
+        }
+      },
+      "material": "m-chip-emissive",
+      "materialLayers": [
+        "m-chip-emissive"
+      ],
+      "deformations": [],
+      "joints": [],
+      "seams": [],
+      "localFeatures": [],
+      "surfaceDetail": {
+        "macroRoughness": 0.0,
+        "microRoughness": 0.0,
+        "bumpAmplitude": 0.0,
+        "normalPattern": "",
+        "displacementPattern": "",
+        "occlusionPattern": "",
+        "edgeWearPattern": "",
+        "notes": ""
+      },
+      "evidenceRefs": [
+        "full-object"
+      ],
+      "details": [],
+      "fidelityTier": "blockout",
+      "colorMaterialRecipe": {
+        "dominantAlbedo": "rgba(3,214,254,1)",
+        "secondaryAlbedo": "rgba(92,224,255,1)",
+        "materialClass": "plastic",
+        "materialClassConfidence": 0.55,
+        "colorGradient": {
+          "type": "linear",
+          "stops": [
+            {
+              "position": 0.0,
+              "color": "rgba(3,214,254,1)"
+            },
+            {
+              "position": 1.0,
+              "color": "rgba(92,224,255,1)"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": "m-t-gloss",
+      "name": "T body gloss plastic",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial (clearcoat)",
+      "baseColor": "#ffffff",
+      "color": "#ffffff",
+      "albedo": {
+        "dominant": "#ffffff",
+        "secondary": [
+          "#0377f9",
+          "#03d0ff",
+          "#0230b8",
+          "#049bff"
+        ],
+        "samplingNotes": "Colour comes from the component rootTipGradient vertex ramp; this material colour is white so the ramp is not squared."
+      },
+      "roughness": {
+        "base": 0.28,
+        "variation": 0.04,
+        "map": "none (flat gloss)",
+        "localResponse": "lower roughness on the specular rim override"
+      },
+      "metalness": {
+        "base": 0.1,
+        "variation": 0.0
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.1,
+        "contactShadowBias": 0.2,
+        "notes": "No cavities: smooth convex solids."
+      },
+      "localOverrides": [
+        {
+          "id": "crossbar-gradient",
+          "region": "crossbar: -X to +X",
+          "effect": "horizontal ramp azure #0377f9 to cyan #03d0ff",
+          "strength": 1.0,
+          "evidenceRef": "zone-r0c1"
+        },
+        {
+          "id": "stem-gradient",
+          "region": "stem: bottom to top",
+          "effect": "vertical ramp deep blue #0230b8 to azure #049bff",
+          "strength": 1.0,
+          "evidenceRef": "zone-r2c1"
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Replace with image-derived color, roughness, noise, and edge-wear notes.",
+      "clearcoat": 1.0,
+      "clearcoatRoughness": 0.08,
+      "textureless": {
+        "declared": true,
+        "evidence": [
+          "reference-mark.png zones r0c0..r2c2 (design/triviq-core/detail-zones): flat vector-like colour regions with smooth gradients; no grain, pores, print or relief",
+          "analyze_texture classification: see design/triviq-core/texture-analysis.json"
+        ]
+      }
+    },
+    {
+      "id": "m-ring-gloss",
+      "name": "Orbit ring gloss",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial (clearcoat)",
+      "baseColor": "#ffffff",
+      "color": "#ffffff",
+      "albedo": {
+        "dominant": "#ffffff",
+        "secondary": [
+          "#0540c8",
+          "#2a9bff",
+          "#03c9ff"
+        ],
+        "samplingNotes": "Colour comes from the component rootTipGradient vertex ramp; this material colour is white so the ramp is not squared."
+      },
+      "roughness": {
+        "base": 0.22,
+        "variation": 0.12,
+        "map": "none (flat gloss)",
+        "localResponse": "lower roughness on the specular rim override"
+      },
+      "metalness": {
+        "base": 0.15,
+        "variation": 0.0
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.1,
+        "contactShadowBias": 0.2,
+        "notes": "No cavities: smooth convex solids."
+      },
+      "localOverrides": [
+        {
+          "id": "ring-rim-gloss",
+          "region": "inner edge of the ring bands",
+          "effect": "near-mirror specular rim reading as a white outline",
+          "roughness": 0.1,
+          "strength": 0.8,
+          "evidenceRef": "zone-r1c1"
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Replace with image-derived color, roughness, noise, and edge-wear notes.",
+      "clearcoat": 1.0,
+      "clearcoatRoughness": 0.06,
+      "textureless": {
+        "declared": true,
+        "evidence": [
+          "reference-mark.png zones r0c0..r2c2 (design/triviq-core/detail-zones): flat vector-like colour regions with smooth gradients; no grain, pores, print or relief",
+          "analyze_texture classification: see design/triviq-core/texture-analysis.json"
+        ]
+      }
+    },
+    {
+      "id": "m-chip-emissive",
+      "name": "Pixel chip emissive cyan",
+      "type": "physical",
+      "shaderModel": "MeshPhysicalMaterial (clearcoat)",
+      "baseColor": "#03d6fe",
+      "color": "#03d6fe",
+      "albedo": {
+        "dominant": "#03d6fe",
+        "secondary": [
+          "#5ce0ff"
+        ],
+        "samplingNotes": "Colour comes from the component rootTipGradient vertex ramp; this material colour is white so the ramp is not squared."
+      },
+      "roughness": {
+        "base": 0.5,
+        "variation": 0.05,
+        "map": "none (flat gloss)",
+        "localResponse": "lower roughness on the specular rim override"
+      },
+      "metalness": {
+        "base": 0.0,
+        "variation": 0.0
+      },
+      "ambientOcclusion": {
+        "cavityStrength": 0.1,
+        "contactShadowBias": 0.2,
+        "notes": "No cavities: smooth convex solids."
+      },
+      "localOverrides": [
+        {
+          "id": "chip-emissive",
+          "region": "all three chips",
+          "effect": "self-lit cyan #03d6fe, emissiveIntensity 1.1",
+          "emissive": "#03d6fe",
+          "emissiveIntensity": 1.1,
+          "strength": 1.0,
+          "evidenceRef": "zone-r0c2"
+        }
+      ],
+      "shaderNotes": [
+        "Prefer MeshPhysicalMaterial when clearcoat, sheen, transmission, or thin-surface response is observed; otherwise use MeshStandardMaterial-compatible PBR channels.",
+        "Generate albedo, roughness, height/normal, and AO independently; never alias albedo into roughness.",
+        "Use normal/bump/displacement only when they map to observed surface relief.",
+        "Use displacement geometry when the observed relief changes the close-up silhouette; texture-only relief is insufficient there."
+      ],
+      "notes": "Replace with image-derived color, roughness, noise, and edge-wear notes.",
+      "clearcoat": 0.0,
+      "clearcoatRoughness": 0.3,
+      "textureless": {
+        "declared": true,
+        "evidence": [
+          "reference-mark.png zones r0c0..r2c2 (design/triviq-core/detail-zones): flat vector-like colour regions with smooth gradients; no grain, pores, print or relief",
+          "analyze_texture classification: see design/triviq-core/texture-analysis.json"
+        ]
+      },
+      "emissive": "#03d6fe",
+      "emissiveIntensity": 1.1
+    }
+  ],
+  "repetitionSystems": [
+    {
+      "id": "pixel-chips",
+      "level": "meso",
+      "parent": "t-stem",
+      "description": "Three floating square chips stepping up and +X from the crossbar end (large, medium, small).",
+      "elementComponentIds": [
+        "pixel-chip-large",
+        "pixel-chip-medium",
+        "pixel-chip-small"
+      ],
+      "distribution": "hand-placed along a diagonal, sizes 0.27 / 0.24 / 0.15"
+    }
+  ],
+  "buildPasses": [
+    {
+      "id": "blockout",
+      "goal": "Match macro silhouette and proportions.",
+      "componentRefs": [
+        "t-stem",
+        "orbit-ring",
+        "pixel-chip-large"
+      ],
+      "acceptance": [
+        "Silhouette reads correctly without materials.",
+        "Quality contract has named all required macro feature groups before code generation.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "structural-pass",
+      "goal": "Build the component hierarchy implied by the pre-spec complexity assessment.",
+      "componentRefs": [
+        "t-stem",
+        "t-crossbar",
+        "orbit-ring",
+        "ring-back-arc",
+        "pixel-chip-large",
+        "pixel-chip-medium",
+        "pixel-chip-small"
+      ],
+      "acceptance": [
+        "Macro, meso, and repeated structures meet qualityContract.minimumSpecDepth.",
+        "Parent-child relations, joints, seams, sockets, and contact points are explicit.",
+        "Every attached child appendage/connector has parentSocket, localStart/localEnd, contactType, embedDepth or overlap, and gapTolerance.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "form-refinement",
+      "goal": "Refine shape, deformation, bevels, tapers, curves, asymmetry, and visible local geometry.",
+      "componentRefs": [
+        "t-stem",
+        "t-crossbar",
+        "orbit-ring",
+        "ring-back-arc",
+        "pixel-chip-large",
+        "pixel-chip-medium",
+        "pixel-chip-small"
+      ],
+      "acceptance": [
+        "Important visible forms are represented in component geometryDescriptor, deformations, localFeatures, or repetitionSystems.",
+        "Endpoint-based child parts are rooted at their attachment sockets and do not visibly float away from parents.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "material-pass",
+      "goal": "Match material color, roughness, bump, and local variation.",
+      "componentRefs": [
+        "t-stem",
+        "t-crossbar",
+        "orbit-ring",
+        "ring-back-arc",
+        "pixel-chip-large",
+        "pixel-chip-medium",
+        "pixel-chip-small"
+      ],
+      "acceptance": [
+        "Reference-derived albedo palette records dominant, secondary, and accent colors per visible material.",
+        "Each important material defines roughness variation and at least one normal/bump/displacement response.",
+        "Local material overrides, dirt/wear/stains/moss/chips/scratches or equivalent masks are tied to evidenceRefs.",
+        "Thin, transparent, reflective, wet, or fibrous materials document alpha/transmission/clearcoat/metalness/fiber response when relevant.",
+        "Generated preview uses procedural albedo/roughness/bump texture or vertex color variation instead of one flat color.",
+        "Generated preview uses independent PBR maps at 1024px or higher for the quality-first tier.",
+        "If source pixels are available, referencePbr extraction passed at confidence >= 0.7 or the pass is stopped/requesting better references.",
+        "Macro, meso, and micro surface frequency bands are visible at the intended review distance without obvious tiling.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "surface-pass",
+      "goal": "Add procedural surface locality such as normal/bump/displacement, AO, dirt, stains, chips, grain, moss, scratches, and wear.",
+      "componentRefs": [
+        "t-stem",
+        "t-crossbar",
+        "orbit-ring",
+        "ring-back-arc",
+        "pixel-chip-large",
+        "pixel-chip-medium",
+        "pixel-chip-small"
+      ],
+      "acceptance": [
+        "Every required material feature group has local overrides or surfaceDetail tied to evidenceRefs.",
+        "A grazing-angle close-up proves that normal/height detail breaks highlights naturally and does not read as smooth plastic.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "lighting-pass",
+      "goal": "Make material and form readable under neutral turntable lighting plus optional reference lighting.",
+      "componentRefs": [
+        "t-stem",
+        "t-crossbar",
+        "orbit-ring",
+        "ring-back-arc",
+        "pixel-chip-large",
+        "pixel-chip-medium",
+        "pixel-chip-small"
+      ],
+      "acceptance": [
+        "lightingFromPhoto identifies key light direction/color/intensity, fill light, rim or environment light, and ambient color.",
+        "Exposure, tone mapping, background color/gradient, shadow softness, and contact shadow behavior are specified.",
+        "Lighting does not hide geometry/material gaps and screenshots can be compared fairly to the reference.",
+        "Neutral, grazing, and reference-matched lighting checks distinguish material errors from lighting errors.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "interaction-pass",
+      "goal": "Make the model ready for future animation, transformation, physics, or destruction.",
+      "componentRefs": [
+        "t-stem",
+        "t-crossbar",
+        "orbit-ring",
+        "ring-back-arc",
+        "pixel-chip-large",
+        "pixel-chip-medium",
+        "pixel-chip-small"
+      ],
+      "acceptance": [
+        "Macro and movable meso components have stable pivot nodes.",
+        "Sockets, collider proxies, and destruction metadata are present for future runtime actions.",
+        "AI vision comparison score meets selfCorrectLoop.visualAcceptance.threshold."
+      ]
+    },
+    {
+      "id": "optimization-pass",
+      "goal": "Protect runtime performance after visual fidelity is accepted.",
+      "componentRefs": [
+        "t-stem",
+        "t-crossbar",
+        "orbit-ring",
+        "ring-back-arc",
+        "pixel-chip-large",
+        "pixel-chip-medium",
+        "pixel-chip-small"
+      ],
+      "acceptance": [
+        "Triangle count, draw calls, instancing, LOD strategy, and FPS target are documented or verified.",
+        "Repeated detail is instanced or simplified where possible without breaking silhouette/material believability."
+      ]
+    }
+  ],
+  "visualEvidence": [
+    {
+      "timestamp": "2026-10-05T10:50:07.048726+00:00",
+      "passId": "blockout",
+      "estimatedFidelity": 0.8,
+      "aiVisionScore": 0.8,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.8,
+        "formDetail": 0.5,
+        "materialSurface": 0.3,
+        "lightingCamera": 0.4
+      },
+      "featureReviews": [
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "T proportions, stepped +X crossbar end and stem match the reference mask almost cell for cell."
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.78,
+          "notes": "Ring tilt, extent and tapered tips match; the band reads slightly thinner than the reference ribbon and the cyan far arc hides behind the crossbar."
+        },
+        {
+          "id": "chip-cluster",
+          "score": 0.85,
+          "notes": "Three cubes in the right diagonal order and sizes."
+        }
+      ],
+      "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+      "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/front.png",
+      "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/comparison.png",
+      "cameraView": "front, fov 25, distance 6.1 (reference framing)",
+      "notes": "",
+      "aiVisionNotes": "Inspected comparison.png: silhouette and proportions read as the Triviq T mark; ring is a tapered ribbon crossing in front of the stem."
+    },
+    {
+      "timestamp": "2026-10-05T10:51:50.902780+00:00",
+      "passId": "structural-pass",
+      "estimatedFidelity": 0.82,
+      "aiVisionScore": 0.82,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.85,
+        "formDetail": 0.5,
+        "materialSurface": 0.3,
+        "lightingCamera": 0.4
+      },
+      "featureReviews": [
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "Stem and stepped crossbar are separate parented components that read as one T from every orbit view."
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.82,
+          "notes": "Three-quarter view: the ribbon wraps the stem, passing in front below and behind above, which is the intended orbit; tips taper to points."
+        },
+        {
+          "id": "chip-cluster",
+          "score": 0.85,
+          "notes": "Chips parented to the large chip; sizes and diagonal order match."
+        }
+      ],
+      "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+      "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/structural-pass/front.png",
+      "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/structural-pass/comparison.png",
+      "cameraView": "front, fov 25, distance 6.1 (reference framing)",
+      "notes": "",
+      "aiVisionNotes": ""
+    },
+    {
+      "timestamp": "2026-10-05T10:59:07.775428+00:00",
+      "passId": "form-refinement",
+      "estimatedFidelity": 0.83,
+      "aiVisionScore": 0.83,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.85,
+        "formDetail": 0.78,
+        "materialSurface": 0.3,
+        "lightingCamera": 0.4
+      },
+      "featureReviews": [
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "Stepped crossbar and stem keep the mask match; rounded chamfers (0.02-0.028) now catch the key light along the top and side edges."
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.83,
+          "notes": "Tapered ribbon with true points at both tips; the ring spine was fitted offline against the reference mask (IoU 0.854 analytic)."
+        },
+        {
+          "id": "chip-cluster",
+          "score": 0.85,
+          "notes": "Three cubes in the right order and sizes."
+        }
+      ],
+      "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+      "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/form-refinement/front.png",
+      "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/form-refinement/comparison.png",
+      "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+      "notes": "",
+      "aiVisionNotes": ""
+    },
+    {
+      "timestamp": "2026-10-05T11:00:44.184175+00:00",
+      "passId": "material-pass",
+      "estimatedFidelity": 0.82,
+      "aiVisionScore": 0.82,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.85,
+        "formDetail": 0.78,
+        "materialSurface": 0.8,
+        "lightingCamera": 0.5
+      },
+      "featureReviews": [
+        {
+          "id": "gradient-gloss",
+          "score": 0.78,
+          "notes": "Flat-albedo render (ambient only, no tone mapping): crossbar #0381f1 to #03c1f5 vs reference #037bfc to cyan, stem #038ced to #024bbe vs #007bfc to #012bb8, chips #03d4ff vs #03d6fe; max per-part dE 12.45 (<20). Gloss/clearcoat verified in the reference-lit render."
+        },
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "unchanged"
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.8,
+          "notes": "Ring ramps deep blue to azure; the reference's right half is slightly more cyan."
+        }
+      ],
+      "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+      "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/material-pass/front.png",
+      "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/material-pass/comparison.png",
+      "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+      "notes": "",
+      "aiVisionNotes": ""
+    },
+    {
+      "timestamp": "2026-10-05T11:08:24.976579+00:00",
+      "passId": "surface-pass",
+      "estimatedFidelity": 0.82,
+      "aiVisionScore": 0.82,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.85,
+        "formDetail": 0.78,
+        "materialSurface": 0.82,
+        "lightingCamera": 0.6
+      },
+      "featureReviews": [
+        {
+          "id": "gradient-gloss",
+          "score": 0.82,
+          "notes": "Lit render (studio rig, no tone mapping): azure-to-cyan crossbar ramp, azure-to-deep-blue stem ramp, glossy ring with clearcoat streaks, emissive cyan chips. Max per-part dE 18.26 (<20)."
+        },
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "unchanged"
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.82,
+          "notes": "Specular rim reads as the reference's bright inner edge; the white outline gap of the 2D logo is approximated by clearcoat highlights only."
+        }
+      ],
+      "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+      "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/surface-pass/front.png",
+      "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/surface-pass/comparison.png",
+      "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+      "notes": "",
+      "aiVisionNotes": ""
+    },
+    {
+      "timestamp": "2026-10-05T11:10:46.038605+00:00",
+      "passId": "lighting-pass",
+      "estimatedFidelity": 0.83,
+      "aiVisionScore": 0.83,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.85,
+        "formDetail": 0.78,
+        "materialSurface": 0.82,
+        "lightingCamera": 0.82
+      },
+      "featureReviews": [
+        {
+          "id": "gradient-gloss",
+          "score": 0.82,
+          "notes": "Same lit rig as the surface pass; specular streaks on the ring, saturated gradients."
+        },
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "unchanged"
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.82,
+          "notes": "Rim light (#6fd8ff from behind) outlines the ring edge on a dark background."
+        }
+      ],
+      "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+      "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/lighting-pass/front.png",
+      "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/lighting-pass/comparison.png",
+      "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+      "notes": "",
+      "aiVisionNotes": ""
+    },
+    {
+      "timestamp": "2026-10-05T11:12:33.105287+00:00",
+      "passId": "interaction-pass",
+      "estimatedFidelity": 0.84,
+      "aiVisionScore": 0.84,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.88,
+        "formDetail": 0.78,
+        "materialSurface": 0.82,
+        "lightingCamera": 0.82
+      },
+      "featureReviews": [
+        {
+          "id": "orbit-ring",
+          "score": 0.85,
+          "notes": "Ring pivot sits at the ring centre; rotating it 90 deg about the plane normal (-0.174, 0.897, 0.407) orbits the stem without drifting (spin0 vs spin90 captures)."
+        },
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "unchanged"
+        },
+        {
+          "id": "gradient-gloss",
+          "score": 0.82,
+          "notes": "unchanged"
+        }
+      ],
+      "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+      "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/interaction-pass/front.png",
+      "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/interaction-pass/comparison.png",
+      "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+      "notes": "",
+      "aiVisionNotes": ""
+    },
+    {
+      "timestamp": "2026-10-05T11:13:56.452093+00:00",
+      "passId": "optimization-pass",
+      "estimatedFidelity": 0.84,
+      "aiVisionScore": 0.84,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.88,
+        "formDetail": 0.78,
+        "materialSurface": 0.82,
+        "lightingCamera": 0.82
+      },
+      "featureReviews": [
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "unchanged"
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.85,
+          "notes": "unchanged"
+        },
+        {
+          "id": "gradient-gloss",
+          "score": 0.82,
+          "notes": "unchanged"
+        }
+      ],
+      "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+      "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/optimization-pass/front.png",
+      "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/optimization-pass/comparison.png",
+      "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+      "notes": "",
+      "aiVisionNotes": ""
+    }
+  ],
+  "reviewHistory": [
+    {
+      "timestamp": "2026-10-05T10:50:07.048726+00:00",
+      "passId": "blockout",
+      "estimatedFidelity": 0.8,
+      "aiVisionScore": 0.8,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.8,
+        "formDetail": 0.5,
+        "materialSurface": 0.3,
+        "lightingCamera": 0.4
+      },
+      "featureReviews": [
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "T proportions, stepped +X crossbar end and stem match the reference mask almost cell for cell."
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.78,
+          "notes": "Ring tilt, extent and tapered tips match; the band reads slightly thinner than the reference ribbon and the cyan far arc hides behind the crossbar."
+        },
+        {
+          "id": "chip-cluster",
+          "score": 0.85,
+          "notes": "Three cubes in the right diagonal order and sizes."
+        }
+      ],
+      "action": "continue",
+      "summary": "Blockout: macro silhouette matches (mask IoU 0.853, aspect delta 0.027, scale delta 0.072). T, stepped crossbar, tilted ring and chips present. Colour/gloss are pale placeholders by design (lighting and material passes own them). STYLISED interpretation: depth, bevel and ring cross-section are invented.",
+      "matched": [
+        "T stem and crossbar proportions",
+        "stepped crossbar end",
+        "ring tilt, extent and tapered tips",
+        "chip sizes and diagonal placement"
+      ],
+      "mismatches": [
+        "ring band thinner than the reference ribbon",
+        "far arc hidden behind the crossbar",
+        "colours washed out (lighting pass)",
+        "no bevels yet (form-refinement)"
+      ],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/front.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/three-quarter-right.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/three-quarter-left.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/top.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/side.png"
+      ],
+      "mapStrippedRender": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/stripped.png",
+      "visualEvidence": {
+        "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+        "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/front.png",
+        "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/comparison.png",
+        "cameraView": "front, fov 25, distance 6.1 (reference framing)",
+        "notes": "",
+        "aiVisionNotes": "Inspected comparison.png: silhouette and proportions read as the Triviq T mark; ring is a tapered ribbon crossing in front of the stem."
+      }
+    },
+    {
+      "timestamp": "2026-10-05T10:51:50.902780+00:00",
+      "passId": "structural-pass",
+      "estimatedFidelity": 0.82,
+      "aiVisionScore": 0.82,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.85,
+        "formDetail": 0.5,
+        "materialSurface": 0.3,
+        "lightingCamera": 0.4
+      },
+      "featureReviews": [
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "Stem and stepped crossbar are separate parented components that read as one T from every orbit view."
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.82,
+          "notes": "Three-quarter view: the ribbon wraps the stem, passing in front below and behind above, which is the intended orbit; tips taper to points."
+        },
+        {
+          "id": "chip-cluster",
+          "score": 0.85,
+          "notes": "Chips parented to the large chip; sizes and diagonal order match."
+        }
+      ],
+      "action": "continue",
+      "summary": "Structural pass: hierarchy t-stem > t-crossbar, orbit-ring > ring-back-arc, t-stem > pixel-chip-large > medium/small. Pivots, sockets and collider proxies authored; mask IoU unchanged. Still stylised: depth, bevel and ring cross-section invented.",
+      "matched": [
+        "component hierarchy",
+        "ring wraps the stem in 3D",
+        "chips parented as a cluster",
+        "ring-spin axis and chip anchors defined"
+      ],
+      "mismatches": [
+        "no bevels yet",
+        "colours pale",
+        "far arc small and mostly hidden"
+      ],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/structural-pass/front.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/structural-pass/three-quarter-right.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/structural-pass/three-quarter-left.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/structural-pass/top.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/structural-pass/side.png"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+        "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/structural-pass/front.png",
+        "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/structural-pass/comparison.png",
+        "cameraView": "front, fov 25, distance 6.1 (reference framing)",
+        "notes": "",
+        "aiVisionNotes": ""
+      }
+    },
+    {
+      "timestamp": "2026-10-05T10:59:07.775428+00:00",
+      "passId": "form-refinement",
+      "estimatedFidelity": 0.83,
+      "aiVisionScore": 0.83,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.85,
+        "formDetail": 0.78,
+        "materialSurface": 0.3,
+        "lightingCamera": 0.4
+      },
+      "featureReviews": [
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "Stepped crossbar and stem keep the mask match; rounded chamfers (0.02-0.028) now catch the key light along the top and side edges."
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.83,
+          "notes": "Tapered ribbon with true points at both tips; the ring spine was fitted offline against the reference mask (IoU 0.854 analytic)."
+        },
+        {
+          "id": "chip-cluster",
+          "score": 0.85,
+          "notes": "Three cubes in the right order and sizes."
+        }
+      ],
+      "action": "continue",
+      "summary": "Form refinement (refine-code): bevels via ExtrudeGeometry bevelOffset=-size so the outline equals the authored profile; crossbar +X end trimmed to 0.865; camera framing matched (5.95). Tier 1: IoU 0.851, aspect delta 0.040, scale delta 0.027. Stylised: bevel/depth/ring section invented.",
+      "matched": [
+        "chamfered T edges",
+        "ring tapers to points",
+        "outline unchanged by bevel",
+        "framing matches reference extent"
+      ],
+      "mismatches": [
+        "colours pale",
+        "no environment-driven saturation yet",
+        "cyan far arc small"
+      ],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/form-refinement/front.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/form-refinement/three-quarter-right.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/form-refinement/three-quarter-left.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/form-refinement/top.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/form-refinement/side.png"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+        "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/form-refinement/front.png",
+        "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/form-refinement/comparison.png",
+        "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+        "notes": "",
+        "aiVisionNotes": ""
+      }
+    },
+    {
+      "timestamp": "2026-10-05T11:00:44.184175+00:00",
+      "passId": "material-pass",
+      "estimatedFidelity": 0.82,
+      "aiVisionScore": 0.82,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.85,
+        "formDetail": 0.78,
+        "materialSurface": 0.8,
+        "lightingCamera": 0.5
+      },
+      "featureReviews": [
+        {
+          "id": "gradient-gloss",
+          "score": 0.78,
+          "notes": "Flat-albedo render (ambient only, no tone mapping): crossbar #0381f1 to #03c1f5 vs reference #037bfc to cyan, stem #038ced to #024bbe vs #007bfc to #012bb8, chips #03d4ff vs #03d6fe; max per-part dE 12.45 (<20). Gloss/clearcoat verified in the reference-lit render."
+        },
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "unchanged"
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.8,
+          "notes": "Ring ramps deep blue to azure; the reference's right half is slightly more cyan."
+        }
+      ],
+      "action": "continue",
+      "summary": "Material pass: materials declare textureless (flat gradient colour, no grain/print/relief); colour comes from rootTipGradient ramps on a white MeshPhysicalMaterial (clearcoat 1, roughness 0.22-0.28). Flat-albedo palette matches the reference; max per-part dE 12.45.",
+      "matched": [
+        "crossbar azure-to-cyan ramp",
+        "stem azure-to-deep-blue ramp",
+        "cyan chips",
+        "gloss response (clearcoat)"
+      ],
+      "mismatches": [
+        "ring right half less cyan than the reference",
+        "environment/tone mapping still desaturate in lit renders (lighting pass)"
+      ],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/material-pass/front.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/material-pass/three-quarter-right.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/material-pass/three-quarter-left.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/material-pass/top.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/material-pass/side.png"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+        "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/material-pass/front.png",
+        "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/material-pass/comparison.png",
+        "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+        "notes": "",
+        "aiVisionNotes": ""
+      }
+    },
+    {
+      "timestamp": "2026-10-05T11:08:24.976579+00:00",
+      "passId": "surface-pass",
+      "estimatedFidelity": 0.82,
+      "aiVisionScore": 0.82,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.85,
+        "formDetail": 0.78,
+        "materialSurface": 0.82,
+        "lightingCamera": 0.6
+      },
+      "featureReviews": [
+        {
+          "id": "gradient-gloss",
+          "score": 0.82,
+          "notes": "Lit render (studio rig, no tone mapping): azure-to-cyan crossbar ramp, azure-to-deep-blue stem ramp, glossy ring with clearcoat streaks, emissive cyan chips. Max per-part dE 18.26 (<20)."
+        },
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "unchanged"
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.82,
+          "notes": "Specular rim reads as the reference's bright inner edge; the white outline gap of the 2D logo is approximated by clearcoat highlights only."
+        }
+      ],
+      "action": "continue",
+      "summary": "Surface pass: localOverrides realised as clearcoat/roughness response (ring rim gloss), per-component gradient ramps, emissive chips (intensity 1.1). Fixed a builder bug where chips inherited the stem's rootTipGradient. Lit rig: env 0.3, ambient 0.5, key 1.3, NoToneMapping (Neutral/ACES desaturate the brand blues). Tier 1 passes, dE 18.26. White outline gap of the logo not reproduced.",
+      "matched": [
+        "saturated gradient palette",
+        "glossy ring highlights",
+        "cyan emissive chips",
+        "IoU 0.856"
+      ],
+      "mismatches": [
+        "no white outline gap around the ring",
+        "ring right half a little less cyan than the reference"
+      ],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/surface-pass/front.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/surface-pass/three-quarter-right.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/surface-pass/three-quarter-left.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/surface-pass/top.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/surface-pass/side.png"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+        "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/surface-pass/front.png",
+        "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/surface-pass/comparison.png",
+        "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+        "notes": "",
+        "aiVisionNotes": ""
+      }
+    },
+    {
+      "timestamp": "2026-10-05T11:10:46.038605+00:00",
+      "passId": "lighting-pass",
+      "estimatedFidelity": 0.83,
+      "aiVisionScore": 0.83,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.85,
+        "formDetail": 0.78,
+        "materialSurface": 0.82,
+        "lightingCamera": 0.82
+      },
+      "featureReviews": [
+        {
+          "id": "gradient-gloss",
+          "score": 0.82,
+          "notes": "Same lit rig as the surface pass; specular streaks on the ring, saturated gradients."
+        },
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "unchanged"
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.82,
+          "notes": "Rim light (#6fd8ff from behind) outlines the ring edge on a dark background."
+        }
+      ],
+      "action": "continue",
+      "summary": "Lighting pass: concrete key (-4,6,5.5)x1.3, fill (4,-1,3.5)x0.5, rim (1,3,-6)x1.0, ambient 0.5, RoomEnvironment 0.3, NoToneMapping, no contact shadow (floating mark). Tier 1 passes (dE 18.26). Neutral/ACES tone mapping measured worse (dE 22+).",
+      "matched": [
+        "key/fill/rim structure",
+        "saturated brand blues preserved",
+        "specular highlights read"
+      ],
+      "mismatches": [
+        "rim light only reads on dark backgrounds"
+      ],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/lighting-pass/front.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/lighting-pass/three-quarter-right.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/lighting-pass/three-quarter-left.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/lighting-pass/top.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/lighting-pass/side.png"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+        "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/lighting-pass/front.png",
+        "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/lighting-pass/comparison.png",
+        "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+        "notes": "",
+        "aiVisionNotes": ""
+      }
+    },
+    {
+      "timestamp": "2026-10-05T11:12:33.105287+00:00",
+      "passId": "interaction-pass",
+      "estimatedFidelity": 0.84,
+      "aiVisionScore": 0.84,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.88,
+        "formDetail": 0.78,
+        "materialSurface": 0.82,
+        "lightingCamera": 0.82
+      },
+      "featureReviews": [
+        {
+          "id": "orbit-ring",
+          "score": 0.85,
+          "notes": "Ring pivot sits at the ring centre; rotating it 90 deg about the plane normal (-0.174, 0.897, 0.407) orbits the stem without drifting (spin0 vs spin90 captures)."
+        },
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "unchanged"
+        },
+        {
+          "id": "gradient-gloss",
+          "score": 0.82,
+          "notes": "unchanged"
+        }
+      ],
+      "action": "continue",
+      "summary": "Interaction pass: every component is a named pivot Group with sockets/colliders; ring pivot moved to the ring centre so spin about its plane normal orbits cleanly (evidence/interaction-pass/spin_pair.png). Tier 1 unchanged (IoU 0.856).",
+      "matched": [
+        "ring spin about its own centre",
+        "named pivots and sockets",
+        "chip anchors"
+      ],
+      "mismatches": [
+        "none blocking"
+      ],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/interaction-pass/front.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/interaction-pass/three-quarter-right.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/interaction-pass/three-quarter-left.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/interaction-pass/top.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/interaction-pass/side.png"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+        "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/interaction-pass/front.png",
+        "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/interaction-pass/comparison.png",
+        "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+        "notes": "",
+        "aiVisionNotes": ""
+      }
+    },
+    {
+      "timestamp": "2026-10-05T11:13:56.452093+00:00",
+      "passId": "optimization-pass",
+      "estimatedFidelity": 0.84,
+      "aiVisionScore": 0.84,
+      "visualAcceptanceThreshold": 0.7,
+      "layerScores": {
+        "silhouetteProportion": 0.88,
+        "componentStructure": 0.88,
+        "formDetail": 0.78,
+        "materialSurface": 0.82,
+        "lightingCamera": 0.82
+      },
+      "featureReviews": [
+        {
+          "id": "t-silhouette",
+          "score": 0.9,
+          "notes": "unchanged"
+        },
+        {
+          "id": "orbit-ring",
+          "score": 0.85,
+          "notes": "unchanged"
+        },
+        {
+          "id": "gradient-gloss",
+          "score": 0.82,
+          "notes": "unchanged"
+        }
+      ],
+      "action": "continue",
+      "summary": "Optimization pass: 1,608 triangles, 7 meshes/draw calls, 3 materials, no textures (budget 12k tris / 8 draw calls). No visual change; Tier 1 passes.",
+      "matched": [
+        "triangle and draw-call budget met",
+        "no textures",
+        "shared materials"
+      ],
+      "mismatches": [
+        "none"
+      ],
+      "specFixes": [],
+      "codeFixes": [],
+      "evidence": [
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/optimization-pass/front.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/optimization-pass/three-quarter-right.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/optimization-pass/three-quarter-left.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/optimization-pass/top.png",
+        "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/optimization-pass/side.png"
+      ],
+      "visualEvidence": {
+        "referenceScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/reference-mark.png",
+        "renderScreenshot": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/optimization-pass/front.png",
+        "comparisonImage": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/optimization-pass/comparison.png",
+        "cameraView": "front, fov 25, distance 5.95 (reference framing)",
+        "notes": "",
+        "aiVisionNotes": ""
+      }
+    }
+  ],
+  "lodPlan": [
+    {
+      "tier": "near",
+      "distance": 0,
+      "strategy": "full component tree and material layers"
+    },
+    {
+      "tier": "far",
+      "distance": 30,
+      "strategy": "merge static components and reduce local feature geometry"
+    }
+  ],
+  "performanceBudget": {
+    "qualityPriority": "real-time hero prop",
+    "targetTriangles": 12000,
+    "maxDrawCalls": 8,
+    "textureSize": 0,
+    "fpsTarget": 60,
+    "optimizationPolicy": "No textures; <= 12k triangles; shared materials; no per-frame allocations."
+  },
+  "lightingFromPhoto": [
+    {
+      "role": "key",
+      "type": "DirectionalLight",
+      "position": [
+        -4,
+        6,
+        5.5
+      ],
+      "intensity": 1.3,
+      "color": "#ffffff",
+      "note": "upper-left front: top edges of the T catch the highlight, as in the reference"
+    },
+    {
+      "role": "fill",
+      "type": "DirectionalLight",
+      "position": [
+        4,
+        -1,
+        3.5
+      ],
+      "intensity": 0.5,
+      "color": "#cfe6ff",
+      "note": "lower-right cool fill keeps the stem bottom readable"
+    },
+    {
+      "role": "rim",
+      "type": "DirectionalLight",
+      "position": [
+        1,
+        3,
+        -6
+      ],
+      "intensity": 1.0,
+      "color": "#6fd8ff",
+      "note": "back rim lights the ring edge"
+    },
+    {
+      "role": "ambient",
+      "type": "AmbientLight",
+      "intensity": 0.5,
+      "color": "#ffffff"
+    },
+    {
+      "role": "environment",
+      "note": "RoomEnvironment PMREM, environmentIntensity 0.3, for clearcoat reflections"
+    },
+    {
+      "role": "exposure",
+      "note": "exposure 1.0, NoToneMapping: ACES and Neutral compress the saturated blues toward white (measured dE 22+ vs 18.26)"
+    },
+    {
+      "role": "background",
+      "note": "reference review on #a0a8b2 grey (white splits the mark's own rim lines); site hero uses #05070a"
+    },
+    {
+      "role": "shadow",
+      "note": "no contact shadow or ground shadow by design: the mark floats in the hero scene; shadow maps off"
+    }
+  ],
+  "proceduralStrategy": [
+    "Block out macro silhouette first.",
+    "Add component hierarchy and joints.",
+    "Create stable pivot groups, sockets, collider proxies, and destruction metadata before visual polish.",
+    "Refine forms with bevels, tapers, bends, and procedural noise.",
+    "Run reference PBR extraction for important source-image materials and stop when confidence is below the target threshold.",
+    "Add material variation before adding expensive micro-geometry."
+  ],
+  "animationAnchors": [
+    "root pivot supports whole-object rotation for pointer parallax",
+    "orbit-ring pivot spins about its plane normal (-0.174, 0.897, 0.407)",
+    "chip anchors host data-pulse effects"
+  ],
+  "destructionAnchors": [
+    "actionProfile.destruction.fractureGroup marks detachable or breakable component sets",
+    "component seams and sockets define plausible break points instead of random explosions"
+  ],
+  "risks": [
+    "Generator extrudes with bevelEnabled false: real bevels are added in refine-code and recorded in design/triviq-core/PATCHES.md.",
+    "Ring cross-section orientation follows parallel transport; verify the band reads as a swoosh from three-quarter views."
+  ],
+  "localSpecSearch": {
+    "collection": "core_3d",
+    "query": "Triviq T-core extruded letterform bevel tapered orbit ring tube instanced cube cluster emissive glossy clearcoat gradient blue",
+    "index": {
+      "status": "hit",
+      "reason": "current",
+      "fingerprint": "62f2831e1d52eeb6dbb94a87c44fa25b1f4926626a7b1f8c2bcadc63e04e9471"
+    },
+    "matches": [
+      {
+        "record_id": "core.pbr-clearcoat",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.material_pbr[4]",
+        "score": 7.813457652921,
+        "snippets": [
+          "... on top of a duller or differently-colored base layer; Common on Custom Paint Job / Gunsmith style finishes with a glossy topcoat over illustrative artwork Dấu hiệu nhận diện: Có một điểm sáng thứ cấp sắc nét nằm trên lớp nền mờ hơn ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.material_pbr[4]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      },
+      {
+        "record_id": "core.shader-mapping-torusgeometry-rings-loops",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.rendering_shader_mapping[8]",
+        "score": 7.384026045506,
+        "snippets": [
+          "... features. Ánh xạ tới các chi tiết hình vòng tròn kiểu donut. Recognition cues: Circular loop feature — bayonet handle ring, finger loop on a Talon knife, trigger guard loop, carrying handle Dấu hiệu nhận diện: Chi tiết vòng tròn — vòng ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.rendering_shader_mapping[8]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      },
+      {
+        "record_id": "core.shader-mapping-conegeometry-tapered-tips",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.rendering_shader_mapping[11]",
+        "score": 6.299817361323,
+        "snippets": [
+          "Maps to tapered projectile-like or pointed components. Ánh xạ tới các bộ phận thon nhọn giống đầu đạn hoặc có mũi nhọn. Recognition cues: Tapered pointed shape narrowing to a point — projectile tips, some conical muzzle device shapes Dấu hiệu ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.rendering_shader_mapping[11]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      }
+    ]
+  },
+  "tier1Results": [
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.3178,
+        "aspectRatioDelta": 0.0762,
+        "scaleDelta": 1.4789,
+        "bilateralSymmetryError": 0.0822,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 26.03,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 10.27
+            },
+            {
+              "componentId": null,
+              "deltaE": 10.27
+            },
+            {
+              "componentId": null,
+              "deltaE": 26.03
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.44
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.18
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.18
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.18
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "silhouette IoU 0.318 is below threshold 0.85",
+        "aspect-ratio delta 0.076 exceeds threshold 0.05",
+        "scale delta 1.479 exceeds threshold 0.08",
+        "blockout requires --map-stripped-render evidence"
+      ],
+      "maskWarnings": [
+        "reference: 56.3% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 8.0% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "6857d730e1f8bbed",
+      "passId": "blockout"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.5243,
+        "aspectRatioDelta": 0.0823,
+        "scaleDelta": 1.3276,
+        "bilateralSymmetryError": 0.0822,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 26.03,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 10.27
+            },
+            {
+              "componentId": null,
+              "deltaE": 10.27
+            },
+            {
+              "componentId": null,
+              "deltaE": 26.03
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.44
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.18
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.18
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.18
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "silhouette IoU 0.524 is below threshold 0.85",
+        "aspect-ratio delta 0.082 exceeds threshold 0.05",
+        "scale delta 1.328 exceeds threshold 0.08"
+      ],
+      "maskWarnings": [
+        "reference: 53.8% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 8.0% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "6857d730e1f8bbed",
+      "passId": "blockout",
+      "mapStrippedRender": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/stripped.png"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.6289,
+        "aspectRatioDelta": 0.0837,
+        "scaleDelta": 0.0208,
+        "bilateralSymmetryError": 0.0825,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 26.1,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 10.32
+            },
+            {
+              "componentId": null,
+              "deltaE": 10.32
+            },
+            {
+              "componentId": null,
+              "deltaE": 26.1
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.84
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.96
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.96
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.96
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "silhouette IoU 0.629 is below threshold 0.85",
+        "aspect-ratio delta 0.084 exceeds threshold 0.05"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 8.3% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "ea0e6abe71346fbb",
+      "passId": "blockout",
+      "mapStrippedRender": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/stripped.png"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.8576,
+        "aspectRatioDelta": 0.0647,
+        "scaleDelta": 0.038,
+        "bilateralSymmetryError": 0.1473,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 26.05,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 10.95
+            },
+            {
+              "componentId": null,
+              "deltaE": 10.95
+            },
+            {
+              "componentId": null,
+              "deltaE": 26.05
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.75
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.9
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.9
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.9
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "aspect-ratio delta 0.065 exceeds threshold 0.05"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.1% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "80f99f3be7cdfeb8",
+      "passId": "blockout",
+      "mapStrippedRender": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/stripped.png"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.853,
+        "aspectRatioDelta": 0.0267,
+        "scaleDelta": 0.0724,
+        "bilateralSymmetryError": 0.1367,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 25.54,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 10.71
+            },
+            {
+              "componentId": null,
+              "deltaE": 10.71
+            },
+            {
+              "componentId": null,
+              "deltaE": 25.54
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.76
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.63
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.63
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.63
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "1fd262777f92e2b1",
+      "passId": "blockout",
+      "mapStrippedRender": "/Users/sonubodat/Desktop/Triviq/triviq-website/design/triviq-core/evidence/blockout/stripped.png"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.853,
+        "aspectRatioDelta": 0.0267,
+        "scaleDelta": 0.0724,
+        "bilateralSymmetryError": 0.1367,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 25.54,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 10.71
+            },
+            {
+              "componentId": null,
+              "deltaE": 10.71
+            },
+            {
+              "componentId": null,
+              "deltaE": 25.54
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.76
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.63
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.63
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.63
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "1fd262777f92e2b1",
+      "passId": "structural-pass"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.8494,
+        "aspectRatioDelta": 0.0387,
+        "scaleDelta": 0.0831,
+        "bilateralSymmetryError": 0.1372,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 27.49,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 12.32
+            },
+            {
+              "componentId": null,
+              "deltaE": 12.32
+            },
+            {
+              "componentId": null,
+              "deltaE": 27.49
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.22
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.3
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.3
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.3
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "silhouette IoU 0.849 is below threshold 0.85",
+        "scale delta 0.083 exceeds threshold 0.08"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.3% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "7c4c77b07ba16bbe",
+      "passId": "form-refinement"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.8513,
+        "aspectRatioDelta": 0.0387,
+        "scaleDelta": 0.0831,
+        "bilateralSymmetryError": 0.1373,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 26.86,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 11.74
+            },
+            {
+              "componentId": null,
+              "deltaE": 11.74
+            },
+            {
+              "componentId": null,
+              "deltaE": 26.86
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.47
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.57
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.57
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.57
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [
+        "scale delta 0.083 exceeds threshold 0.08"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.3% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "5f2b06cd9774705e",
+      "passId": "form-refinement"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.8508,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1488,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 27.58,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 12.12
+            },
+            {
+              "componentId": null,
+              "deltaE": 12.12
+            },
+            {
+              "componentId": null,
+              "deltaE": 27.58
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.23
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.69
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.69
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.69
+            }
+          ],
+          "gated": false
+        }
+      },
+      "failures": [],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "6f607f2b26126ae1",
+      "passId": "form-refinement"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 12.45,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 12.45
+            },
+            {
+              "componentId": null,
+              "deltaE": 12.45
+            },
+            {
+              "componentId": null,
+              "deltaE": 12.42
+            },
+            {
+              "componentId": null,
+              "deltaE": 10.88
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.47
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.47
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.47
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "9adcb21844d8aa0d",
+      "passId": "material-pass"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.8508,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1488,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 27.58,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 12.12
+            },
+            {
+              "componentId": null,
+              "deltaE": 12.12
+            },
+            {
+              "componentId": null,
+              "deltaE": 27.58
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.23
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.69
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.69
+            },
+            {
+              "componentId": null,
+              "deltaE": 23.69
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [
+        "max per-part color delta-E 27.58 exceeds threshold 20.0"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "6f607f2b26126ae1",
+      "passId": "surface-pass"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 21.99,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 14.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 14.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 11.73
+            },
+            {
+              "componentId": null,
+              "deltaE": 10.37
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.99
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [
+        "max per-part color delta-E 21.99 exceeds threshold 20.0"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "61e923c484a04f9b",
+      "passId": "surface-pass"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 22.46,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 14.49
+            },
+            {
+              "componentId": null,
+              "deltaE": 14.49
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.5
+            },
+            {
+              "componentId": null,
+              "deltaE": 7.42
+            },
+            {
+              "componentId": null,
+              "deltaE": 22.46
+            },
+            {
+              "componentId": null,
+              "deltaE": 22.46
+            },
+            {
+              "componentId": null,
+              "deltaE": 22.46
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [
+        "max per-part color delta-E 22.46 exceeds threshold 20.0"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "d8d2dc8dfb5a08a6",
+      "passId": "surface-pass"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 21.99,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 14.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 14.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 11.73
+            },
+            {
+              "componentId": null,
+              "deltaE": 10.37
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.99
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [
+        "max per-part color delta-E 21.99 exceeds threshold 20.0"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "61e923c484a04f9b",
+      "passId": "surface-pass"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 21.99,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 14.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 14.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 11.73
+            },
+            {
+              "componentId": null,
+              "deltaE": 10.37
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 21.99
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [
+        "max per-part color delta-E 21.99 exceeds threshold 20.0"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "61e923c484a04f9b",
+      "passId": "surface-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 18.26,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 16.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.26
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.24
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.0
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.0
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.0
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "5f354f75ec8efbba",
+      "passId": "surface-pass"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 20.63,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 20.47
+            },
+            {
+              "componentId": null,
+              "deltaE": 20.47
+            },
+            {
+              "componentId": null,
+              "deltaE": 20.63
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.63
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.1
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.1
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.1
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [
+        "max per-part color delta-E 20.63 exceeds threshold 20.0"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "6934fcd48a0a7af9",
+      "passId": "surface-pass"
+    },
+    {
+      "passed": false,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 24.03,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 24.03
+            },
+            {
+              "componentId": null,
+              "deltaE": 24.03
+            },
+            {
+              "componentId": null,
+              "deltaE": 20.95
+            },
+            {
+              "componentId": null,
+              "deltaE": 14.15
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.22
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.22
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.22
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [
+        "max per-part color delta-E 24.03 exceeds threshold 20.0"
+      ],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "e892f4eccfff69a2",
+      "passId": "surface-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 18.26,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 16.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.26
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.24
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.0
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.0
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.0
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "5f354f75ec8efbba",
+      "passId": "surface-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 18.26,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 16.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.43
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.26
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.24
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.0
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.0
+            },
+            {
+              "componentId": null,
+              "deltaE": 9.0
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "5f354f75ec8efbba",
+      "passId": "lighting-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.8557,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1496,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 18.53,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 16.22
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.22
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.53
+            },
+            {
+              "componentId": null,
+              "deltaE": 12.41
+            },
+            {
+              "componentId": null,
+              "deltaE": 17.96
+            },
+            {
+              "componentId": null,
+              "deltaE": 17.96
+            },
+            {
+              "componentId": null,
+              "deltaE": 17.96
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.4% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "200e4116fb1deb68",
+      "passId": "lighting-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.8556,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1497,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 18.99,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 16.5
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.5
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.14
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.72
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.99
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.3% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "3b6b749633fcd188",
+      "passId": "interaction-pass"
+    },
+    {
+      "passed": true,
+      "checks": {
+        "silhouetteIoU": 0.8556,
+        "aspectRatioDelta": 0.0403,
+        "scaleDelta": 0.0271,
+        "bilateralSymmetryError": 0.1497,
+        "colorDelta": {
+          "checked": 7,
+          "maxDeltaE": 18.99,
+          "perComponent": [
+            {
+              "componentId": null,
+              "deltaE": 16.5
+            },
+            {
+              "componentId": null,
+              "deltaE": 16.5
+            },
+            {
+              "componentId": null,
+              "deltaE": 15.14
+            },
+            {
+              "componentId": null,
+              "deltaE": 13.72
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.99
+            },
+            {
+              "componentId": null,
+              "deltaE": 18.99
+            }
+          ],
+          "gated": true
+        }
+      },
+      "failures": [],
+      "maskWarnings": [
+        "reference: 12.2% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured",
+        "render: 7.3% of foreground cells lie outside the largest connected blob and were excluded from the bounding box; if the subject really has separated parts in this projection, they are not being measured"
+      ],
+      "renderHash": "3b6b749633fcd188",
+      "passId": "optimization-pass"
+    }
+  ]
+}

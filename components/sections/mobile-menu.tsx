@@ -35,11 +35,14 @@ export function MobileMenu() {
       </button>
       <nav id="mobile-nav" className="menu-panel" data-open={open} aria-label="Mobile" inert={!open}>
         <div className="menu-inner px-6 pb-6">
-          {nav.map((item) => (
+          {[...nav, { label: "Contact", href: "/contact" }].map((item) => (
             <Link key={item.href} href={item.href} className="menu-link" onClick={() => setOpen(false)}>
               {item.label}
             </Link>
           ))}
+          <Link href="/contact" className="btn btn-primary mt-6 w-full" onClick={() => setOpen(false)}>
+            Start a project
+          </Link>
         </div>
       </nav>
     </div>

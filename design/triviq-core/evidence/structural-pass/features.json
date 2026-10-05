@@ -1,0 +1,5 @@
+[
+ {"id":"t-silhouette","score":0.9,"notes":"Stem and stepped crossbar are separate parented components that read as one T from every orbit view."},
+ {"id":"orbit-ring","score":0.82,"notes":"Three-quarter view: the ribbon wraps the stem, passing in front below and behind above, which is the intended orbit; tips taper to points."},
+ {"id":"chip-cluster","score":0.85,"notes":"Chips parented to the large chip; sizes and diagonal order match."}
+]
