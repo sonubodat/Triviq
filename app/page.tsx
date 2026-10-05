@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { HomeMotion } from "@/components/motion/home-motion";
 import { ProjectCta } from "@/components/sections/cta";
 import { EngagementSection } from "@/components/sections/engagement";
 import { Hero } from "@/components/sections/hero";
@@ -14,7 +15,7 @@ export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function Home() {
   return (
-    <>
+    <div data-home-motion-scope>
       <Hero />
       <Marquee />
       <ServicesSection />
@@ -24,6 +25,7 @@ export default function Home() {
       <StudioSection />
       <EngagementSection />
       <ProjectCta />
-    </>
+      <HomeMotion />
+    </div>
   );
 }

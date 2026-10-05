@@ -3,7 +3,7 @@ const label = { fontSize: 10, letterSpacing: "0.06em" } as const;
 
 export function ServiceDiagram({ id }: { id: string }) {
   return (
-    <svg viewBox="0 0 240 96" className="dg" aria-hidden="true">
+    <svg viewBox="0 0 240 96" className="dg" data-motion="service-diagram" aria-hidden="true">
       {id === "web" && (
         <>
           <rect className="ln" x="12" y="8" width="132" height="80" rx="8" />

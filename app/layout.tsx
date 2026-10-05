@@ -5,7 +5,6 @@ import "./globals.css";
 
 import { SiteFooter } from "@/components/sections/site-footer";
 import { SiteHeader } from "@/components/sections/site-header";
-import { SplashIntro } from "@/components/sections/splash-intro";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -67,7 +66,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
-        <SplashIntro />
         <a href="#main" className="skip-link">Skip to Content</a>
         <SiteHeader />
         <main id="main">{children}</main>

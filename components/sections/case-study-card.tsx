@@ -8,8 +8,8 @@ import { QrFlowDiagram } from "./service-diagrams";
 export function CaseStudyCard({ project, dark = false }: { project: Project; dark?: boolean }) {
   const { media, details } = project;
   return (
-    <article className={`cs ${dark ? "cs-dark" : ""}`}>
-      <div className="cs-media">
+    <article className={`cs ${dark ? "cs-dark" : ""}`} data-motion="project-card">
+      <div className="cs-media" data-motion="project-media">
         {media.type === "phones" ? (
           media.images.map((img, index) => (
             <div key={img.src} className="phone" style={{ "--phone-shift": `${index * 28}px` } as CSSProperties}>
@@ -22,7 +22,7 @@ export function CaseStudyCard({ project, dark = false }: { project: Project; dar
           </div>
         )}
       </div>
-      <div className="cs-body">
+      <div className="cs-body" data-motion="project-copy">
         <p className="mono flex flex-wrap items-center gap-x-4">
           <span className={dark ? "accent-cyan" : "accent"}>{project.kind === "product" ? "Triviq product" : "Platform build"}</span>
           {project.status && <span className="status accent">{project.status}</span>}

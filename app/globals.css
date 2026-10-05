@@ -39,6 +39,15 @@
   --triviq-border-dark-strong: #1b344f;
   --triviq-error: #c0392b;
   --product-shadow: rgba(5, 7, 10, 0.22) 3px 5px 30px 0;
+  --space-section: clamp(6rem, 10vw, 10rem);
+  --motion-micro: 0.18s;
+  --motion-fast: 0.32s;
+  --motion-base: 0.55s;
+  --motion-reveal: 0.75s;
+  --motion-product: 1s;
+  --motion-cinematic: 1.25s;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
 
   --font-body: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
   --font-mono-stack: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -75,7 +84,7 @@
 /* Component classes live in the components layer so Tailwind utilities (pt-0, mt-6, ...) can override them */
 @layer components {
   /* Tiles: full-bleed, the colour change is the divider */
-  .tile { padding: 80px 0; }
+  .tile { padding: var(--space-section) 0; }
   .tile-light { background: var(--triviq-white); color: var(--triviq-text); }
   .tile-surface { background: var(--triviq-surface); color: var(--triviq-text); }
   .tile-dark { background: var(--triviq-dark); color: #fff; }
@@ -91,10 +100,11 @@
   }
 
   /* Type */
-  .t-hero-xl, .t-hero, .t-display, .t-title, .t-lead { text-wrap: balance; }
-  .t-hero-xl { font-size: clamp(38px, 5.6vw, 68px); font-weight: 600; line-height: 1.03; letter-spacing: -0.035em; }
+  .t-hero-xl, .t-hero, .t-display, .t-editorial, .t-title, .t-lead { text-wrap: balance; }
+  .t-hero-xl { font-size: clamp(48px, 5.7vw, 92px); font-weight: 600; line-height: 0.99; letter-spacing: -0.04em; }
   .t-hero { font-size: clamp(34px, 6vw, 56px); font-weight: 600; line-height: 1.07; letter-spacing: -0.03em; }
-  .t-display { font-size: clamp(28px, 4.4vw, 40px); font-weight: 600; line-height: 1.1; letter-spacing: -0.025em; }
+  .t-display { font-size: clamp(36px, 4.2vw, 64px); font-weight: 600; line-height: 1.04; letter-spacing: -0.035em; }
+  .t-editorial { font-size: clamp(48px, 6.2vw, 96px); font-weight: 600; line-height: 0.98; letter-spacing: -0.045em; }
   .t-lead { font-size: clamp(18px, 2.2vw, 24px); font-weight: 400; line-height: 1.35; letter-spacing: -0.01em; }
   .t-title { font-size: clamp(24px, 3vw, 30px); font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; }
   .t-tagline { font-size: 21px; font-weight: 600; line-height: 1.19; letter-spacing: -0.01em; }
@@ -121,158 +131,14 @@
     transition: transform 0.18s ease-out;
   }
   .skip-link:focus-visible { transform: translateY(0); }
-
-  /* First splash: clean Triviq mark with a short preload cue while WebGL and images warm up. */
-  .splash-intro {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: grid;
-    place-items: center;
-    background:
-      radial-gradient(circle at 50% 46%, rgba(10, 103, 212, 0.28), transparent 32%),
-      linear-gradient(rgba(5, 7, 10, 0.94), rgba(5, 7, 10, 0.94)),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cpath d='M0 30h96M0 63h96M32 0v96M66 0v96' stroke='%23029dff' stroke-opacity='.08'/%3E%3C/svg%3E");
-    animation: splashExit 0.36s ease forwards 1.82s;
-  }
-  .splash-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: min(68vw, 360px);
-    min-height: 310px;
-    padding: 26px 30px 28px;
-    border-radius: 24px;
-    background:
-      linear-gradient(180deg, rgba(14, 23, 38, 0.92), rgba(5, 7, 10, 0.94)),
-      var(--triviq-black);
-    border: 1px solid rgba(111, 216, 255, 0.18);
-    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.44), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    overflow: hidden;
-    animation: splashCard 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-  }
-  .splash-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(90deg, transparent, rgba(111, 216, 255, 0.08), transparent),
-      radial-gradient(circle at 72% 24%, rgba(3, 215, 254, 0.14), transparent 28%);
-    pointer-events: none;
-  }
-  .splash-mark {
-    position: relative;
-    z-index: 1;
-    width: min(78%, 260px);
-    overflow: visible;
-    filter: drop-shadow(0 18px 24px rgba(10, 103, 212, 0.3));
-  }
-  .splash-mark path {
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    vector-effect: non-scaling-stroke;
-  }
-  .splash-t-shadow { fill: #0540c8; opacity: 0; transform: translate(5px, 5px); animation: splashMarkIn 0.34s ease-out forwards 0.1s; }
-  .splash-t-face { fill: var(--triviq-blue); opacity: 0; transform-origin: center; animation: splashMarkIn 0.34s ease-out forwards 0.06s, splashBreathe 1s ease-in-out infinite 0.52s; }
-  .splash-t-highlight { fill: #35c9ff; opacity: 0; animation: splashShine 0.5s ease-out forwards 0.2s; }
-  .splash-orbit {
-    stroke: var(--triviq-sky);
-    fill: none;
-    stroke-width: 5;
-    stroke-dasharray: 470;
-    stroke-dashoffset: 470;
-    transform-origin: 132px 118px;
-    animation: splashDraw 0.42s ease-out forwards 0.12s, splashOrbit 1.05s ease-in-out infinite 0.56s;
-  }
-  .splash-orbit-b { stroke-width: 2.25; opacity: 0.55; animation-delay: 0.16s, 0.6s; }
-  .splash-pixel {
-    fill: var(--triviq-cyan);
-    stroke: rgba(255, 255, 255, 0.28);
-    stroke-width: 1;
-    opacity: 0;
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: splashPop 0.18s ease-out forwards, splashPixel 0.72s ease-in-out infinite;
-  }
-  .splash-pixel-1 { animation-delay: 0.22s, 0.44s; }
-  .splash-pixel-2 { animation-delay: 0.27s, 0.49s; opacity: 0.8; }
-  .splash-pixel-3 { animation-delay: 0.32s, 0.54s; opacity: 0.62; }
-  .splash-loader {
-    position: relative;
-    z-index: 1;
-    width: min(210px, 72%);
-    height: 4px;
-    margin-top: 4px;
-    overflow: hidden;
-    border-radius: 9999px;
-    background: rgba(111, 216, 255, 0.14);
-  }
-  .splash-loader span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    background: linear-gradient(90deg, var(--triviq-blue), var(--triviq-cyan));
-    transform-origin: left;
-    animation: splashLoad 1.62s cubic-bezier(0.2, 0.78, 0.1, 1) forwards;
-  }
-  .splash-word {
-    position: relative;
-    z-index: 1;
-    margin-top: 14px;
-    color: var(--triviq-text-dark-muted);
-    letter-spacing: 0.12em;
-    animation: splashWord 0.24s ease-out both 0.34s;
-  }
-  @keyframes splashDraw { to { stroke-dashoffset: 0; } }
-  @keyframes splashMarkIn {
-    from { opacity: 0; transform: translateY(10px) scale(0.94); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  @keyframes splashShine {
-    from { opacity: 0; transform: translateX(-10px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes splashBreathe {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-1px) scale(1.012); }
-  }
-  @keyframes splashOrbit {
-    0%, 100% { transform: rotate(0deg); opacity: 0.95; }
-    50% { transform: rotate(2.5deg); opacity: 0.68; }
-  }
-  @keyframes splashPop {
-    from { opacity: 0; transform: scale(0.2) rotate(-8deg); }
-    to { opacity: 1; transform: scale(1) rotate(0deg); }
-  }
-  @keyframes splashPixel {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(2px, -2px) scale(1.08); }
-  }
-  @keyframes splashWord {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes splashLoad {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
-  }
-  @keyframes splashCard {
-    from { opacity: 0; transform: translateY(16px) scale(0.94); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  @keyframes splashExit {
-    to { opacity: 0; visibility: hidden; transform: scale(1.012); }
-  }
+  .motion-line-clip { display: block; overflow: clip; }
 
   /* Buttons: pill = action, scale(0.95) on press */
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     min-height: 44px; padding: 11px 22px; border-radius: 9999px;
     font-size: 17px; line-height: 1; cursor: pointer; border: 1px solid transparent;
-    transition: transform 0.15s ease-out, background-color 0.2s ease-out, color 0.2s ease-out;
+    transition: transform var(--motion-micro) ease-out, background-color var(--motion-micro) ease-out, color var(--motion-micro) ease-out;
     touch-action: manipulation;
   }
   .btn:active { transform: scale(0.95); }
@@ -321,9 +187,9 @@
   @keyframes marquee { to { transform: translateX(-50%); } }
 
   /* Services */
-  .svc { display: flex; flex-direction: column; gap: 12px; height: 100%; background: var(--triviq-surface); border: 1px solid var(--triviq-border); border-radius: 18px; padding: 24px; transition: transform 0.25s ease-out, border-color 0.25s ease-out; }
+  .svc { display: flex; flex-direction: column; gap: 12px; height: 100%; background: var(--triviq-surface); border: 1px solid var(--triviq-border); border-radius: 18px; padding: 24px; transition: transform var(--motion-fast) ease-out, border-color var(--motion-fast) ease-out; }
   .svc:hover { transform: translateY(-2px); border-color: var(--triviq-blue); }
-  .svc-arrow { transition: transform 0.25s ease-out, color 0.25s ease-out; color: var(--triviq-text-muted); }
+  .svc-arrow { transition: transform var(--motion-fast) ease-out, color var(--motion-fast) ease-out; color: var(--triviq-text-muted); }
   .svc:hover .svc-arrow { transform: translate(3px, -3px); color: var(--triviq-blue); }
 
   /* Diagrams: structure = slate, important node = blue, data/motion = sky, tiny highlight = cyan */
@@ -334,7 +200,6 @@
   .dg .hl { fill: var(--triviq-cyan); }
   .dg .flow { stroke: var(--triviq-sky); stroke-dasharray: 3 5; }
   .dg text { fill: var(--triviq-text-muted); }
-  .svc .dg .flow, .cs .dg .flow { animation: dash 1.2s linear infinite; }
   @keyframes dash { to { stroke-dashoffset: -18; } }
   .hd-flow { animation: dash 2.4s linear infinite; }
 
@@ -351,7 +216,8 @@
     overflow: hidden;
     background: #fff;
     box-shadow: var(--product-shadow);
-    transform: translateY(var(--phone-shift, 0));
+    transform: translate(var(--phone-reveal-x, 0px), calc(var(--phone-shift, 0px) + var(--phone-reveal-y, 0px)));
+    will-change: transform;
   }
   .phone img { width: 100%; height: auto; display: block; }
   .phone:nth-child(2) img { transform: translateY(-34px); }
@@ -435,7 +301,18 @@
   }
   .hero-exit-rail .mono { color: #cfe6ff; font-size: 11px; letter-spacing: 0.08em; }
   .deliver { margin: 0; padding: 0; list-style: none; }
-  .deliver li { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--triviq-border-dark-strong); }
+  .deliver li { position: relative; display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--triviq-border-dark-strong); }
+  .deliver li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: var(--triviq-sky);
+    transform: scaleX(var(--delivery-progress, 0));
+    transform-origin: left center;
+  }
 
   /* FAQ */
   details.faq { border-bottom: 1px solid var(--triviq-border); padding: 16px 0; }
@@ -456,17 +333,9 @@
   .menu-bar { display: block; height: 1.5px; background: currentColor; transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1); }
   .menu-btn[aria-expanded="true"] .menu-bar:first-child { transform: translateY(3.75px) rotate(45deg); }
   .menu-btn[aria-expanded="true"] .menu-bar:last-child { transform: translateY(-3.75px) rotate(-45deg); }
-  .menu-panel { position: absolute; left: 0; right: 0; top: 100%; background: var(--triviq-black); display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.35s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.25s ease-out; max-height: calc(100dvh - 44px); overflow-y: auto; }
-  .menu-panel[data-open="true"] { grid-template-rows: 1fr; opacity: 1; }
+  .menu-panel { position: absolute; left: 0; right: 0; top: 100%; background: var(--triviq-black); max-height: calc(100dvh - 44px); overflow-y: auto; }
   .menu-inner { overflow: hidden; min-height: 0; }
-  .menu-link { display: block; padding: 14px 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; border-bottom: 1px solid var(--triviq-border-dark); opacity: 0; transform: translateY(-6px); transition: opacity 0.3s ease-out, transform 0.3s ease-out; }
-  .menu-panel[data-open="true"] .menu-link { opacity: 1; transform: none; }
-  .menu-panel[data-open="true"] .menu-link:nth-child(2) { transition-delay: 0.03s; }
-  .menu-panel[data-open="true"] .menu-link:nth-child(3) { transition-delay: 0.06s; }
-  .menu-panel[data-open="true"] .menu-link:nth-child(4) { transition-delay: 0.09s; }
-  .menu-panel[data-open="true"] .menu-link:nth-child(5) { transition-delay: 0.12s; }
-  .menu-panel[data-open="true"] .menu-link:nth-child(6) { transition-delay: 0.15s; }
-  .menu-panel[data-open="true"] .menu-link:nth-child(7) { transition-delay: 0.18s; }
+  .menu-link { display: block; padding: 14px 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; border-bottom: 1px solid var(--triviq-border-dark); }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -474,7 +343,5 @@
     .marquee-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; }
     .marquee-dup { display: none; }
     .dg .flow { animation: none !important; }
-    .splash-intro { animation-duration: 0.12s; animation-delay: 0.35s; }
-    .splash-card, .splash-t-shadow, .splash-t-face, .splash-t-highlight, .splash-orbit, .splash-pixel, .splash-loader span, .splash-word { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
   }
 }

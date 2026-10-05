@@ -4,11 +4,11 @@ import { siteConfig } from "@/lib/site";
 
 export function ProjectCta() {
   return (
-    <section className="tile tile-black text-center">
+    <section className="tile tile-black text-center" data-motion-section="cta">
       <div className="wrap">
-        <p className="mono accent-cyan">Have something to build?</p>
-        <h2 className="t-display mx-auto mt-4 max-w-2xl">Let&rsquo;s turn it into a product.</h2>
-        <div className="mt-8">
+        <p className="mono accent-cyan" data-motion="section-kicker">Have something to build?</p>
+        <h2 className="t-editorial mx-auto mt-4 max-w-4xl" data-motion="section-title">Let&rsquo;s turn it into a product.</h2>
+        <div className="mt-8" data-motion="cta-button">
           <Link href="/contact" className="btn btn-primary">Start a project <span aria-hidden="true">&rarr;</span></Link>
         </div>
         <p className="mt-6 muted">
