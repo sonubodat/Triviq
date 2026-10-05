@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { SiteHeader } from "@/components/sections/site-header";
 import { siteConfig } from "@/lib/site";
+import SplashCursor from "@/components/SplashCursor";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full bg-background text-foreground">
+        <SplashCursor />
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />
