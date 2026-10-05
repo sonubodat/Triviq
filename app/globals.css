@@ -122,7 +122,7 @@
   }
   .skip-link:focus-visible { transform: translateY(0); }
 
-  /* First splash: rough paper sketch of the Triviq T. Fast, looping while visible. */
+  /* First splash: clean Triviq mark with a short preload cue while WebGL and images warm up. */
   .splash-intro {
     position: fixed;
     inset: 0;
@@ -130,105 +130,118 @@
     display: grid;
     place-items: center;
     background:
-      linear-gradient(rgba(5, 7, 10, 0.92), rgba(5, 7, 10, 0.92)),
+      radial-gradient(circle at 50% 46%, rgba(10, 103, 212, 0.28), transparent 32%),
+      linear-gradient(rgba(5, 7, 10, 0.94), rgba(5, 7, 10, 0.94)),
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cpath d='M0 30h96M0 63h96M32 0v96M66 0v96' stroke='%23029dff' stroke-opacity='.08'/%3E%3C/svg%3E");
-    animation: splashExit 0.28s ease forwards 1.18s;
+    animation: splashExit 0.36s ease forwards 1.82s;
   }
-  .splash-paper {
+  .splash-card {
     position: relative;
-    display: grid;
-    place-items: center;
-    width: min(62vw, 330px);
-    aspect-ratio: 1.2;
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: min(68vw, 360px);
+    min-height: 310px;
+    padding: 26px 30px 28px;
+    border-radius: 24px;
     background:
-      radial-gradient(circle at 24% 18%, rgba(3, 215, 254, 0.1), transparent 28%),
-      repeating-linear-gradient(0deg, rgba(10, 103, 212, 0.08) 0 1px, transparent 1px 9px),
-      #f6faff;
-    border: 1px solid rgba(220, 232, 247, 0.74);
-    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+      linear-gradient(180deg, rgba(14, 23, 38, 0.92), rgba(5, 7, 10, 0.94)),
+      var(--triviq-black);
+    border: 1px solid rgba(111, 216, 255, 0.18);
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.44), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     overflow: hidden;
-    transform: rotate(-1.4deg);
-    animation: splashPaper 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation: splashCard 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
-  .splash-paper::before {
+  .splash-card::before {
     content: "";
     position: absolute;
     inset: 0;
-    opacity: 0.36;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.26'/%3E%3C/svg%3E");
-    mix-blend-mode: multiply;
+    background:
+      linear-gradient(90deg, transparent, rgba(111, 216, 255, 0.08), transparent),
+      radial-gradient(circle at 72% 24%, rgba(3, 215, 254, 0.14), transparent 28%);
     pointer-events: none;
   }
   .splash-mark {
     position: relative;
     z-index: 1;
-    width: 78%;
+    width: min(78%, 260px);
     overflow: visible;
-    filter: drop-shadow(0 10px 18px rgba(10, 103, 212, 0.16));
+    filter: drop-shadow(0 18px 24px rgba(10, 103, 212, 0.3));
   }
   .splash-mark path {
-    fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
   }
-  .splash-t {
-    stroke: var(--triviq-blue);
-    stroke-width: 18;
-    stroke-dasharray: 170;
-    stroke-dashoffset: 170;
-    animation: splashDraw 0.26s ease-out forwards, splashSketch 0.38s steps(2, end) infinite 0.32s;
-  }
-  .splash-t-b {
-    stroke: #085bbe;
-    stroke-width: 9;
-    opacity: 0.72;
-    animation-delay: 0.03s, 0.35s;
-  }
-  .splash-stem-a { animation-delay: 0.05s, 0.36s; }
-  .splash-stem-b {
-    stroke: #063f91;
-    stroke-width: 8;
-    opacity: 0.58;
-    animation-delay: 0.07s, 0.38s;
-  }
+  .splash-t-shadow { fill: #0540c8; opacity: 0; transform: translate(5px, 5px); animation: splashMarkIn 0.34s ease-out forwards 0.1s; }
+  .splash-t-face { fill: var(--triviq-blue); opacity: 0; transform-origin: center; animation: splashMarkIn 0.34s ease-out forwards 0.06s, splashBreathe 1s ease-in-out infinite 0.52s; }
+  .splash-t-highlight { fill: #35c9ff; opacity: 0; animation: splashShine 0.5s ease-out forwards 0.2s; }
   .splash-orbit {
     stroke: var(--triviq-sky);
-    stroke-width: 6;
+    fill: none;
+    stroke-width: 5;
     stroke-dasharray: 470;
     stroke-dashoffset: 470;
-    animation: splashDraw 0.32s ease-out forwards 0.08s, splashOrbit 0.64s ease-in-out infinite 0.42s;
+    transform-origin: 132px 118px;
+    animation: splashDraw 0.42s ease-out forwards 0.12s, splashOrbit 1.05s ease-in-out infinite 0.56s;
   }
-  .splash-orbit-b { stroke-width: 2.5; opacity: 0.55; animation-delay: 0.1s, 0.44s; }
+  .splash-orbit-b { stroke-width: 2.25; opacity: 0.55; animation-delay: 0.16s, 0.6s; }
   .splash-pixel {
     fill: var(--triviq-cyan);
-    stroke: #0876d6;
-    stroke-width: 2;
+    stroke: rgba(255, 255, 255, 0.28);
+    stroke-width: 1;
     opacity: 0;
     transform-box: fill-box;
     transform-origin: center;
-    animation: splashPop 0.18s ease-out forwards, splashPixel 0.58s ease-in-out infinite;
+    animation: splashPop 0.18s ease-out forwards, splashPixel 0.72s ease-in-out infinite;
   }
   .splash-pixel-1 { animation-delay: 0.22s, 0.44s; }
   .splash-pixel-2 { animation-delay: 0.27s, 0.49s; opacity: 0.8; }
   .splash-pixel-3 { animation-delay: 0.32s, 0.54s; opacity: 0.62; }
-  .splash-word {
-    position: absolute;
-    bottom: 22px;
+  .splash-loader {
+    position: relative;
     z-index: 1;
-    color: var(--triviq-text-soft);
+    width: min(210px, 72%);
+    height: 4px;
+    margin-top: 4px;
+    overflow: hidden;
+    border-radius: 9999px;
+    background: rgba(111, 216, 255, 0.14);
+  }
+  .splash-loader span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--triviq-blue), var(--triviq-cyan));
+    transform-origin: left;
+    animation: splashLoad 1.62s cubic-bezier(0.2, 0.78, 0.1, 1) forwards;
+  }
+  .splash-word {
+    position: relative;
+    z-index: 1;
+    margin-top: 14px;
+    color: var(--triviq-text-dark-muted);
     letter-spacing: 0.12em;
-    animation: splashWord 0.24s ease-out both 0.32s;
+    animation: splashWord 0.24s ease-out both 0.34s;
   }
   @keyframes splashDraw { to { stroke-dashoffset: 0; } }
-  @keyframes splashSketch {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    50% { transform: translate(1px, -1px) rotate(-0.25deg); }
+  @keyframes splashMarkIn {
+    from { opacity: 0; transform: translateY(10px) scale(0.94); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes splashShine {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes splashBreathe {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-1px) scale(1.012); }
   }
   @keyframes splashOrbit {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.95; }
-    50% { transform: translate(-1px, 1px) rotate(0.7deg); opacity: 0.68; }
+    0%, 100% { transform: rotate(0deg); opacity: 0.95; }
+    50% { transform: rotate(2.5deg); opacity: 0.68; }
   }
   @keyframes splashPop {
     from { opacity: 0; transform: scale(0.2) rotate(-8deg); }
@@ -242,9 +255,13 @@
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
-  @keyframes splashPaper {
-    from { opacity: 0; transform: translateY(16px) scale(0.94) rotate(-2.6deg); }
-    to { opacity: 1; transform: translateY(0) scale(1) rotate(-1.4deg); }
+  @keyframes splashLoad {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes splashCard {
+    from { opacity: 0; transform: translateY(16px) scale(0.94); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
   }
   @keyframes splashExit {
     to { opacity: 0; visibility: hidden; transform: scale(1.012); }
@@ -317,7 +334,7 @@
   .dg .hl { fill: var(--triviq-cyan); }
   .dg .flow { stroke: var(--triviq-sky); stroke-dasharray: 3 5; }
   .dg text { fill: var(--triviq-text-muted); }
-  .svc:hover .dg .flow, .cs:hover .dg .flow { animation: dash 1.2s linear infinite; }
+  .svc .dg .flow, .cs .dg .flow { animation: dash 1.2s linear infinite; }
   @keyframes dash { to { stroke-dashoffset: -18; } }
   .hd-flow { animation: dash 2.4s linear infinite; }
 
@@ -458,6 +475,6 @@
     .marquee-dup { display: none; }
     .dg .flow { animation: none !important; }
     .splash-intro { animation-duration: 0.12s; animation-delay: 0.35s; }
-    .splash-paper, .splash-t, .splash-orbit, .splash-pixel, .splash-word { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+    .splash-card, .splash-t-shadow, .splash-t-face, .splash-t-highlight, .splash-orbit, .splash-pixel, .splash-loader span, .splash-word { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
   }
 }
