@@ -3,15 +3,21 @@
 Triviq is an independent product and engineering studio building websites, apps, SaaS platforms and digital experiences for businesses worldwide. Based in India, working worldwide.
 
 ## Services
-- Web & Platforms
-- Mobile Apps
-- SaaS Products
-- AI & Automation
-- Business Software
-- Games & Interactive
+- [Web & Platforms](https://triviq.com/services/web-platforms): fast websites, commerce and web platforms (Next.js, React, Node.js)
+- [Mobile Apps](https://triviq.com/services/mobile-apps): iOS and Android apps with their back end (Flutter, React Native)
+- [SaaS Products](https://triviq.com/services/saas-products): dashboards, subscriptions, APIs and automation (FastAPI, Postgres, Supabase)
+- [AI & Automation](https://triviq.com/services/ai-automation): AI features, workflow automation and integrations
+- [Business Software](https://triviq.com/services/business-software): internal tools, admin systems and portals (React, Node.js, Prisma)
+- [Games & Interactive](https://triviq.com/services/games-interactive): game prototypes and interactive 3D (Godot, Three.js)
+
+## Work
+- [Streefi](https://triviq.com/work/streefi): street-food discovery and dine-in offers platform
+- [QR Referral & Lead-Attribution Platform](https://triviq.com/work/qr-referral-platform): vendor referral tracking for an energy business
+- [Untold](https://triviq.com/work/untold): anonymous mental-health support app, a Triviq product in development
 
 ## Pages
-- Home: https://triviq.com/
-- About: https://triviq.com/about
-- Contact: https://triviq.com/contact
-- Help & Support: https://triviq.com/support
+- [Home](https://triviq.com/)
+- [Services](https://triviq.com/services)
+- [About](https://triviq.com/about)
+- [Contact](https://triviq.com/contact)
+- [Help & Support](https://triviq.com/support)

@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-
 import { ProjectCta } from "@/components/sections/cta";
 import { PageHero } from "@/components/sections/page-hero";
 import { services } from "@/lib/content";
+import { pageMeta } from "@/lib/seo";
+import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = { alternates: { canonical: "/about" }, title: "About", description: "Triviq is an independent technology studio building software for businesses and products of its own." };
+export const metadata = pageMeta(siteConfig, { title: "About", description: "Triviq is an independent technology studio building software for businesses and products of its own.", path: "/about" });
 
 const principles = [
   ["Ship real things", "We measure ourselves by working software in users' hands, not slide decks."],

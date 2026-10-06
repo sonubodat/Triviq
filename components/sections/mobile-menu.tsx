@@ -31,7 +31,7 @@ export function MobileMenu() {
         type="button"
         className="menu-btn"
         aria-expanded={open}
-        aria-controls="mobile-nav"
+        aria-controls={open ? "mobile-nav" : undefined} // the panel is not in the DOM while closed
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((o) => !o)}
       >

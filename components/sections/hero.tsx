@@ -17,7 +17,8 @@ export function Hero() {
             Triviq is an independent product and engineering studio building websites, apps, SaaS platforms and digital experiences for
             businesses worldwide.
           </p>
-          <div className="mt-9 flex flex-wrap gap-3" data-motion="hero-ctas">
+          {/* Stacked below sm on purpose: side by side only fits once the Geist font swaps in, and that re-wrap shifted the page by 56px. */}
+          <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row" data-motion="hero-ctas">
             <Link href="/contact" className="btn btn-primary">Start a project <span aria-hidden="true">&rarr;</span></Link>
             <Link href="/#work" className="btn btn-ghost">Explore our work</Link>
           </div>

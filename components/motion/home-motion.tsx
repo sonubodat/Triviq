@@ -52,6 +52,9 @@ function revealEditorial(section: Element | null, id: string) {
   });
 }
 
+// Draw-in once as the grid scrolls into view, then hand over to CSS. The final state is the SSR drawing itself, so nothing is hidden
+// until this runs and nothing stays hidden if it never does. Connectors (.flow) are dashed on purpose: they fade in instead of being
+// drawn, and every inline style is cleared at the end so the hover "march" in globals.css and the SMIL pulses work on the real markup.
 function animateServiceDiagrams(root: Element | null) {
   if (!root) return;
   const grid = one<HTMLElement>(root, '[data-motion="services-grid"]');
@@ -65,32 +68,25 @@ function animateServiceDiagrams(root: Element | null) {
     once: true,
     onEnter: () => {
       diagrams.forEach((svg, index) => {
-        const strokes = all<SVGGeometryElement>(svg, ".ln, .ac, .flow").filter((el) => svgLength(el) > 0);
-        const fills = all<SVGElement>(svg, ".fl, .hl");
-        const tl = gsap.timeline({ delay: index * 0.08 });
+        const strokes = all<SVGGeometryElement>(svg, ".ln, .ac").filter((el) => svgLength(el) > 0);
+        const flows = all<SVGElement>(svg, ".flow");
+        const marks = all<SVGElement>(svg, ".fl, .hl");
+        const labels = all<SVGElement>(svg, ".lbl");
+        const tl = gsap.timeline({ delay: index * 0.05 }); // 50ms per card: a stagger you can read, not a wave
 
         strokes.forEach((el) => {
           const length = svgLength(el);
           gsap.set(el, { strokeDasharray: length, strokeDashoffset: length });
         });
-        gsap.set(fills, { autoAlpha: 0, scale: 0.78, transformOrigin: "center center" });
+        gsap.set([...flows, ...labels], { autoAlpha: 0 });
 
-        tl.to(strokes, {
-          strokeDashoffset: 0,
-          duration: 0.72,
-          ease: EASE.enter,
-          stagger: 0.018,
-        }).to(
-          fills,
-          {
-            autoAlpha: 1,
-            scale: 1,
-            duration: 0.28,
-            ease: EASE.enter,
-            stagger: 0.035,
-          },
-          0.18,
-        );
+        tl.to(strokes, { strokeDashoffset: 0, duration: 0.7, ease: EASE.enter, stagger: 0.012, clearProps: "strokeDasharray,strokeDashoffset" });
+        if (marks.length) { // not every diagram has accent marks, and GSAP warns on an empty target list
+          gsap.set(marks, { autoAlpha: 0, scale: 0.78, transformOrigin: "center center" });
+          tl.to(marks, { autoAlpha: 1, scale: 1, duration: 0.28, ease: EASE.enter, stagger: 0.03, clearProps: "opacity,visibility,transform,transformOrigin" }, 0.18);
+        }
+        tl.to([...flows, ...labels], { autoAlpha: 1, duration: 0.4, ease: EASE.enter, clearProps: "opacity,visibility" }, 0.45);
+        tl.call(() => marks.forEach((el) => el.removeAttribute("style"))); // GSAP leaves an inert transform-origin on SVG marks
       });
     },
   });

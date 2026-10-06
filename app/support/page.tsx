@@ -1,10 +1,10 @@
 import Link from "next/link";
-import type { Metadata } from "next";
 
 import { PageHero } from "@/components/sections/page-hero";
 import { siteConfig } from "@/lib/site";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { alternates: { canonical: "/support" }, title: "Help & Support", description: "Answers to common questions about working with Triviq, and how to get support." };
+export const metadata = pageMeta(siteConfig, { title: "Help & Support", description: "Answers to common questions about working with Triviq, and how to get support.", path: "/support" });
 
 const faqs = [
   ["How does a project start?", "Send an inquiry with your goals and budget range. We reply within one business day, usually with questions or a short call, and then send a written proposal."],

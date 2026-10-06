@@ -46,3 +46,7 @@ next-env.d.ts
 
 # img2threejs working state
 .img2threejs/
+
+# HyperFrames showreel working output (the encoded files are committed under public/media)
+/media/showreel/renders/
+/media/showreel/snapshots/

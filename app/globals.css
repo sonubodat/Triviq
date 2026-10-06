@@ -36,6 +36,7 @@
   --triviq-chip-border: #c9dff6;
   --triviq-line: #9db3ca; /* diagram structure */
   --triviq-line-inactive: #b4c5d8;
+  --triviq-field: #7c90a8; /* form control outline: 3.2:1 on white, the WCAG 1.4.11 minimum for a control boundary is 3:1 */
   --triviq-border-dark-strong: #1b344f;
   --triviq-error: #c0392b;
   --product-shadow: rgba(5, 7, 10, 0.22) 3px 5px 30px 0;
@@ -150,8 +151,9 @@
   :is(.tile-dark, .tile-black) .btn-primary:hover { background: var(--triviq-sky); color: var(--triviq-black); }
   :is(.tile-dark, .tile-black) .btn-ghost { color: var(--triviq-sky); border-color: var(--triviq-sky); }
   :is(.tile-dark, .tile-black) .btn-ghost:hover { background: rgba(2, 157, 255, 0.12); }
-  .link { color: var(--triviq-blue); }
-  .link:hover { text-decoration: underline; }
+  /* Links inside running text are underlined, so colour is never the only cue (WCAG 1.4.1) */
+  .link { color: var(--triviq-blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .link:hover { text-decoration-thickness: 2px; }
   :is(.tile-dark, .tile-black) .link { color: var(--triviq-sky); }
   .btn:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible, button:focus-visible {
     outline: 2px solid var(--triviq-blue); outline-offset: 2px;
@@ -167,9 +169,11 @@
     font-size: 14px; letter-spacing: -0.01em; transition: border-color 0.2s ease-out, color 0.2s ease-out;
   }
   .chip:hover { border-color: var(--triviq-blue); color: var(--triviq-blue); }
+  @media (pointer: coarse) { a.chip { min-height: 44px; } }
 
   /* Inputs: pill grammar */
-  .field { width: 100%; min-height: 44px; padding: 12px 20px; border-radius: 9999px; border: 1px solid var(--triviq-border); background: var(--triviq-white); color: var(--triviq-text); font: inherit; letter-spacing: -0.01em; }
+  .field { width: 100%; min-height: 44px; padding: 12px 20px; border-radius: 9999px; border: 1px solid var(--triviq-field); background: var(--triviq-white); color: var(--triviq-text); font: inherit; letter-spacing: -0.01em; }
+  .field:user-invalid { border-color: var(--triviq-error); } /* inline feedback once the person has touched the field, no JS */
   select.field { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--triviq-text-muted) 50%), linear-gradient(135deg, var(--triviq-text-muted) 50%, transparent 50%); background-position: calc(100% - 22px) 55%, calc(100% - 16px) 55%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 40px; }
   textarea.field { border-radius: 18px; min-height: 140px; resize: vertical; }
   .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
@@ -192,6 +196,38 @@
   .svc-arrow { transition: transform var(--motion-fast) ease-out, color var(--motion-fast) ease-out; color: var(--triviq-text-muted); }
   .svc:hover .svc-arrow { transform: translate(3px, -3px); color: var(--triviq-blue); }
 
+  /* Service cards (home grid and /services). One link: panel with the diagram, title, copy, stack chips and an arrow.
+     States: hover lifts and turns the border blue, press scales to 0.985 within 100ms, keyboard focus gets the global ring plus the same
+     "live" diagram as hover. Hover is never the only signal: the arrow circle and the heartbeat pulse carry the affordance on touch. */
+  .sc {
+    position: relative; display: flex; flex-direction: column; gap: 12px; height: 100%; padding: 14px 14px 18px;
+    border: 1px solid var(--triviq-border); border-radius: 20px; background: var(--triviq-surface);
+    transition: transform var(--motion-fast) var(--ease-enter), border-color var(--motion-fast) ease-out; touch-action: manipulation;
+  }
+  .sc > h2, .sc > h3, .sc > p, .sc-foot { margin: 0; padding-inline: 8px; }
+  .sc > p { margin-top: -4px; }
+  .sc:hover { transform: translateY(-2px); border-color: var(--triviq-blue); }
+  .sc:active { transform: scale(0.985); transition-duration: 0.1s; }
+  .sc-panel {
+    position: relative; padding: 24px 12px 6px; border: 1px solid var(--triviq-border); border-radius: 12px;
+    background: var(--triviq-white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ccircle cx='1' cy='1' r='.8' fill='%239db3ca' fill-opacity='.4'/%3E%3C/svg%3E");
+    background-size: 16px 16px;
+  }
+  .sc-panel-lg { padding: 40px 28px 20px; border-radius: 18px; }
+  .sc-idx { position: absolute; top: 10px; left: 12px; font-size: 11px; color: var(--triviq-text-muted); }
+  .sc-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--triviq-border); }
+  .sc > .sc-foot { margin-inline: 8px; padding-inline: 0; }
+  .sc-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sc-chip { padding: 3px 9px; border: 1px solid var(--triviq-border); border-radius: 9999px; background: var(--triviq-white); font-size: 11px; letter-spacing: 0.06em; color: var(--triviq-text-soft); }
+  .sc-go {
+    position: absolute; top: 8px; right: 8px; display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--triviq-border); border-radius: 9999px;
+    background: var(--triviq-white); color: var(--triviq-text-muted);
+    transition: background-color var(--motion-micro) ease-out, border-color var(--motion-micro) ease-out, color var(--motion-micro) ease-out;
+  }
+  .sc-go svg { transition: transform var(--motion-micro) ease-out; }
+  .sc:is(:hover, :focus-visible) .sc-go { background: var(--triviq-blue); border-color: var(--triviq-blue); color: #fff; }
+  .sc:is(:hover, :focus-visible) .sc-go svg { transform: translate(1px, -1px); }
+
   /* Diagrams: structure = slate, important node = blue, data/motion = sky, tiny highlight = cyan */
   .dg { width: 100%; height: auto; }
   .dg .ln { fill: none; stroke: var(--triviq-line); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
@@ -202,6 +238,17 @@
   .dg text { fill: var(--triviq-text-muted); }
   @keyframes dash { to { stroke-dashoffset: -18; } }
   .hd-flow { animation: dash 2.4s linear infinite; }
+
+  /* Diagram system (service-diagrams.tsx): structure = slate, core node and arrows = blue, data flow = sky dashes, accents = cyan.
+     Declared after the base .dg rules on purpose: same specificity, so source order decides. Dashes march while the card is hovered
+     or focused; the pulse is SMIL and is hidden for reduced motion below. */
+  .dg-sys .ln, .dg-sys .ac, .dg-sys .flow { stroke-width: 1.25; }
+  .dg-sys .node { fill: var(--triviq-white); }
+  .dg-sys .flow { fill: none; stroke: var(--triviq-sky); stroke-dasharray: 3 4; stroke-linecap: round; transition: stroke var(--motion-micro) ease-out; }
+  .dg-sys .lbl { font-family: var(--font-mono-stack); font-size: 7.5px; letter-spacing: 0.06em; text-anchor: middle; fill: var(--triviq-text-muted); }
+  .dg-sys .pulse { fill: var(--triviq-cyan); }
+  .sc:is(:hover, :focus-visible) .dg-sys .flow { stroke: var(--triviq-blue); animation: dg-march 0.8s linear infinite; }
+  @keyframes dg-march { to { stroke-dashoffset: -7; } }
 
   /* Case studies: product work stays the focus, so media sits on a quiet blue-white */
   .cs { display: flex; flex-direction: column; overflow: hidden; background: var(--triviq-white); border: 1px solid var(--triviq-border); border-radius: 18px; }
@@ -246,14 +293,97 @@
   .cs-more summary::after { content: "\2192"; transition: transform 0.2s ease-out; }
   .cs-more[open] summary::after { transform: rotate(90deg); }
   .cs-detail { display: grid; gap: 14px; margin: 4px 0 0; padding-top: 16px; border-top: 1px solid var(--triviq-border); }
-  .cs-dark { background: var(--triviq-dark-card); border-color: var(--triviq-border-dark); }
+  /* The dark card carries its own text colours: service pages place it inside a light tile. */
+  .cs-dark { background: var(--triviq-dark-card); border-color: var(--triviq-border-dark); color: #fff; }
+  .cs-dark .muted { color: var(--triviq-text-dark-muted); }
+  .cs-dark .accent { color: var(--triviq-sky); }
   .cs-dark .cs-media { background: var(--triviq-black); }
+  .cs-dark .dg text { fill: var(--triviq-text-dark-muted); }
   .cs-dark .proof-chips li { background: var(--triviq-dark); border-color: var(--triviq-border-dark); color: var(--triviq-text-dark-muted); }
-  .cs-dark .cs-facts dt, .cs-dark .cs-detail dt { color: var(--triviq-text-dark-muted); }
+  .cs-dark .cs-facts dt, .cs-dark .cs-detail dt, :is(.tile-dark, .tile-black) .cs-facts dt { color: var(--triviq-text-dark-muted); }
   .cs-dark .cs-more summary { color: var(--triviq-sky); }
   .cs-dark .cs-detail { border-color: var(--triviq-border-dark); }
   .cs-soon { display: flex; flex-direction: column; justify-content: center; gap: 12px; min-height: 240px; padding: 32px; border: 1px dashed var(--triviq-border-dark-strong); border-radius: 18px; }
+  /* Case-study disclosure: opens and closes smoothly where ::details-content is supported (instant elsewhere). Press feedback lands on pointer-down. */
+  .cs-more { interpolate-size: allow-keywords; }
+  .cs-more::details-content { block-size: 0; overflow: clip; transition: block-size 0.32s var(--ease-enter), content-visibility 0.32s allow-discrete; }
+  .cs-more[open]::details-content { block-size: auto; }
+  .cs-more summary { transition: transform var(--motion-micro) ease-out; touch-action: manipulation; }
+  .cs-more summary:active { transform: scale(0.97); }
+
+  /* Showreel (components/sections/showreel.tsx): glass controls over the video, instant press feedback, solid fallbacks below. */
+  .reel { margin: 0; }
+  .reel-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; isolation: isolate; border-radius: 18px; background: var(--triviq-black); border: 1px solid var(--triviq-border-dark); }
+  .reel-frame[data-ui="hidden"] { cursor: none; }
+  .reel-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--triviq-black); cursor: pointer; }
+  .glass {
+    background: rgba(16, 23, 34, 0.55);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-color: rgba(255, 255, 255, 0.3); /* light catching the top edge */
+    color: #fff;
+  }
+  .reel-play {
+    position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px;
+    display: grid; place-items: center; border-radius: 9999px; background: rgba(255, 255, 255, 0.18);
+    cursor: pointer; touch-action: manipulation;
+    transition: transform 0.2s var(--ease-enter), background-color var(--motion-micro) ease-out;
+  }
+  .reel-play svg { margin-left: 3px; } /* optical centre of the triangle */
+  @media (max-width: 640px) { .reel-play { width: 60px; height: 60px; margin: -30px 0 0 -30px; } .reel-play svg { width: 24px; height: 24px; } }
+  .reel-play:hover { transform: scale(1.05); background: rgba(255, 255, 255, 0.24); }
+  .reel-play:active { transform: scale(0.96); transition-duration: 0.08s; }
+  .reel-chip { position: absolute; left: 14px; bottom: 14px; padding: 7px 12px; border-radius: 9999px; font-size: 11px; letter-spacing: 0.08em; }
+  .reel-bar {
+    position: absolute; left: 14px; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 12px;
+    padding: 6px 16px 6px 6px; border-radius: 18px;
+    transition: opacity 0.24s var(--ease-enter), transform 0.28s var(--ease-enter), visibility 0s;
+  }
+  .reel-frame[data-state="idle"] .reel-bar, .reel-frame[data-ui="hidden"] .reel-bar {
+    opacity: 0; visibility: hidden; transform: translateY(8px) scale(0.985); pointer-events: none;
+    transition: opacity 0.24s var(--ease-enter), transform 0.28s var(--ease-enter), visibility 0s 0.28s;
+  }
+  .reel-btn {
+    display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 9999px;
+    color: #fff; background: transparent; cursor: pointer; touch-action: manipulation;
+    transition: transform 0.08s ease-out, background-color var(--motion-micro) ease-out;
+  }
+  .reel-btn:hover { background: rgba(255, 255, 255, 0.12); }
+  .reel-btn:active { transform: scale(0.92); }
+  .reel-time { flex: none; min-width: 3.2ch; font-variant-numeric: tabular-nums; font-size: 12px; letter-spacing: 0.04em; color: rgba(255, 255, 255, 0.86); }
+  .reel-range { --p: 0%; flex: 1; min-width: 0; height: 32px; margin: 0; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none; touch-action: pan-y; }
+  .reel-range::-webkit-slider-runnable-track { height: 4px; border-radius: 9999px; background: linear-gradient(to right, #fff var(--p), rgba(255, 255, 255, 0.28) var(--p)); }
+  .reel-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; margin-top: -5px; border-radius: 9999px; background: #fff; box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4); transition: transform 0.12s var(--ease-enter); }
+  .reel-range:active::-webkit-slider-thumb { transform: scale(1.3); }
+  .reel-range::-moz-range-track { height: 4px; border-radius: 9999px; background: rgba(255, 255, 255, 0.28); }
+  .reel-range::-moz-range-progress { height: 4px; border-radius: 9999px; background: #fff; }
+  .reel-range::-moz-range-thumb { width: 14px; height: 14px; border: 0; border-radius: 9999px; background: #fff; box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4); }
+  .reel-cap { margin-top: 12px; font-size: 11px; }
   .status { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* Inner pages (services, case studies): breadcrumbs, tick lists, case-study title link */
+  .crumbs { font-size: 12px; }
+  .crumbs ol { display: flex; flex-wrap: wrap; gap: 4px 8px; margin: 0; padding: 0; list-style: none; color: var(--triviq-text-muted); }
+  .crumbs li + li::before { content: "/"; margin-right: 8px; opacity: 0.6; }
+  .crumbs a { transition: color var(--motion-micro) ease-out; }
+  .crumbs a:hover { color: var(--triviq-blue); }
+  .crumbs [aria-current] { color: var(--triviq-text); }
+  :is(.tile-dark, .tile-black) .crumbs ol { color: var(--triviq-text-dark-muted); }
+  :is(.tile-dark, .tile-black) .crumbs a:hover { color: var(--triviq-sky); }
+  :is(.tile-dark, .tile-black) .crumbs [aria-current] { color: #fff; }
+  .tick { margin: 0; padding: 0; list-style: none; }
+  .tick li { display: flex; align-items: flex-start; gap: 12px; }
+  .tick li::before {
+    content: ""; flex: none; width: 20px; height: 20px; margin-top: 2px; border-radius: 9999px;
+    background: var(--triviq-blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.8 2.8L14 7.6' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat;
+  }
+  /* Inline, so on a two-line title the arrow stays attached to the last word instead of floating to the edge. */
+  .cs-title-link { padding-block: 7px; transition: color var(--motion-micro) ease-out; } /* padding lifts the tap target to 44px without moving the text */
+  .cs-title-link svg { display: inline-block; vertical-align: -2px; margin-left: 6px; color: var(--triviq-text-muted); transition: transform var(--motion-micro) ease-out, color var(--motion-micro) ease-out; }
+  .cs-title-link:hover { color: var(--triviq-blue); }
+  .cs-title-link:hover svg { transform: translate(2px, -2px); color: inherit; }
+  .cs-dark .cs-title-link:hover { color: var(--triviq-sky); }
   .status::before { content: ""; width: 6px; height: 6px; border-radius: 9999px; background: var(--triviq-cyan); }
 
   /* Process (static) + delivery list */
@@ -279,27 +409,45 @@
   .rail ol { position: relative; display: flex; justify-content: space-between; margin: 0; padding: 0; list-style: none; }
   .rail li { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
   .rail-dot { width: 9px; height: 9px; border-radius: 9999px; background: var(--triviq-blue); }
+  /* Hero exit rail (decorative, desktop only). Placed in % of the hero visual box so it lines up with the 3D node row
+     (system-graph.ts LINE_Y / LINE_STEP). Hidden by default: hero-visual.tsx reveals it and reverts it on resize / reduced motion. */
   .hero-exit-rail {
-    padding-top: 0;
-    color: #dbeafe;
-    text-shadow: 0 1px 14px rgba(5, 7, 10, 0.55);
+    position: absolute;
+    left: 10.4%;
+    right: 10.4%;
+    bottom: 4%;
+    z-index: 10;
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    color: #cfe6ff;
   }
+  @media (min-width: 1024px) { .hero-exit-rail { display: block; } }
+  .hero-exit-rail .rail-line, .hero-exit-rail .rail-fill { left: 0; right: 0; }
   .hero-exit-rail .rail-line { background: #26384c; }
   .hero-exit-rail .rail-fill { background: var(--triviq-blue); }
-  .hero-exit-rail .rail-dot {
-    position: relative;
-    background: #26384c;
-    box-shadow: 0 0 0 1px rgba(3, 215, 254, 0.16);
-  }
-  .hero-exit-rail .rail-dot::after {
-    content: "";
+  .hero-exit-rail li { width: 0; align-items: center; } /* zero-width stops: dots sit at exactly 0, 1/3, 2/3, 1 of the line */
+  .hero-exit-rail .rail-dot { background: #26384c; }
+  .hero-exit-rail .mono { color: #cfe6ff; font-size: 10px; letter-spacing: 0.1em; white-space: nowrap; }
+  .rail-pulse {
     position: absolute;
-    inset: 2px;
-    border-radius: inherit;
+    top: 4px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    margin: -2px 0 0 -2.5px;
+    border-radius: 9999px;
     background: var(--triviq-cyan);
-    opacity: 0.8;
+    box-shadow: 0 0 10px 2px rgba(3, 215, 254, 0.5);
   }
-  .hero-exit-rail .mono { color: #cfe6ff; font-size: 11px; letter-spacing: 0.08em; }
+  /* Static hero diagram (SSR). Phones, reduced motion and no-JS keep it. Where the WebGL scene will mount it stays hidden
+     so there is no flash (data-state unset), it is hidden whenever a scene is live (gl), and it only comes back if the
+     capability check says the scene cannot run (static). */
+  .hero-static[data-state="gl"] { visibility: hidden; }
+  @media (min-width: 640px) and (prefers-reduced-motion: no-preference) {
+    .hero-static:not([data-state="static"]) { visibility: hidden; }
+  }
   .deliver { margin: 0; padding: 0; list-style: none; }
   .deliver li { position: relative; display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--triviq-border-dark-strong); }
   .deliver li::after {
@@ -315,8 +463,9 @@
   }
 
   /* FAQ */
-  details.faq { border-bottom: 1px solid var(--triviq-border); padding: 16px 0; }
-  details.faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  details.faq { border-bottom: 1px solid var(--triviq-border); padding: 4px 0; }
+  details.faq[open] { padding-bottom: 16px; }
+  details.faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; }
   details.faq summary::-webkit-details-marker { display: none; }
   details.faq summary::after { content: "+"; color: var(--triviq-blue); font-size: 24px; line-height: 1; }
   details.faq[open] summary::after { content: "\2212"; }
@@ -326,7 +475,7 @@
   .prose-legal p, .prose-legal li { color: var(--triviq-text-soft); }
   .prose-legal ul { padding-left: 20px; list-style: disc; }
   .prose-legal p + p, .prose-legal p + ul { margin-top: 12px; }
-  .prose-legal a { color: var(--triviq-blue); }
+  .prose-legal a { color: var(--triviq-blue); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
   /* Mobile menu: animated, cancellable (pure CSS state via data-open) */
   .menu-btn { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 44px; height: 44px; padding: 0 12px; background: none; border: 0; color: #fff; cursor: pointer; touch-action: manipulation; }
@@ -337,11 +486,30 @@
   .menu-inner { overflow: hidden; min-height: 0; }
   .menu-link { display: block; padding: 14px 0; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; border-bottom: 1px solid var(--triviq-border-dark); }
 
+  @media (prefers-reduced-transparency: reduce) {
+    .glass { background: #101722; -webkit-backdrop-filter: none; backdrop-filter: none; }
+    .reel-play, .reel-play:hover { background: #1d2a3a; }
+  }
+  @media (prefers-contrast: more) {
+    .glass { background: #000; border-color: #fff; }
+    .reel-range::-webkit-slider-runnable-track { background: linear-gradient(to right, #fff var(--p), #7d8794 var(--p)); }
+  }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .btn, .svc, .svc-arrow, .chip, .menu-bar, .menu-panel, .menu-link, .cs-more summary::after, .marquee li { transition: none; }
+    /* Reduced motion keeps feedback but swaps slides, scales and springs for plain fades. */
+    .sc, .sc-go, .sc-go svg, .dg-sys .flow { transition: none; }
+    .sc:hover, .sc:active, .sc:is(:hover, :focus-visible) .sc-go svg { transform: none; }
+    .dg-sys .pulse { display: none; }
+    .sc:is(:hover, :focus-visible) .dg-sys .flow { animation: none; }
+    .cs-more::details-content, .cs-more summary, .reel-range::-webkit-slider-thumb, .cs-title-link, .cs-title-link svg, .crumbs a { transition: none; }
+    .cs-title-link:hover svg { transform: none; }
+    .reel-play, .reel-btn { transition: background-color var(--motion-micro) ease-out; }
+    .reel-play:hover, .reel-play:active, .reel-btn:active, .cs-more summary:active { transform: none; }
+    .reel-bar { transition: opacity 0.2s ease, visibility 0s; }
+    .reel-frame[data-state="idle"] .reel-bar, .reel-frame[data-ui="hidden"] .reel-bar { transform: none; transition: opacity 0.2s ease, visibility 0s 0.2s; }
     .marquee-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; }
     .marquee-dup { display: none; }
-    .dg .flow { animation: none !important; }
+    .dg .flow, .hd-flow { animation: none !important; }
   }
 }

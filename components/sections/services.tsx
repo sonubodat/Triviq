@@ -1,9 +1,6 @@
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-
 import { services } from "@/lib/content";
 
-import { ServiceDiagram } from "./service-diagrams";
+import { ServiceCard } from "./service-card";
 
 export function ServicesSection() {
   return (
@@ -15,16 +12,7 @@ export function ServicesSection() {
         <ul className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-motion="services-grid">
           {services.map((s, i) => (
             <li key={s.id}>
-              <Link href={`/contact?service=${encodeURIComponent(s.title)}`} className="svc">
-                <div className="flex items-start justify-between">
-                  <span className="mono muted">{String(i + 1).padStart(2, "0")}</span>
-                  <ArrowUpRight className="svc-arrow size-5" aria-hidden="true" />
-                </div>
-                <ServiceDiagram id={s.id} />
-                <h3 className="t-tagline">{s.title}</h3>
-                <p className="muted">{s.body}</p>
-                <p className="mono mt-auto pt-2 text-soft">{s.stack}</p>
-              </Link>
+              <ServiceCard service={s} index={i} count={services.length} />
             </li>
           ))}
         </ul>

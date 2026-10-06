@@ -9,7 +9,7 @@ import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment
 
 import { createTriviqTCoreModel } from "@/components/three/createTriviqCore";
 
-import { NODES, layoutInto } from "./system-graph";
+import { NODES, layoutInto, phases } from "./system-graph";
 
 gsap.registerPlugin(useGSAP);
 
@@ -42,7 +42,7 @@ function labelPosition(id: string): [number, number, number] {
   }
 }
 
-function NodeLabel({ id, text }: { id: string; text: string }) {
+function NodeLabel({ id, text, matRef }: { id: string; text: string; matRef: (m: THREE.MeshBasicMaterial | null) => void }) {
   const texture = useMemo(() => {
     const canvas = document.createElement("canvas");
     canvas.width = 320;
@@ -72,7 +72,7 @@ function NodeLabel({ id, text }: { id: string; text: string }) {
   return (
     <mesh position={labelPosition(id)}>
       <planeGeometry args={[1.28, 0.38]} />
-      <meshBasicMaterial map={texture} transparent depthWrite={false} toneMapped={false} />
+      <meshBasicMaterial ref={matRef} map={texture} transparent depthWrite={false} toneMapped={false} />
     </mesh>
   );
 }
@@ -104,6 +104,10 @@ function System({ onHover, onSlow, onFirstFrame, guard, collapse }: Callbacks & 
   const coreGroup = useRef<THREE.Group>(null);
   const nodeRefs = useRef<(THREE.Group | null)[]>([]);
   const edgeAttr = useRef<THREE.BufferAttribute>(null);
+  const chainAttr = useRef<THREE.BufferAttribute>(null);
+  const spokeMat = useRef<THREE.LineBasicMaterial>(null);
+  const chainMat = useRef<THREE.LineBasicMaterial>(null);
+  const labelMats = useRef<(THREE.MeshBasicMaterial | null)[]>([]);
   const pulses = useRef<THREE.InstancedMesh>(null);
   const progress = useRef({ order: 0, breathe: 0 });
   const frames = useRef({ n: 0, sum: 0, first: false });
@@ -144,43 +148,66 @@ function System({ onHover, onSlow, onFirstFrame, guard, collapse }: Callbacks & 
       if (guard && f.n === 100 && f.sum / 90 > 0.028) onSlow();
     }
 
+    // Scroll hand-off (hero-visual.tsx scrubs `collapse` 0..1): tighten -> core recedes -> connections quiet -> align on a line.
     const c = collapse.current;
-    const living = progress.current.breathe * progress.current.order * (1 - c);
+    const p = phases(c);
+    const living = progress.current.breathe * progress.current.order * (1 - p.tight);
     layoutInto(pos, Math.max(0, progress.current.order - living * 0.05), c);
     const t = state.clock.elapsedTime;
     const lines = edgeAttr.current;
+    const chain = chainAttr.current;
+    const nodeScale = 1 - 0.38 * p.line;
+    let px = 0;
+    let py = 0;
+    let pz = 0;
     for (let i = 0; i < NODES.length; i += 1) {
       const g = nodeRefs.current[i];
       const x = pos[i * 3] + Math.sin(t * 1.35 + i * 0.8) * 0.09 * living;
-      const y = pos[i * 3 + 1] + Math.sin(t * 1.15 + i) * (0.04 + 0.06 * living);
+      const y = pos[i * 3 + 1] + Math.sin(t * 1.15 + i) * (0.04 + 0.06 * living) * (1 - p.line);
       const z = pos[i * 3 + 2] + Math.cos(t * 1.2 + i) * 0.08 * living;
       g?.position.set(x, y, z);
+      g?.scale.setScalar(nodeScale);
       if (lines) {
         lines.setXYZ(i * 2, 0, 0, 0);
         lines.setXYZ(i * 2 + 1, x, y, z);
       }
       if (pulses.current) {
-        const p = (t * 0.68 + i / NODES.length) % 1;
-        dummy.position.set(x * p, y * p, z * p);
+        const f = (t * 0.68 + i / NODES.length) % 1;
+        dummy.position.set(x * f, y * f, z * f);
+        dummy.scale.setScalar(1 - p.hush);
         dummy.updateMatrix();
         pulses.current.setMatrixAt(i, dummy.matrix);
+      }
+      if (chain && i > 0) {
+        chain.setXYZ((i - 1) * 2, px, py, pz);
+        chain.setXYZ((i - 1) * 2 + 1, x, y, z);
+      }
+      px = x;
+      py = y;
+      pz = z;
+      const label = labelMats.current[i];
+      if (label) {
+        label.opacity = 1 - p.labels;
+        label.visible = p.labels < 0.99;
       }
     }
     if (lines) lines.needsUpdate = true;
     if (pulses.current) pulses.current.instanceMatrix.needsUpdate = true;
+    if (chain) chain.needsUpdate = true;
+    if (spokeMat.current) spokeMat.current.opacity = 0.45 * (1 - p.hush);
+    if (chainMat.current) chainMat.current.opacity = 0.5 * p.chain;
 
     ring.rotateOnAxis(SPIN_AXIS, dt * 1.15 * (1 - c * 0.55));
     if (group.current) {
-      // pointer parallax: whole system leans at most 3 degrees
+      // pointer parallax: whole system leans at most 3 degrees, and settles flat as it collapses
       group.current.rotation.y += (state.pointer.x * MAX_TILT * (1 - c) - group.current.rotation.y) * 0.06;
       group.current.rotation.x += (-state.pointer.y * MAX_TILT * (1 - c) - group.current.rotation.x) * 0.06;
-      group.current.position.y += (-0.35 * c - group.current.position.y) * 0.08;
-      group.current.scale.setScalar(1 - c * 0.1);
     }
     if (coreGroup.current) {
-      coreGroup.current.position.z += (-0.9 * c - coreGroup.current.position.z) * 0.08;
-      coreGroup.current.scale.setScalar(1.15 - c * 0.22);
-      coreGroup.current.rotation.z = Math.sin(t * 1.1) * 0.012 * (1 - c);
+      // recedes and shrinks a little; never grows, never spins faster
+      coreGroup.current.position.z = -0.6 * p.core;
+      coreGroup.current.scale.setScalar(1.15 - 0.13 * p.core);
+      coreGroup.current.rotation.z = Math.sin(t * 1.1) * 0.012 * (1 - p.core);
     }
   });
 
@@ -189,11 +216,17 @@ function System({ onHover, onSlow, onFirstFrame, guard, collapse }: Callbacks & 
       <group ref={coreGroup} position={[0, 0, 0]} scale={1.15}>
         <primitive object={core} position-z={-0.23} />
       </group>
-      <lineSegments>
+      <lineSegments frustumCulled={false}>
         <bufferGeometry>
           <bufferAttribute ref={edgeAttr} attach="attributes-position" args={[new Float32Array(NODES.length * 6), 3]} />
         </bufferGeometry>
-        <lineBasicMaterial color="#029dff" transparent opacity={0.45} />
+        <lineBasicMaterial ref={spokeMat} color="#029dff" transparent opacity={0.45} />
+      </lineSegments>
+      <lineSegments frustumCulled={false}>
+        <bufferGeometry>
+          <bufferAttribute ref={chainAttr} attach="attributes-position" args={[new Float32Array((NODES.length - 1) * 6), 3]} />
+        </bufferGeometry>
+        <lineBasicMaterial ref={chainMat} color="#6fd8ff" transparent opacity={0} />
       </lineSegments>
       <instancedMesh ref={pulses} args={[undefined, undefined, NODES.length]}>
         <sphereGeometry args={[0.05, 10, 10]} />
@@ -215,7 +248,13 @@ function System({ onHover, onSlow, onFirstFrame, guard, collapse }: Callbacks & 
             <NodeShape id={node.id} />
             <meshStandardMaterial color="#17233a" roughness={0.4} metalness={0.25} />
           </mesh>
-          <NodeLabel id={node.id} text={node.label} />
+          <NodeLabel
+            id={node.id}
+            text={node.label}
+            matRef={(m) => {
+              labelMats.current[i] = m;
+            }}
+          />
           <lineSegments>
             <edgesGeometry args={[nodeEdgeSource(node.id)]} />
             <lineBasicMaterial color="#6fd8ff" transparent opacity={0.85} />

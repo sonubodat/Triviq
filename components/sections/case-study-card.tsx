@@ -1,33 +1,29 @@
-import Image from "next/image";
-import type { CSSProperties } from "react";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 import type { Project } from "@/lib/content";
 
-import { QrFlowDiagram } from "./service-diagrams";
+import { ProjectMedia } from "./project-media";
 
 export function CaseStudyCard({ project, dark = false }: { project: Project; dark?: boolean }) {
   const { media, details } = project;
   return (
-    <article className={`cs ${dark ? "cs-dark" : ""}`} data-motion="project-card">
+    <article className={`cs ${dark ? "cs-dark" : ""}`} data-motion="project-card" data-project={project.slug}>
       <div className="cs-media" data-motion="project-media">
-        {media.type === "phones" ? (
-          media.images.map((img, index) => (
-            <div key={img.src} className="phone" style={{ "--phone-shift": `${index * 28}px` } as CSSProperties}>
-              <Image src={img.src} alt={img.alt} width={img.width} height={img.height} sizes="188px" />
-            </div>
-          ))
-        ) : (
-          <div className="mt-10 w-full max-w-[420px] self-start">
-            <QrFlowDiagram />
-          </div>
-        )}
+        <ProjectMedia media={media} />
       </div>
       <div className="cs-body" data-motion="project-copy">
         <p className="mono flex flex-wrap items-center gap-x-4">
           <span className={dark ? "accent-cyan" : "accent"}>{project.kind === "product" ? "Triviq product" : "Platform build"}</span>
           {project.status && <span className="status accent">{project.status}</span>}
         </p>
-        <h3 className="t-title">{project.name}</h3>
+        <h3 className="t-title">
+          <Link href={`/work/${project.slug}`} className="cs-title-link">
+            {project.name}
+            <ArrowUpRight className="size-5" aria-hidden="true" />
+            <span className="sr-only"> case study</span>
+          </Link>
+        </h3>
         <p className="muted">{project.descriptor}</p>
         <ul className="proof-chips" aria-label={`${project.name} proof points`}>
           {project.proofPoints.map((point) => (

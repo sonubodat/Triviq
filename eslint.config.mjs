@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // HyperFrames showreel project (HTML + vendored GSAP), not app code.
+    "media/**",
   ]),
 ]);
 
