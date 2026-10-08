@@ -19,9 +19,9 @@ export const siteConfig = {
   socialImageAlt: "Triviq: we turn ambitious ideas into working software.", // alt text for the share card (app/opengraph-image.png)
   logo: "/assets/triviq-logo.png",
   icon: "/assets/icon.png",
-  // ponytail: placeholders, replace with real inboxes before launch
-  email: "hello@triviq.com",
-  supportEmail: "support@triviq.com",
+  // one shared inbox for now; split email and supportEmail when support gets its own
+  email: "triviqsolutions@gmail.com",
+  supportEmail: "triviqsolutions@gmail.com",
   // Legal clauses render only when these are filled in.
   legal: { entity: "", jurisdiction: "" },
   // Analytics stay off (no script, no cookies, privacy policy says so) until NEXT_PUBLIC_PLAUSIBLE_DOMAIN is set at build time.
