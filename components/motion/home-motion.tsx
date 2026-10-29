@@ -252,6 +252,7 @@ export function HomeMotion() {
       if (!root) return;
 
       const mm = gsap.matchMedia();
+      let refreshTimer: number | undefined;
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         heroIntro(root);
 
@@ -275,10 +276,13 @@ export function HomeMotion() {
         revealEditorial(cta, "cta");
         revealSupport(cta, "cta");
 
-        window.setTimeout(() => ScrollTrigger.refresh(), 250);
+        refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 250);
       });
 
-      return () => mm.revert();
+      return () => {
+        if (refreshTimer) window.clearTimeout(refreshTimer);
+        mm.revert();
+      };
     },
     { dependencies: [pathname], revertOnUpdate: true },
   );

@@ -176,6 +176,7 @@ export type Project = {
   proofPoints: string[];
   media:
     | { type: "phones"; images: { src: string; width: number; height: number; alt: string }[] }
+    | { type: "dashboard"; image: { src: string; width: number; height: number; alt: string } }
     | { type: "diagram"; id: "qr-flow" };
   details: { problem: string; approach: string; system: string };
   // What is inside, one line per part. Restates the facts above; no results until there are real numbers to show.
@@ -242,6 +243,36 @@ export const work: Project[] = [
     ],
     services: ["business", "web"],
   },
+  {
+    slug: "gymos",
+    kind: "work",
+    name: "GymOS",
+    descriptor: "Gym management web app for daily operations.",
+    built: "Dashboard · Memberships · Payments · Attendance · Machine access",
+    system: "Web app · Dashboard · Role-based workflows",
+    proofPoints: ["Operations dashboard", "Member workflows", "Access control"],
+    media: {
+      type: "dashboard",
+      image: {
+        src: "/work/gymos.png",
+        width: 2880,
+        height: 1636,
+        alt: "GymOS dashboard for The Gym 77 with membership, payment, attendance and machine access tools",
+      },
+    },
+    details: {
+      problem: "Give a gym team one clear place to manage members, payments, attendance, enquiries and daily access operations.",
+      approach: "A focused operations dashboard brings the most frequent actions forward, including adding members, checking in, collecting payment, renewing memberships and handling enquiries.",
+      system: "A role-aware web app organized around the gym's daily workflows, with dashboard views for customer records, money, staff, machines and setup.",
+    },
+    scope: [
+      { title: "Operations dashboard", body: "A daily home view surfaces attention items, money in today, outstanding dues, entries and staff attendance." },
+      { title: "Member management", body: "Customer records, attendance, enquiries, membership endings and EMI customer workflows are grouped in one workspace." },
+      { title: "Payments and renewals", body: "The primary action bar keeps adding members, collecting payment and renewing memberships close at hand." },
+      { title: "Access and staff", body: "Machine status, open-door controls, door entries and staff attendance support the operational side of the gym." },
+    ],
+    services: ["business", "web"],
+  },
 ];
 
 export const products: Project[] = [
@@ -274,6 +305,35 @@ export const products: Project[] = [
       { title: "Billing", body: "In-app purchases run through RevenueCat." },
     ],
     services: ["mobile", "saas"],
+  },
+  {
+    slug: "taptap",
+    kind: "product",
+    name: "TapTap",
+    descriptor: "Real-time 1v1 tapping battles.",
+    built: "Mobile game · Online multiplayer · Practice mode · Leaderboards",
+    system: "Flutter · Flame · Fastify · WebSocket",
+    status: "In development",
+    proofPoints: ["1v1 gameplay", "Realtime systems", "Leaderboards"],
+    media: {
+      type: "phones",
+      images: [
+        { src: "/work/taptap/taptap-hero.png", width: 1206, height: 2622, alt: "TapTap 1v1 tap battle with players pushing the wave" },
+        { src: "/work/taptap/taptap-matchmaking.png", width: 1206, height: 2622, alt: "TapTap matchmaking screen introducing a real-time opponent" },
+      ],
+    },
+    details: {
+      problem: "Make a quick competitive game that is easy to start, satisfying to master and fair in real-time play.",
+      approach: "A portrait-first tap duel with online 1v1 matches, practice bots, local two-player play, challenges, ranks and power-ups.",
+      system: "Flutter and Flame for the mobile experience, with a server-authoritative backend and WebSocket gameplay designed for real-time matches.",
+    },
+    scope: [
+      { title: "1v1 battles", body: "Real-time tapping duels where each player pushes the wave toward the opponent." },
+      { title: "Practice and local play", body: "Practice bots across difficulty levels, plus two-player matches on one device." },
+      { title: "Competitive systems", body: "Challenges, ranks and leaderboards give repeat play a clear sense of progression." },
+      { title: "Power-ups", body: "Fire, Double Tap, Freeze and Shield add tactical choices to each round." },
+    ],
+    services: ["games", "mobile"],
   },
 ];
 

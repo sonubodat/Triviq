@@ -15,6 +15,22 @@ export function ProjectMedia({ media, eager = false }: { media: Project["media"]
       </div>
     );
   }
+  if (media.type === "dashboard") {
+    return (
+      <div className="w-full overflow-hidden rounded-[1.25rem] border border-white/10 bg-black/20">
+        <Image
+          src={media.image.src}
+          alt={media.image.alt}
+          width={media.image.width}
+          height={media.image.height}
+          sizes="(min-width: 1024px) 52vw, 100vw"
+          loading={eager ? "eager" : undefined}
+          fetchPriority={eager ? "high" : undefined}
+          className="h-auto w-full"
+        />
+      </div>
+    );
+  }
   return media.images.map((img, index) => (
     <div key={img.src} className="phone" style={{ "--phone-shift": `${index * 28}px` } as CSSProperties}>
       <Image

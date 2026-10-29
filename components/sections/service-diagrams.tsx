@@ -17,14 +17,30 @@ const STEP = 0.45; // seconds one pulse takes to cross a link
 
 const arrow = ([x, y]: Pt) => `M${x - 3.5} ${y - 3.5}L${x} ${y}L${x - 3.5} ${y + 3.5}`;
 
-// Each animation runs for STEP seconds and then restarts one heartbeat later (begin = "first; self.end + rest"). Spanning the whole
-// cycle with keyTimes instead kept every pulse "active" on every frame, which cost about 10% of a throttled phone's main thread (about 3% now).
+// Each pulse owns one slot in the shared heartbeat. The animation repeats its full cycle
+// without event-based `self.end` references, which are unreliable in some SVG runtimes.
 function Pulse({ id, d, begin, cycle }: { id: string; d: string; begin: number; cycle: number }) {
-  const again = (self: string) => `${begin}s;${self}.end+${(cycle - STEP).toFixed(2)}s`;
   return (
     <circle className="pulse" r="2.4" opacity="0">
-      <animateMotion id={`${id}m`} dur={`${STEP}s`} begin={again(`${id}m`)} path={d} keyPoints="0;1" keyTimes="0;1" calcMode="linear" />
-      <animate id={`${id}o`} attributeName="opacity" dur={`${STEP}s`} begin={again(`${id}o`)} values="0;1;1;0" keyTimes="0;0.15;0.85;1" />
+      <animateMotion
+        id={`${id}m`}
+        dur={`${cycle}s`}
+        begin={`${begin}s`}
+        repeatCount="indefinite"
+        path={d}
+        keyPoints="0;0;1;1"
+        keyTimes="0;0.7;0.7;1"
+        calcMode="linear"
+      />
+      <animate
+        id={`${id}o`}
+        attributeName="opacity"
+        dur={`${cycle}s`}
+        begin={`${begin}s`}
+        repeatCount="indefinite"
+        values="0;0;1;1;0"
+        keyTimes="0;0.68;0.72;0.88;1"
+      />
     </circle>
   );
 }
